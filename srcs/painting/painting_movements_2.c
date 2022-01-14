@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   painting_movements.c                               :+:      :+:    :+:   */
+/*   painting_movements_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 16:36:15 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/14 16:50:44 by pmaryjo          ###   ########.fr       */
+/*   Created: 2022/01/14 17:20:24 by pmaryjo           #+#    #+#             */
+/*   Updated: 2022/01/14 20:07:22 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,21 @@ static t_movements	paint_get_vars(t_painting *painting)
 	return (vars);
 }
 
-void	paint_move_left(t_painting *painting)
+int	paint_is_move_left(t_painting *painting)
 {
 	t_movements	vars;
 
 	vars = paint_get_vars(painting);
 	if (painting->map->lines[vars.sq_y]->line[vars.sq_x - 1]->type != WALL
-		|| paint_get_dist(vars.pl_x, vars.pl_y,
-			vars.sq_x, vars.pl_y) - PLAYER_RAD > EPS)
+		|| (paint_get_dist(vars.pl_x, vars.pl_y,
+				vars.sq_x, vars.pl_y) - PLAYER_RAD > EPS))
 	{
-		painting->map->player->pos->x -= STEP;
+		return (1);
 	}
+	return (0);
 }
 
-void	paint_move_right(t_painting *painting)
+int	paint_is_move_right(t_painting *painting)
 {
 	t_movements	vars;
 
@@ -45,11 +46,12 @@ void	paint_move_right(t_painting *painting)
 		|| paint_get_dist(vars.pl_x, vars.pl_y,
 			vars.sq_x + 1, vars.pl_y) - PLAYER_RAD > EPS)
 	{
-		painting->map->player->pos->x += STEP;
+		return (1);
 	}
+	return (0);
 }
 
-void	paint_move_up(t_painting *painting)
+int	paint_is_move_up(t_painting *painting)
 {
 	t_movements	vars;
 
@@ -58,11 +60,12 @@ void	paint_move_up(t_painting *painting)
 		|| paint_get_dist(vars.pl_x, vars.pl_y,
 			vars.pl_x, vars.sq_y) - PLAYER_RAD > EPS)
 	{
-		painting->map->player->pos->y -= STEP;
+		return (1);
 	}
+	return (0);
 }
 
-void	paint_move_down(t_painting *painting)
+int	paint_is_move_down(t_painting *painting)
 {
 	t_movements	vars;
 
@@ -71,6 +74,7 @@ void	paint_move_down(t_painting *painting)
 		|| paint_get_dist(vars.pl_x, vars.pl_y,
 			vars.pl_x, vars.sq_y + 1) - PLAYER_RAD > EPS)
 	{
-		painting->map->player->pos->y += STEP;
+		return (1);
 	}
+	return (0);
 }

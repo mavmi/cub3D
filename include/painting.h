@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/14 16:45:18 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/14 20:07:43 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 // PLAYER_RAD and STEP are relative
 # define PLAYER_RAD 0.2
-# define STEP 0.12
+# define STEP 0.31
 # define EPS 0.2
 
 # define WIDTH 2000
@@ -73,10 +73,16 @@ void	paint_draw_map(t_painting *painting);
 // painting_utils.c
 double	paint_get_dist(double x1, double y1, double x2, double y2);
 
-// painting_movements.c
+// painting_movements_1.c
 void	paint_move_left(t_painting *painting);
 void	paint_move_right(t_painting *painting);
 void	paint_move_up(t_painting *painting);
 void	paint_move_down(t_painting *painting);
+
+// painting_movements_2.c
+int		paint_is_move_left(t_painting *painting);
+int		paint_is_move_right(t_painting *painting);
+int		paint_is_move_up(t_painting *painting);
+int		paint_is_move_down(t_painting *painting);
 
 #endif
