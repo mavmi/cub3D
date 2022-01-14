@@ -1,0 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   painting_1.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
+/*   Updated: 2022/01/14 16:42:08 by pmaryjo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/painting.h"
+
+static void	paint_exit(t_painting *painting)
+{
+	if (!painting)
+		return ;
+	pars_destroy_map(painting->map);
+	mlx_destroy_window(painting->mlx, painting->win);
+	free(painting);
+	exit(0);
+}
+
+static void	paint_handle_arrows(int key_code, t_painting *painting)
+{
+	paint_draw_player(painting, BLACK);
+	if (key_code == LEFT)
+		paint_move_left(painting);
+	else if (key_code == RIGHT)
+		paint_move_right(painting);
+	else if (key_code == UP)
+		paint_move_up(painting);
+	else if (key_code == DOWN)
+		paint_move_down(painting);
+	paint_draw_player(painting, RED);
+}
+
+static int	paint_key_pressed(int key_code, t_painting *painting)
+{
+	if (key_code == ESC)
+		paint_exit(painting);
+	if (key_code == LEFT || key_code == RIGHT
+		|| key_code == UP || key_code == DOWN)
+		paint_handle_arrows(key_code, painting);
+	return (0);
+}
+
+void	paint_init(t_map *map)
+{
+	t_painting	*painting;
+
+	if (!map)
+		exit(1);
+	painting = (t_painting *)malloc(sizeof(t_painting));
+	if (!painting)
+	{
+		pars_destroy_map(map);
+		exit(1);
+	}
+	painting->map = map;
+	painting->mlx = mlx_init();
+	painting->win = mlx_new_window(painting->mlx, WIDTH, HEIGHT, "cub2D");
+	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
+	paint_draw_map(painting);
+	paint_draw_player(painting, RED);
+	mlx_loop(painting->mlx);
+}
