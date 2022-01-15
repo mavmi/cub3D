@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/14 20:07:43 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/15 17:56:08 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@
 // PLAYER_RAD and STEP are relative
 # define PLAYER_RAD 0.2
 # define STEP 0.31
+
 # define EPS 0.2
+# define PIXELS_PER_DEGREE 1
 
 # define WIDTH 2000
 # define HEIGHT 1000
@@ -40,7 +42,8 @@ typedef enum e_color		t_color;
 typedef struct s_painting	t_painting;
 typedef struct s_movements	t_movements;
 
-enum	e_color{
+enum	e_color
+{
 	WHITE,
 	RED,
 	BLACK
@@ -72,6 +75,7 @@ void	paint_draw_map(t_painting *painting);
 
 // painting_utils.c
 double	paint_get_dist(double x1, double y1, double x2, double y2);
+double	paint_get_module(double num);
 
 // painting_movements_1.c
 void	paint_move_left(t_painting *painting);

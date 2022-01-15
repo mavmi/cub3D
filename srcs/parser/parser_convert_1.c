@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:43:34 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/14 15:06:02 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/15 17:49:08 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static void	pars_is_player(t_map *map, char c, int x, int y)
 	map->player->pos->y = (double)y + 0.5;
 	map->player->orient = c;
 	if (c == NORTH_OR)
-		map->player->angle = 0.0;
+		map->player->angle = 0;
 	else if (c == SOUTH_OR)
-		map->player->angle = 180.0;
+		map->player->angle = 180;
 	else if (c == EAST_OR)
-		map->player->angle = 90.0;
+		map->player->angle = 90;
 	else if (c == WEST_OR)
-		map->player->angle = 270.0;
+		map->player->angle = 270;
 }
 
 t_square	*pars_char_to_square(t_map *map, char c, int x, int y)

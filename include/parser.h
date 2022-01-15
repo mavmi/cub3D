@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/14 15:06:31 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/15 17:48:51 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define BAD_SQ_POS -1
 # define BAD_PL_ORIENT '+'
 # define BAD_PL_POS -1.0
-# define BAD_PL_ANGLE -1.0
+# define BAD_PL_ANGLE -1
 
 # define VOID ' '
 # define EMPTY '0'
@@ -48,7 +48,7 @@ struct s_player
 {
 	t_point	*pos;
 	char	orient;
-	double	angle;
+	int		angle;
 };
 
 struct s_square
