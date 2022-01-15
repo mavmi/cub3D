@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/15 17:56:08 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/15 19:33:52 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ enum	e_color
 {
 	WHITE,
 	RED,
+	YELLOW,
 	BLACK
 };
 
@@ -73,10 +74,6 @@ void	paint_draw_pixel(t_painting *painting,
 void	paint_draw_player(t_painting *painting, t_color color);
 void	paint_draw_map(t_painting *painting);
 
-// painting_utils.c
-double	paint_get_dist(double x1, double y1, double x2, double y2);
-double	paint_get_module(double num);
-
 // painting_movements_1.c
 void	paint_move_left(t_painting *painting);
 void	paint_move_right(t_painting *painting);
@@ -88,5 +85,11 @@ int		paint_is_move_left(t_painting *painting);
 int		paint_is_move_right(t_painting *painting);
 int		paint_is_move_up(t_painting *painting);
 int		paint_is_move_down(t_painting *painting);
+
+// painting_ray.c
+
+// painting_utils.c
+double	paint_get_dist(double x1, double y1, double x2, double y2);
+double	paint_get_module(double num);
 
 #endif

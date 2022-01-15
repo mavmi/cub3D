@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/15 18:00:05 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/15 20:00:32 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 		paint_move_up(painting);
 	else if (key_code == DOWN)
 		paint_move_down(painting);
-	paint_draw_player(painting, RED);
+	paint_draw_player(painting, YELLOW);
 }
 
 static int	paint_key_pressed(int key_code, t_painting *painting)
@@ -91,6 +91,6 @@ void	paint_init(t_map *map)
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
 	paint_draw_map(painting);
-	paint_draw_player(painting, RED);
+	paint_draw_player(painting, YELLOW);
 	mlx_loop(painting->mlx);
 }
