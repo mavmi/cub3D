@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/15 21:00:37 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/16 12:17:03 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	paint_draw_pixel(t_painting *painting,
 		x_iter = 0;
 		while (x_iter < PIXEL_SIZE)
 		{
-			if (y_iter == 0 || x_iter == 0
-				|| x_iter + 1 == PIXEL_SIZE || y_iter + 1 == PIXEL_SIZE)
+			if ((x + x_iter) % PIXEL_SIZE == 0
+				|| (y + y_iter) % PIXEL_SIZE == 0)
 				mlx_pixel_put(painting->mlx, painting->win,
 					x + x_iter, y + y_iter, paint_get_color(RED));
 			else
@@ -60,19 +60,16 @@ static void	paint_draw_player_handler(t_painting *painting,
 			painting->map->player->pos->x * PIXEL_SIZE,
 			painting->map->player->pos->y * PIXEL_SIZE
 		) < PLAYER_RAD * PIXEL_SIZE)
-	{
 		mlx_pixel_put(painting->mlx, painting->win, x, y,
 			paint_get_color(color));
+	if (color != BLACK)
 		return ;
-	}
-	if ((x % PIXEL_SIZE == 0 || y % PIXEL_SIZE == 0) && color == BLACK)
-	{
+	if (x % PIXEL_SIZE == 0 || y % PIXEL_SIZE == 0)
 		mlx_pixel_put(painting->mlx, painting->win,
 			x, y, paint_get_color(RED));
-		return ;
-	}
-	mlx_pixel_put(painting->mlx, painting->win,
-		x, y, paint_get_color(BLACK));
+	else
+		mlx_pixel_put(painting->mlx, painting->win,
+			x, y, paint_get_color(BLACK));
 }
 
 void	paint_draw_player(t_painting *painting, t_color color)
