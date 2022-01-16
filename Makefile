@@ -6,7 +6,7 @@
 #    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/01/15 19:21:27 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/01/16 18:58:08 by pmaryjo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME			=	cub3D
 
 HDRS_DIR		=	include
 SRCS_DIR		=	srcs
+GEOM_DIR		=	$(SRCS_DIR)/geometry
 GNL_DIR			=	$(SRCS_DIR)/get_next_line
 PAINTING_DIR	=	$(SRCS_DIR)/painting
 PARSER_DIR		=	$(SRCS_DIR)/parser
@@ -29,6 +30,7 @@ MLX				=	$(MLX_DIR)/libmlx.a
 
 HDRS			=	$(addprefix $(HDRS_DIR)/, geometry.h get_next_line.h painting.h parser.h utils.h)
 SRCS			=	$(addprefix $(SRCS_DIR)/, main.c)\
+					$(addprefix $(GEOM_DIR)/, geometry_1.c geometry_2.c geometry_3.c)\
 					$(addprefix $(GNL_DIR)/, get_next_line.c get_next_line_utils.c)\
 					$(addprefix $(PAINTING_DIR)/, painting_1.c painting_2.c  painting_movements_1.c\
 							painting_movements_2.c painting_ray.c painting_utils.c)\
@@ -83,6 +85,9 @@ norm:
 #			@echo "$(BLUE)\n\t*** SRCS ***$(NC)"
 #			@norminette $(SRCS_DIR)/*.c | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
 
+			@echo "$(BLUE)\n\t*** GEOMETRY ***$(NC)"
+			@norminette $(GEOM_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+			
 			@echo "$(BLUE)\n\t*** GNL ***$(NC)"
 			@norminette $(GNL_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
 

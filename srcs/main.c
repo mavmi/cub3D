@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/16 20:02:21 by pmaryjo           #+#    #+#             */
+/*   Updated: 2022/01/16 20:02:22 by pmaryjo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <math.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -8,6 +20,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "../include/geometry.h"
 #include "../include/painting.h"
 #include "../include/parser.h"
 #include "../include/utils.h"
@@ -25,7 +38,17 @@ void	test_print_str_arr(char **arr)
 
 void	test_print_point(t_point *point)
 {
-	printf("x = %f\ny = %f\n", point->x, point->y);
+	printf("{x = %d, y = %d, z = %d}\n", point->x, point->y, point->z);
+}
+
+void	test_print_vector(t_vector *vector)
+{
+	printf("[\n");
+	printf("\tbegin: ");
+	test_print_point(vector->begin);
+	printf("\tend: ");
+	test_print_point(vector->end);
+	printf("]\n");
 }
 
 void	test_print_square(t_square *square)
@@ -78,9 +101,33 @@ void	test_print_map(t_map *map)
 
 // ************************************************** //
 
-int main(int argc, char **argv){
-	t_map	*map;
+void	test_vector(void)
+{
+	t_point		*begin_1 = geom_init_point(1, 1, 0);
+	t_point		*end_1 = geom_init_point(2, 2, 0);
+
+	t_point		*begin_2 = geom_init_point(-4, -4, 0);
+	t_point		*end_2 = geom_init_point(-3, -3, 0);
+
+	t_vector	*vector_1 = geom_init_vector(begin_1, end_1);
+	t_vector	*vector_2 = geom_init_vector(begin_2, end_2);
+	t_vector	*vector_sum = geom_sum_vectors(vector_1, vector_2);
 	
+	test_print_vector(vector_1);
+	test_print_vector(vector_2);
+	test_print_vector(vector_sum);
+
+	geom_destroy_vector(vector_1);
+	geom_destroy_vector(vector_2);
+	geom_destroy_vector(vector_sum);
+}
+
+// ************************************************** //
+
+void	run(int argc, char **argv)
+{
+	t_map	*map;
+
 	if (argc != 2){
 		printf("Bad input\n");
 		exit(1);
@@ -92,5 +139,10 @@ int main(int argc, char **argv){
 		exit(1);
 	}
 	paint_init(map);
+}
+
+int main(int argc, char **argv)
+{
+	run(argc, argv);
 	return (0);
 }

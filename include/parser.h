@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/15 17:48:51 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/16 13:11:38 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,23 @@
 # define EAST_OR 'E'
 # define WEST_OR 'W'
 
+typedef struct s_position	t_position;
 typedef struct s_player		t_player;
 typedef struct s_square		t_square;
 typedef struct s_map_line	t_map_line;
 typedef struct s_map		t_map;
 
+struct s_position
+{
+	double	x;
+	double	y;
+};
+
 struct s_player
 {
-	t_point	*pos;
-	char	orient;
-	int		angle;
+	t_position	*pos;
+	char		orient;
+	int			angle;
 };
 
 struct s_square

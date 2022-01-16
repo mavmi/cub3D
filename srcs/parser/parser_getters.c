@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:10:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/14 15:06:38 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/16 13:12:07 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_player	*pars_get_empty_player(void)
 	player = (t_player *)malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->pos = (t_point *)malloc(sizeof(t_point));
+	player->pos = (t_position *)malloc(sizeof(t_position));
 	if (!player->pos)
 	{
 		free(player);

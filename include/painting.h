@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/15 19:33:52 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/16 13:08:57 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ typedef struct s_movements	t_movements;
 
 enum	e_color
 {
-	WHITE,
-	RED,
-	YELLOW,
-	BLACK
+	WALL_COLOR,
+	GRID_COLOR,
+	PLAYER_COLOR,
+	FIELD_COLOR
 };
 
 struct s_painting
@@ -87,9 +87,11 @@ int		paint_is_move_up(t_painting *painting);
 int		paint_is_move_down(t_painting *painting);
 
 // painting_ray.c
+void	praint_print_ray(t_painting *painting);
 
 // painting_utils.c
 double	paint_get_dist(double x1, double y1, double x2, double y2);
 double	paint_get_module(double num);
+int		paint_get_color(t_color color);
 
 #endif

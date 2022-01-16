@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/15 20:00:32 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/16 13:09:12 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	paint_exit(t_painting *painting)
 
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
-	paint_draw_player(painting, BLACK);
+	paint_draw_player(painting, FIELD_COLOR);
 	if (key_code == LEFT)
 		paint_move_left(painting);
 	else if (key_code == RIGHT)
@@ -33,7 +33,7 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 		paint_move_up(painting);
 	else if (key_code == DOWN)
 		paint_move_down(painting);
-	paint_draw_player(painting, YELLOW);
+	paint_draw_player(painting, PLAYER_COLOR);
 }
 
 static int	paint_key_pressed(int key_code, t_painting *painting)
@@ -70,6 +70,7 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	else if (counter > 0 && *angle == 359)
 		*angle = 0;
 	counter = 0;
+	praint_print_ray(painting);
 	return (0);
 }
 
@@ -91,6 +92,6 @@ void	paint_init(t_map *map)
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
 	paint_draw_map(painting);
-	paint_draw_player(painting, YELLOW);
+	paint_draw_player(painting, PLAYER_COLOR);
 	mlx_loop(painting->mlx);
 }
