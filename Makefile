@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
+#    By: username <username@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/01/16 18:58:08 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/01/17 20:04:46 by username         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,12 @@ PARSER_DIR		=	$(SRCS_DIR)/parser
 UTILS_DIR		=	$(SRCS_DIR)/utils
 LIBFT_DIR		=	libft
 MLX_DIR			=	minilibx
+MLX_LIN_DIR		=	minilibx_linux
 
 
 LIBFT			=	$(LIBFT_DIR)/libft.a
 MLX				=	$(MLX_DIR)/libmlx.a
+MLX_LIN			=	$(MLX_LIN_DIR)/libmlx.a
 
 
 HDRS			=	$(addprefix $(HDRS_DIR)/, geometry.h get_next_line.h painting.h parser.h utils.h)
@@ -44,6 +46,7 @@ DEPEN			=	$(SRCS:.c=.d)
 CC				=	gcc
 GCC				=	$(CC) -Wall -Wextra -Werror -MMD -g
 GCC_MLX			=	$(GCC) -framework OpenGL -framework AppKit
+GCC_MLX_FL_LIN	=	-lXext -lX11 -lm -lz
 
 
 # Norminette colors
@@ -100,6 +103,28 @@ norm:
 			@echo "$(BLUE)\n\t*** UTILS ***$(NC)"
 			@norminette $(UTILS_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
 
+
+###############################################
+
+
+linux:			get_libft linux_get_mlx $(OBJS)
+				$(GCC) $(OBJS) -L$(MLX_LIN_DIR) -lmlx_Linux -L/usr/lib -I$(MLX_LIN_DIR) $(GCC_MLX_FL_LIN) $(LIBFT) -o $(NAME)
+
+linux_get_mlx:
+				$(MAKE) -C $(MLX_LIN_DIR)
+
+linux_clean:
+				rm -f $(OBJS)
+				rm -f $(DEPEN)
+				$(MAKE) clean -C $(LIBFT_DIR)
+				$(MAKE) clean -C $(MLX_LIN_DIR)
+
+linux_fclean:	linux_clean
+				rm -f $(NAME)
+				$(MAKE) fclean -C $(LIBFT_DIR)
+
+linux_re:		linux_fclean linux
+
 -include $(DEPEN)
 
-.PHONE: all clean fclean re get_libft get_mlx norm
+.PHONE: all clean fclean re get_libft get_mlx norm linux get_mlx_linux linux_clean linux_fclean linux_re

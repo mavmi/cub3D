@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 13:05:45 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/17 19:50:46 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	paint_draw_pixel(t_painting *painting,
 	int	x_iter;
 	int	y_iter;
 
-	if (!painting || x < 0 || y < 0)
+	if (!painting)
 		return ;
 	x *= PIXEL_SIZE;
 	y *= PIXEL_SIZE;
