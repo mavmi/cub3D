@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:02:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 17:16:47 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:27:50 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include "../include/parser.h"
 #include "../include/utils.h"
 
-void	test_print_str_arr(char **arr)
+static void	test_print_str_arr(char **arr)
 {
 	if (!arr)
 		return ;
@@ -37,12 +37,12 @@ void	test_print_str_arr(char **arr)
 	}
 }
 
-void	test_print_point(t_point *point)
+static void	test_print_point(t_point *point)
 {
 	printf("{x = %d, y = %d, z = %d}\n", point->x, point->y, point->z);
 }
 
-void	test_print_vector(t_vector *vector)
+static void	test_print_vector(t_vector *vector)
 {
 	printf("[\n");
 	printf("\tbegin: ");
@@ -52,7 +52,7 @@ void	test_print_vector(t_vector *vector)
 	printf("]\n");
 }
 
-void	test_print_square(t_square *square)
+static void	test_print_square(t_square *square)
 {
 	if (!square)
 	{
@@ -64,7 +64,7 @@ void	test_print_square(t_square *square)
 	printf("type = %c\n", square->type);
 }
 
-void	test_print_map_line(t_map_line *map_line)
+static void	test_print_map_line(t_map_line *map_line)
 {
 	size_t	x;
 
@@ -82,7 +82,7 @@ void	test_print_map_line(t_map_line *map_line)
 	}
 }
 
-void	test_print_map(t_map *map)
+static void	test_print_map(t_map *map)
 {
 	size_t	y;
 
@@ -102,7 +102,7 @@ void	test_print_map(t_map *map)
 
 // ************************************************** //
 
-void	test_vector(void)
+static void	test_vector(void)
 {
 	t_point		*begin_1 = geom_init_point(1, 1, 0);
 	t_point		*end_1 = geom_init_point(2, 2, 0);
@@ -123,7 +123,7 @@ void	test_vector(void)
 	geom_destroy_vector(vector_sum);
 }
 
-void	test_angle(void)
+static void	test_angle(void)
 {
 	t_point		*begin_1 = geom_init_point(0, 0, 0);
 	t_point		*end_1 = geom_init_point(0, 1, 0);
@@ -163,6 +163,14 @@ void	run(int argc, char **argv)
 int main(int argc, char **argv)
 {
 	(void)argc; (void)argv;
+	(void)test_print_str_arr;
+	(void)test_print_point;
+	(void)test_print_vector;
+	(void)test_print_square;
+	(void)test_print_map_line;
+	(void)test_print_map;
+	(void)test_vector;
+	(void)test_angle;
 	
 	//test_vector();
 	//test_angle();

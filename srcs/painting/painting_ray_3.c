@@ -6,22 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 21:22:44 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:31:58 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
-
-/*
-printf("\t========================\n");	
-printf("abs angle: %d\n", painting->map->player->angle);
-printf("quarter: %d\n", ray->quarter);
-printf("quarter angle: %d\n", ray->quarter_angle);
-printf("vert: ");
-test_print_vector_(ray->orient_vert);
-printf("hor: ");
-test_print_vector_(ray->orient_hor);
-*/
 
 static t_vector	*paint_get_corner_vector_handler(t_point *begin, t_point *end)
 {
@@ -69,6 +58,7 @@ static void	paint_print_ray_handler(t_painting *painting, t_ray *ray)
 			ray->quarter);
 	if (!corner_vector)
 		return ;
+	// check angles and smth
 }
 
 void	paint_print_ray(t_painting *painting)
