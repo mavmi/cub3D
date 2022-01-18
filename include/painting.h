@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 20:27:57 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:22:11 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define EPS 0.2
 # define PIXELS_PER_DEGREE 5
 
-# define WIDTH 1000
+# define WIDTH 2000
 # define HEIGHT 1000
 
 # define ESC 53
