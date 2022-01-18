@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   painting_utils.c                                   :+:      :+:    :+:   */
+/*   painting_ray_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 14:37:48 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 20:03:36 by pmaryjo          ###   ########.fr       */
+/*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
+/*   Updated: 2022/01/18 20:34:53 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-double	paint_get_dist(double x1, double y1, double x2, double y2)
+void	paint_print_ray(t_painting *painting)
 {
-	return (sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2)));
-}
+	t_ray	*ray;
 
-double	paint_get_module(double num)
-{
-	return (sqrt(pow(num, 2)));
-}
-
-int	paint_get_color(t_color color)
-{
-	if (color == COLOR_WALL)
-		return (0xFFFFFF);
-	if (color == COLOR_GRID)
-		return (0xFF0000);
-	if (color == COLOR_PLAYER)
-		return (0xFFFF00);
-	return (0x000000);
+	if (!painting)
+		return ;
+	ray = paint_get_ray_info(painting);
+	if (!ray)
+		return ;
+	printf("\t========================\n");
+	printf("abs angle: %d\n", painting->map->player->angle);
+	printf("quarter: %d\n", ray->quarter);
+	printf("quarter angle: %d\n", ray->quarter_angle);
+	paint_destroy_ray_info(ray);
 }

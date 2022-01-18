@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 13:05:45 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 20:03:48 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	paint_draw_pixel(t_painting *painting,
 			if ((x + x_iter) % PIXEL_SIZE == 0
 				|| (y + y_iter) % PIXEL_SIZE == 0)
 				mlx_pixel_put(painting->mlx, painting->win,
-					x + x_iter, y + y_iter, paint_get_color(GRID_COLOR));
+					x + x_iter, y + y_iter, paint_get_color(COLOR_GRID));
 			else
 				mlx_pixel_put(painting->mlx, painting->win,
 					x + x_iter, y + y_iter, paint_get_color(color));
@@ -51,14 +51,14 @@ static void	paint_draw_player_handler(t_painting *painting,
 		) < PLAYER_RAD * PIXEL_SIZE)
 		mlx_pixel_put(painting->mlx, painting->win, x, y,
 			paint_get_color(color));
-	if (color != FIELD_COLOR)
+	if (color != COLOR_FIELD)
 		return ;
 	if (x % PIXEL_SIZE == 0 || y % PIXEL_SIZE == 0)
 		mlx_pixel_put(painting->mlx, painting->win,
-			x, y, paint_get_color(GRID_COLOR));
+			x, y, paint_get_color(COLOR_GRID));
 	else
 		mlx_pixel_put(painting->mlx, painting->win,
-			x, y, paint_get_color(FIELD_COLOR));
+			x, y, paint_get_color(COLOR_FIELD));
 }
 
 void	paint_draw_player(t_painting *painting, t_color color)
@@ -100,9 +100,9 @@ void	paint_draw_map(t_painting *painting)
 		while (x < painting->map->lines[y]->width)
 		{
 			if (painting->map->lines[y]->line[x]->type == WALL)
-				paint_draw_pixel(painting, x, y, WALL_COLOR);
+				paint_draw_pixel(painting, x, y, COLOR_WALL);
 			else
-				paint_draw_pixel(painting, x, y, FIELD_COLOR);
+				paint_draw_pixel(painting, x, y, COLOR_FIELD);
 			x++;
 		}
 		y++;
