@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:49 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 20:02:07 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 17:52:15 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define GEOMETRY_H
 
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <math.h>
 
-typedef struct s_point	t_point;
-typedef struct s_vector	t_vector;
+typedef struct s_point		t_point;
+typedef struct s_vector		t_vector;
 
 struct s_point
 {
@@ -49,5 +50,6 @@ t_vector	*geom_copy_vector(t_vector *vector);
 t_vector	*geom_sum_vectors(t_vector *first, t_vector *second);
 double		geom_vector_get_module(t_vector *vector);
 void		geom_move_vector(t_vector *vector, t_point *point);
+double		geom_get_angle(t_vector *vector_1, t_vector *vector_2);
 
 #endif

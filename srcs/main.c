@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:02:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 20:02:22 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 17:16:47 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -106,8 +107,8 @@ void	test_vector(void)
 	t_point		*begin_1 = geom_init_point(1, 1, 0);
 	t_point		*end_1 = geom_init_point(2, 2, 0);
 
-	t_point		*begin_2 = geom_init_point(-4, -4, 0);
-	t_point		*end_2 = geom_init_point(-3, -3, 0);
+	t_point		*begin_2 = geom_init_point(-3, -3, 0);
+	t_point		*end_2 = geom_init_point(-6, -6, 0);
 
 	t_vector	*vector_1 = geom_init_vector(begin_1, end_1);
 	t_vector	*vector_2 = geom_init_vector(begin_2, end_2);
@@ -122,12 +123,30 @@ void	test_vector(void)
 	geom_destroy_vector(vector_sum);
 }
 
+void	test_angle(void)
+{
+	t_point		*begin_1 = geom_init_point(0, 0, 0);
+	t_point		*end_1 = geom_init_point(0, 1, 0);
+
+	t_point		*begin_2 = geom_init_point(0, 0, 0);
+	t_point		*end_2 = geom_init_point(1, 1, 0);
+
+	t_vector	*vector_1 = geom_init_vector(begin_1, end_1);
+	t_vector	*vector_2 = geom_init_vector(begin_2, end_2);
+
+	printf("%f\n", geom_get_angle(vector_1, vector_2));
+
+	geom_destroy_vector(vector_1);
+	geom_destroy_vector(vector_2);
+}
+
 // ************************************************** //
 
 void	run(int argc, char **argv)
 {
 	t_map	*map;
 
+	(void)argc;
 	if (argc != 2){
 		printf("Bad input\n");
 		exit(1);
@@ -143,6 +162,10 @@ void	run(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
+	(void)argc; (void)argv;
+	
+	//test_vector();
+	//test_angle();
 	run(argc, argv);
 	return (0);
 }

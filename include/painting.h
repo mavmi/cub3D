@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 13:08:57 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 19:08:09 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@
 
 # include "parser.h"
 # include "painting.h"
+# include "geometry.h"
 
 # define PIXEL_SIZE 50
+# define ANGLE_DELTA 10
 
 // PLAYER_RAD and STEP are relative
 # define PLAYER_RAD 0.2
 # define STEP 0.31
 
 # define EPS 0.2
-# define PIXELS_PER_DEGREE 1
+# define PIXELS_PER_DEGREE 5
 
-# define WIDTH 2000
+# define WIDTH 1000
 # define HEIGHT 1000
 
 # define ESC 53
@@ -38,9 +40,17 @@
 # define LEFT 123
 # define RIGHT 124
 
+typedef struct s_ray		t_ray;
 typedef enum e_color		t_color;
 typedef struct s_painting	t_painting;
 typedef struct s_movements	t_movements;
+
+struct s_ray
+{
+	int			quarter;
+	int			quarter_angle;
+	t_vector	*orient_vector;
+};
 
 enum	e_color
 {
@@ -86,8 +96,12 @@ int		paint_is_move_right(t_painting *painting);
 int		paint_is_move_up(t_painting *painting);
 int		paint_is_move_down(t_painting *painting);
 
-// painting_ray.c
-void	praint_print_ray(t_painting *painting);
+// painting_ray_1.c
+void	paint_print_ray(t_painting *painting);
+
+// painting_ray_2.c
+t_ray	*paint_get_ray_info(t_painting *painting);
+void	paint_destroy_ray_info(t_ray *ray);
 
 // painting_utils.c
 double	paint_get_dist(double x1, double y1, double x2, double y2);

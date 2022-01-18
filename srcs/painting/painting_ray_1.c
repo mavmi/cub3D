@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   painting_ray.c                                     :+:      :+:    :+:   */
+/*   painting_ray_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 13:10:36 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 19:11:29 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-void	praint_print_ray(t_painting *painting)
+void	paint_print_ray(t_painting *painting)
 {
-	(void)painting;
+	if (!painting)
+		return ;
 }

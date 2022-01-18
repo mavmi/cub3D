@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 13:09:12 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 17:53:52 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	if (!counter || counter % PIXELS_PER_DEGREE != 0)
 		return (0);
 	angle = &painting->map->player->angle;
-	if (counter < 0 && *angle > 0)
-		(*angle)--;
-	else if (counter < 0 && *angle == 0)
-		*angle = 359;
-	else if (counter > 0 && *angle < 359)
-		(*angle)++;
-	else if (counter > 0 && *angle == 359)
-		*angle = 0;
+	if (counter < 0 && *angle > ANGLE_DELTA)
+		(*angle) -= ANGLE_DELTA;
+	else if (counter < 0 && *angle <= ANGLE_DELTA)
+		*angle = 360 + *angle - ANGLE_DELTA;
+	else if (counter > 0 && *angle <= 360 - ANGLE_DELTA)
+		(*angle) += ANGLE_DELTA;
+	else if (counter > 0 && *angle > 360 - ANGLE_DELTA)
+		*angle = ANGLE_DELTA - (360 - *angle);
 	counter = 0;
-	praint_print_ray(painting);
+	paint_print_ray(painting);
 	return (0);
 }
 

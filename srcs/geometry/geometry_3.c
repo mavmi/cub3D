@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:58:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 19:50:21 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/18 17:11:06 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,29 @@ void	geom_move_vector(t_vector *vector, t_point *point)
 	vector->end->x += delta.x;
 	vector->end->y += delta.y;
 	vector->end->z += delta.z;
+}
+
+double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
+{
+	double		angle;
+	t_vector	*vector_2_cpy;	
+
+	if (!vector_1 || !vector_2)
+		return (0);
+	vector_2_cpy = geom_copy_vector(vector_2);
+	if (!vector_2_cpy)
+		return (0);
+	geom_move_vector(vector_2_cpy, vector_1->begin);
+	angle = acos(
+			((vector_1->end->x - vector_1->begin->x)
+				* (vector_2_cpy->end->x - vector_2_cpy->begin->x)
+				+ (vector_1->end->y - vector_1->begin->y)
+				* (vector_2_cpy->end->y - vector_2_cpy->begin->y)
+				+ (vector_1->end->z - vector_1->begin->z)
+				* (vector_2_cpy->end->z - vector_2_cpy->begin->z))
+			/ (geom_vector_get_module(vector_1)
+				* geom_vector_get_module(vector_2_cpy))
+			) * (180.0 / M_PI);
+	geom_destroy_vector(vector_2_cpy);
+	return (angle);
 }
