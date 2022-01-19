@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 20:03:48 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/19 19:05:29 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ static int	paint_key_pressed(int key_code, t_painting *painting)
 	if (key_code == LEFT || key_code == RIGHT
 		|| key_code == UP || key_code == DOWN)
 		paint_handle_arrows(key_code, painting);
+	return (0);
+}
+
+static int	mouse_pressed(int key_code, int x, int y, t_painting *painting)
+{
+	(void)painting; (void)key_code;
+	printf("\tX = %d; Y = %d\n", x, y);
 	return (0);
 }
 
@@ -91,6 +98,7 @@ void	paint_init(t_map *map)
 	painting->win = mlx_new_window(painting->mlx, WIDTH, HEIGHT, "cub2D");
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
+	mlx_mouse_hook(painting->win, mouse_pressed, painting);
 	paint_draw_map(painting);
 	paint_draw_player(painting, COLOR_PLAYER);
 	mlx_loop(painting->mlx);

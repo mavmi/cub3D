@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 21:28:03 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/19 20:21:00 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "painting.h"
 # include "geometry.h"
 
-# define PIXEL_SIZE 50
+# define PIXEL_SIZE 30
 # define ANGLE_DELTA 10
 
 // PLAYER_RAD and STEP are relative
@@ -29,10 +29,10 @@
 # define STEP 0.31
 
 # define EPS 0.2
-# define PIXELS_PER_DEGREE 5
+# define PIXELS_PER_DEGREE 25
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 1200
+# define HEIGHT 600
 
 # define ESC 53
 # define UP 126
@@ -107,16 +107,21 @@ int			paint_is_move_up(t_painting *painting);
 int			paint_is_move_down(t_painting *painting);
 
 // painting_ray_1.c
+void		paint_print_ray(t_painting *painting);
+
+// painting_ray_2.c
 t_ray		*paint_get_ray_info(t_painting *painting);
 void		paint_destroy_ray_info(t_ray *ray);
 
-// painting_ray_2.c
+// painting_ray_3.c
 int			paint_get_quarter(int angle);
 int			paint_get_quarter_angle(int quarter, int abs_angle);
 t_vector	*paint_get_orient_vector(t_orient orient);
 
-// painting_ray_3.c
-void		paint_print_ray(t_painting *painting);
+// painting_ray_4.c
+t_vector	*paint_get_corner_vector(t_point *point, int quarter);
+void		paint_draw_vector(t_painting *painting,
+				t_vector *vector, t_color color);
 
 // painting_utils.c
 double		paint_get_dist(double x1, double y1, double x2, double y2);

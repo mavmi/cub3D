@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 13:11:38 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/19 14:27:45 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,14 @@ t_square	*pars_get_empty_square(void);
 t_map_line	*pars_get_empty_map_line(void);
 t_map		*pars_get_empty_map(void);
 
-// parser_utils.c
+// parser_utils_1.c
 int			pars_open_file(char *path);
 int			pars_is_char_valid_square(char c);
 int			pars_is_char_valid_player(char c);
 int			pars_is_char_valid(char c);
 int			pars_is_str_valid(char *str);
+
+// parser_utils_2.c
+t_position	*pars_copy_position(t_position *pos);
 
 #endif

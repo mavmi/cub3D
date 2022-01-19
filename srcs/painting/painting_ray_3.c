@@ -6,70 +6,76 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 21:31:58 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/19 13:52:55 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-static t_vector	*paint_get_corner_vector_handler(t_point *begin, t_point *end)
+int	paint_get_quarter(int angle)
 {
-	t_vector	*vector;
+	if (angle == 360 || (angle >= 0 && angle < 90))
+		return (1);
+	if (angle >= 90 && angle < 180)
+		return (2);
+	if (angle >= 180 && angle < 270)
+		return (3);
+	if (angle >= 270 && angle < 360)
+		return (4);
+	return (0);
+}
 
-	vector = geom_init_vector(begin, end);
-	if (vector)
-		return (vector);
-	geom_destroy_point(begin);
-	geom_destroy_point(end);
+int	paint_get_quarter_angle(int quarter, int abs_angle)
+{
+	if (quarter == 1)
+	{
+		if (abs_angle == 360)
+			return (0);
+		return (abs_angle);
+	}
+	if (quarter == 2)
+		return (90 - (abs_angle - 90));
+	if (quarter == 3)
+		return (abs_angle - 180);
+	if (quarter == 4)
+		return (90 - (abs_angle - 270));
+	return (-1);
+}
+
+static t_point	*paint_get_orient_vector_handler(t_orient orient)
+{
+	if (orient == ORIENT_NORTH)
+		return (geom_init_point(0, 1, 0));
+	else if (orient == ORIENT_EAST)
+		return (geom_init_point(1, 0, 0));
+	else if (orient == ORIENT_SOUTH)
+		return (geom_init_point(0, -1, 0));
+	else if (orient == ORIENT_WEST)
+		return (geom_init_point(-1, 0, 0));
 	return (NULL);
 }
 
-static t_vector	*paint_get_corner_vector(t_position *pl_pos, int quarter)
+t_vector	*paint_get_orient_vector(t_orient orient)
 {
 	t_point		*begin;
 	t_point		*end;
+	t_vector	*orient_vector;
 
-	if (!pl_pos || quarter < 1 || quarter > 4)
+	if (orient != ORIENT_NORTH && orient != ORIENT_EAST
+		&& orient != ORIENT_SOUTH && orient != ORIENT_WEST)
 		return (NULL);
-	begin = geom_init_point(pl_pos->x * PIXEL_SIZE,
-			pl_pos->y * PIXEL_SIZE, 0);
-	if (quarter == 1)
-		end = geom_init_point(((int)pl_pos->x + 1) * PIXEL_SIZE,
-				(int)pl_pos->y * PIXEL_SIZE, 0);
-	else if (quarter == 2)
-		end = geom_init_point(((int)pl_pos->x + 1) * PIXEL_SIZE,
-				((int)pl_pos->y + 1) * PIXEL_SIZE, 0);
-	else if (quarter == 3)
-		end = geom_init_point((int)pl_pos->x * PIXEL_SIZE,
-				((int)pl_pos->y + 1) * PIXEL_SIZE, 0);
-	else
-		end = geom_init_point((int)pl_pos->x * PIXEL_SIZE,
-				(int)pl_pos->y * PIXEL_SIZE, 0);
-	return (paint_get_corner_vector_handler(begin, end));
-}
-
-static void	paint_print_ray_handler(t_painting *painting, t_ray *ray)
-{
-	t_vector	*corner_vector;
-
-	if (!painting || !ray)
-		return ;
-	corner_vector = paint_get_corner_vector(painting->map->player->pos,
-			ray->quarter);
-	if (!corner_vector)
-		return ;
-	// check angles and smth
-}
-
-void	paint_print_ray(t_painting *painting)
-{
-	t_ray	*ray;
-
-	if (!painting)
-		return ;
-	ray = paint_get_ray_info(painting);
-	if (!ray)
-		return ;
-	paint_print_ray_handler(painting, ray);
-	paint_destroy_ray_info(ray);
+	begin = geom_init_point(0, 0, 0);
+	end = paint_get_orient_vector_handler(orient);
+	if (!begin || !end)
+	{
+		geom_destroy_point(begin);
+		geom_destroy_point(end);
+		return (NULL);
+	}
+	orient_vector = geom_init_vector(begin, end);
+	if (orient_vector)
+		return (orient_vector);
+	geom_destroy_point(begin);
+	geom_destroy_point(end);
+	return (NULL);
 }

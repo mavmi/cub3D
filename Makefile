@@ -6,7 +6,7 @@
 #    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/01/18 20:01:51 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/01/19 15:09:23 by pmaryjo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,9 @@ SRCS			=	$(addprefix $(SRCS_DIR)/, main.c)\
 					$(addprefix $(GNL_DIR)/, get_next_line.c get_next_line_utils.c)\
 					$(addprefix $(PAINTING_DIR)/, painting_1.c painting_2.c  painting_movements_1.c\
 							painting_movements_2.c painting_ray_1.c painting_ray_2.c painting_ray_3.c\
-							painting_utils.c)\
+							painting_ray_4.c painting_utils.c)\
 					$(addprefix $(PARSER_DIR)/, parser_1.c parser_convert_1.c parser_convert_2.c\
-							parser_destroyers.c parser_getters.c parser_utils.c)\
+							parser_destroyers.c parser_getters.c parser_utils_1.c parser_utils_2.c)\
 					$(addprefix $(UTILS_DIR)/, utils_1.c)
 OBJS			=	$(SRCS:.c=.o)
 DEPEN			=	$(SRCS:.c=.d)
