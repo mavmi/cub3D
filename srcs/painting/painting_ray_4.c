@@ -6,16 +6,16 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:09:13 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/19 21:08:07 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/20 19:52:48 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-static void	test_print_point(t_point *point)
-{
-	printf("{x = %d, y = %d, z = %d}\n", point->x, point->y, point->z);
-}
+//static void	test_print_point(t_point *point)
+//{
+//	printf("{x = %d, y = %d, z = %d}\n", point->x, point->y, point->z);
+//}
 
 static t_vector	*paint_get_corner_vector_handler(t_point *begin, t_point *end)
 {
@@ -39,14 +39,14 @@ t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 	if (!point || quarter < 1 || quarter > 4)
 		return (NULL);
 	begin = geom_init_point(point->x, point->y, point->z);
-	printf("begin: ");
-	test_print_point(begin);
+	//printf("begin: ");
+	//test_print_point(begin);
 	if (quarter == 1)
 	{
 		if (point->x % PIXEL_SIZE != 0)
 			corner_x = point->x - point->x % PIXEL_SIZE + PIXEL_SIZE;
 		else
-			corner_x = point->x;
+			corner_x = point->x + PIXEL_SIZE;
 			
 		if (point->y % PIXEL_SIZE != 0)
 			corner_y = point->y - point->y % PIXEL_SIZE;
@@ -68,10 +68,9 @@ t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 		corner_x = point->x - point->x % PIXEL_SIZE;
 		corner_y = point->y - point->y % PIXEL_SIZE;
 	}
-	end = geom_init_point(
-		corner_x, corner_y, 0);
-	printf("corner: ");
-	test_print_point(end);
+	end = geom_init_point(corner_x, corner_y, 0);
+	//printf("corner: ");
+	//test_print_point(end);
 	return (paint_get_corner_vector_handler(begin, end));
 
 	/*
@@ -104,7 +103,7 @@ t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 //	return second;
 //}
 
-void	paint_draw_vector(t_painting *painting, t_vector *vector, t_color color)
+void	paint_draw_vector(t_painting *painting, t_vector *vector)
 {
 	double	dx;
 	double	dy;
@@ -124,7 +123,7 @@ void	paint_draw_vector(t_painting *painting, t_vector *vector, t_color color)
 	while (pixels)
 	{
 		if ((int)x % PIXEL_SIZE != 0 || (int)y % PIXEL_SIZE != 0)
-			mlx_pixel_put(painting->mlx, painting->win, x, y, paint_get_color(color));
+			mlx_pixel_put(painting->mlx, painting->win, x, y, paint_get_color(COLOR_RAY));
 		else
 			mlx_pixel_put(painting->mlx, painting->win, x, y, paint_get_color(COLOR_GRID));
 		x += dx;

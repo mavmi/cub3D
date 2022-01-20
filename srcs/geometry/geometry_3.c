@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:58:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 17:11:06 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/20 19:17:30 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	geom_move_vector(t_vector *vector, t_point *point)
 
 double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
 {
+	int			scalar;
 	double		angle;
 	t_vector	*vector_2_cpy;	
 
@@ -75,13 +76,15 @@ double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
 	if (!vector_2_cpy)
 		return (0);
 	geom_move_vector(vector_2_cpy, vector_1->begin);
-	angle = acos(
-			((vector_1->end->x - vector_1->begin->x)
+	scalar = (vector_1->end->x - vector_1->begin->x)
 				* (vector_2_cpy->end->x - vector_2_cpy->begin->x)
 				+ (vector_1->end->y - vector_1->begin->y)
 				* (vector_2_cpy->end->y - vector_2_cpy->begin->y)
 				+ (vector_1->end->z - vector_1->begin->z)
-				* (vector_2_cpy->end->z - vector_2_cpy->begin->z))
+				* (vector_2_cpy->end->z - vector_2_cpy->begin->z);
+	if (scalar < 0)
+		scalar *= -1;
+	angle = acos(scalar
 			/ (geom_vector_get_module(vector_1)
 				* geom_vector_get_module(vector_2_cpy))
 			) * (180.0 / M_PI);

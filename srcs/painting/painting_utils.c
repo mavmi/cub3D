@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:37:48 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 20:03:36 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/20 17:28:33 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	paint_get_color(t_color color)
 		return (0xFF0000);
 	if (color == COLOR_PLAYER)
 		return (0xFFFF00);
+	if (color == COLOR_RAY)
+		return (0x0000FF);
 	return (0x000000);
 }

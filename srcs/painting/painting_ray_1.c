@@ -6,26 +6,48 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/19 21:05:55 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/20 19:54:24 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-//static void	test_print_point(t_point *point)
-//{
-//	printf("{x = %d, y = %d, z = %d}\n", point->x, point->y, point->z);
-//}
+static void	test_print_point(t_point *point)
+{
+	printf("{x = %d, y = %d, z = %d}\n", point->x, point->y, point->z);
+}
 
-//static void	test_print_vector(t_vector *vector)
-//{
-//	printf("[\n");
-//	printf("\tbegin: ");
-//	test_print_point(vector->begin);
-//	printf("\tend: ");
-//	test_print_point(vector->end);
-//	printf("]\n");
-//}
+static void	test_print_vector(t_vector *vector)
+{
+	printf("[\n");
+	printf("\tbegin: ");
+	test_print_point(vector->begin);
+	printf("\tend: ");
+	test_print_point(vector->end);
+	printf("]\n");
+}
+
+// *************************************************** //
+
+static int	paint_is_wall(t_painting *painting, int pixel_x, int pixel_y, int quarter)
+{
+	if (quarter == 1)
+	{
+		if (pixel_x % PIXEL_SIZE != 0)
+			pixel_x -= pixel_x % PIXEL_SIZE;
+		
+		if (pixel_y % PIXEL_SIZE != 0)
+			pixel_y -= pixel_y % PIXEL_SIZE;
+		else
+			pixel_y -= PIXEL_SIZE;
+	}
+	pixel_x /= PIXEL_SIZE;
+	pixel_y /= PIXEL_SIZE;
+	printf("{x = %d, y = %d}\n", pixel_x, pixel_y);
+	if (painting->map->lines[pixel_y]->line[pixel_x]->type == WALL)
+		return (1);
+	return (0);
+}
 
 static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray)
 {
@@ -36,6 +58,7 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray)
 	t_vector	*corner_vector;
 	t_vector	*ray_vector;
 
+	// Инициализация точек вектора луча
 	if (!painting || !ray)
 		return (NULL);
 	begin = geom_init_point(painting->map->player->pos->x * PIXEL_SIZE,
@@ -48,8 +71,14 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray)
 		geom_destroy_point(end);
 		return (NULL);
 	}
+
+	// Обновление точки конца вектора, двигаясь по границам квадратов
 	while (1)
 	{
+		printf("\t====================\n");
+		printf("quarter: %d\n", ray->quarter);
+
+		// Берем вектор, направленный в угол из текущей точки end
 		corner_vector = paint_get_corner_vector(end, ray->quarter);
 		if (!corner_vector)
 		{
@@ -57,32 +86,50 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray)
 			geom_destroy_point(end);
 			return (NULL);
 		}
+
+		printf("\n");
+		printf("to corner: ");
+		test_print_point(end);
+		printf("corner vector: ");
+		test_print_vector(corner_vector);
+
+		// Берем угол между угловым и северным векторами и
 		corner_angle = geom_get_angle(ray->orient_vert, corner_vector);
 		if (corner_angle > 90.0)
 			corner_angle -= 90.0;
+
+		// В зависимости от угла расчитываем сдвиг под одной из осей
 		if (ray->quarter_angle <= corner_angle)
 			delta = (int)sqrt(pow(corner_vector->begin->y - corner_vector->end->y, 2))
 					* tan(ray->quarter_angle * M_PI / 180.0);
 		else
 			delta = (int)sqrt(pow(corner_vector->begin->x - corner_vector->end->x, 2))
 					* tan((90 - ray->quarter_angle) * M_PI / 180.0);
+		geom_destroy_vector(corner_vector);
 		
-		//printf("start point: ");
-		//test_print_point(end);
-		//printf("corner: ");
-		//test_print_vector(corner_vector);
-		//printf("\t==============\n");
+		printf("\n");
+		printf("angle: %f\n", corner_angle);
+		printf("quarter angle: %d\n", ray->quarter_angle);
+		printf("delta: %d\n", delta);
 		
+		// Сдвиг точки конца
 		if (ray->quarter == 1 && ray->quarter_angle <= corner_angle)
 		{
 			end->x += delta;
-			end->y = end->y - end->y % PIXEL_SIZE;
+			if (end->y % PIXEL_SIZE)
+				end->y = end->y - end->y % PIXEL_SIZE;
+			else
+				end->y -= PIXEL_SIZE;
 		}
 		else if (ray->quarter == 1 && ray->quarter_angle > corner_angle)
 		{
-			end->x = end->x - end->x % PIXEL_SIZE + PIXEL_SIZE;
+			if (end->x % PIXEL_SIZE)
+				end->x = end->x - end->x % PIXEL_SIZE + PIXEL_SIZE;
+			else
+				end->x += PIXEL_SIZE;
 			end->y -= delta;
 		}
+		/*
 		else if (ray->quarter == 2 && ray->quarter_angle <= corner_angle)
 		{
 			end->x += delta;
@@ -113,26 +160,30 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray)
 			end->x = end->x - end->x % PIXEL_SIZE;
 			end->y -= delta;
 		}
-		geom_destroy_vector(corner_vector);
+		*/
 			
-//printf("begin: ");
-//test_print_point(begin);
-//printf("end: ");
-//test_print_point(end);
-//printf("\n");
+printf("begin: ");
+test_print_point(begin);
+printf("end: ");
+test_print_point(end);
+printf("\n");
 
-		if (
-			painting->map->lines[(end->y - end->y % PIXEL_SIZE)/PIXEL_SIZE]->line[(end->x - end->x % PIXEL_SIZE)/PIXEL_SIZE]->type == WALL
-		)
+	ray_vector = geom_init_vector(begin, end);
+	paint_draw_vector(painting, ray_vector);
+
+		if (paint_is_wall(painting, end->x, end->y, ray->quarter))
 		{
 			break ;
 		}
+		
 //test_print_vector(ray_vector);
 //ray_vector = geom_init_vector(begin, end);
 //paint_draw_vector(painting, ray_vector, COLOR_PLAYER);
+
+	    //sleep(1); 
 	}
-	ray_vector = geom_init_vector(begin, end);
-	paint_draw_vector(painting, ray_vector, COLOR_PLAYER);
+	//ray_vector = geom_init_vector(begin, end);
+	//paint_draw_vector(painting, ray_vector);
 	printf("\n==--==--==--==--==--==--==--==--\n\n");
 	if (ray_vector)
 		return (ray_vector);
