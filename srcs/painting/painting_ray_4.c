@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:09:13 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/20 19:52:48 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/24 17:22:28 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,44 @@ t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 		else
 			corner_y = point->y - PIXEL_SIZE;
 	}
+	
 	else if (quarter == 2)
 	{
-		corner_x = point->x - point->x % PIXEL_SIZE + PIXEL_SIZE;
-		corner_y = point->y - point->y % PIXEL_SIZE + PIXEL_SIZE;
+		if (point->x % PIXEL_SIZE != 0)
+			corner_x = point->x - point->x % PIXEL_SIZE + PIXEL_SIZE;
+		else
+			corner_x = point->x + PIXEL_SIZE;
+			
+		if (point->y % PIXEL_SIZE != 0)
+			corner_y = point->y - point->y % PIXEL_SIZE + PIXEL_SIZE;
+		else
+			corner_y = point->y + PIXEL_SIZE;
 	}
+	
 	else if (quarter == 3)
 	{
-		corner_x = point->x - point->x % PIXEL_SIZE;
-		corner_y = point->y - point->y % PIXEL_SIZE + PIXEL_SIZE;
+		if (point->x % PIXEL_SIZE != 0)
+			corner_x = point->x - point->x % PIXEL_SIZE;
+		else
+			corner_x = point->x - PIXEL_SIZE;
+
+		if (point->y % PIXEL_SIZE != 0)
+			corner_y = point->y - point->y % PIXEL_SIZE + PIXEL_SIZE;
+		else
+			corner_y = point->y + PIXEL_SIZE;
 	}
+	
 	else
 	{
-		corner_x = point->x - point->x % PIXEL_SIZE;
-		corner_y = point->y - point->y % PIXEL_SIZE;
+		if (point->x % PIXEL_SIZE != 0)
+			corner_x = point->x - point->x % PIXEL_SIZE;
+		else
+			corner_x = point->x - PIXEL_SIZE;
+			
+		if (point->y % PIXEL_SIZE != 0)
+			corner_y = point->y - point->y % PIXEL_SIZE;
+		else
+			corner_y = point->y - PIXEL_SIZE;
 	}
 	end = geom_init_point(corner_x, corner_y, 0);
 	//printf("corner: ");
@@ -89,21 +113,7 @@ t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 	*/
 }
 
-//static double min_double(double first, double second)
-//{
-//	if (first < second)
-//		return first;
-//	return second;
-//}
-
-//static double max_double(double first, double second)
-//{
-//	if (first > second)
-//		return first;
-//	return second;
-//}
-
-void	paint_draw_vector(t_painting *painting, t_vector *vector)
+static void	paint_vector_printer(t_painting *painting, t_vector *vector, t_color color)
 {
 	double	dx;
 	double	dy;
@@ -123,11 +133,25 @@ void	paint_draw_vector(t_painting *painting, t_vector *vector)
 	while (pixels)
 	{
 		if ((int)x % PIXEL_SIZE != 0 || (int)y % PIXEL_SIZE != 0)
-			mlx_pixel_put(painting->mlx, painting->win, x, y, paint_get_color(COLOR_RAY));
+			mlx_pixel_put(painting->mlx, painting->win, x, y, paint_get_color(color));
 		else
 			mlx_pixel_put(painting->mlx, painting->win, x, y, paint_get_color(COLOR_GRID));
 		x += dx;
 		y += dy;
 		--pixels;
 	}
+}
+
+void	paint_draw_vector(t_painting *painting, t_vector *vector)
+{
+	if (!painting || !vector)
+		return ;
+	paint_vector_printer(painting, vector, COLOR_RAY);
+}
+
+void	paint_erase_vector(t_painting *painting, t_vector *vector)
+{
+	if (!painting || !vector)
+		return ;
+	paint_vector_printer(painting, vector, COLOR_FIELD);
 }

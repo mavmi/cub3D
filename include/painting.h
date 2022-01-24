@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/20 20:09:26 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/24 18:08:31 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 # include "geometry.h"
 
 # define PIXEL_SIZE 30
-# define ANGLE_DELTA 1
+# define ANGLE_DELTA 5
 
 // PLAYER_RAD and STEP are relative
 # define PLAYER_RAD 0.2
 # define STEP 0.31
 
 # define EPS 0.2
-# define PIXELS_PER_DEGREE 25
+# define PIXELS_PER_DEGREE 1
 
 # define WIDTH 1200
 # define HEIGHT 600
@@ -121,8 +121,8 @@ t_vector	*paint_get_orient_vector(t_orient orient);
 
 // painting_ray_4.c
 t_vector	*paint_get_corner_vector(t_point *point, int quarter);
-void		paint_draw_vector(t_painting *painting,
-				t_vector *vector);
+void		paint_draw_vector(t_painting *painting, t_vector *vector);
+void		paint_erase_vector(t_painting *painting, t_vector *vector);
 
 // painting_utils.c
 double		paint_get_dist(double x1, double y1, double x2, double y2);

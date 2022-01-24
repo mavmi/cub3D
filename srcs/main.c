@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:02:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 21:27:50 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/24 17:07:57 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,19 @@ static void	test_angle(void)
 	geom_destroy_vector(vector_2);
 }
 
+static void test_move_vector(void)
+{
+	double angle = 90;
+
+	double x1 = 0, y1 = 1;
+
+	double x2 = x1 * cos(angle * M_PI / 180.0) + y1 * sin(angle * M_PI / 180.0);
+	double y2 = y1 * cos(angle * M_PI / 180.0) - x1 * sin(angle * M_PI / 180.0);
+
+	printf("angle: %f\n", angle);
+	printf("x=%f; y=%f\n", x2, y2);
+}
+
 // ************************************************** //
 
 void	run(int argc, char **argv)
@@ -171,9 +184,13 @@ int main(int argc, char **argv)
 	(void)test_print_map;
 	(void)test_vector;
 	(void)test_angle;
+	(void)test_move_vector;
 	
 	//test_vector();
 	//test_angle();
+	//test_move_vector();
+	//return 0;
+	
 	run(argc, argv);
 	return (0);
 }
