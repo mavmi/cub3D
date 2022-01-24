@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:58:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/20 19:17:30 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/24 19:27:41 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
 		return (0);
 	geom_move_vector(vector_2_cpy, vector_1->begin);
 	scalar = (vector_1->end->x - vector_1->begin->x)
-				* (vector_2_cpy->end->x - vector_2_cpy->begin->x)
-				+ (vector_1->end->y - vector_1->begin->y)
-				* (vector_2_cpy->end->y - vector_2_cpy->begin->y)
-				+ (vector_1->end->z - vector_1->begin->z)
-				* (vector_2_cpy->end->z - vector_2_cpy->begin->z);
+		* (vector_2_cpy->end->x - vector_2_cpy->begin->x)
+		+ (vector_1->end->y - vector_1->begin->y)
+		* (vector_2_cpy->end->y - vector_2_cpy->begin->y)
+		+ (vector_1->end->z - vector_1->begin->z)
+		* (vector_2_cpy->end->z - vector_2_cpy->begin->z);
 	if (scalar < 0)
 		scalar *= -1;
 	angle = acos(scalar

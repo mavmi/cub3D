@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/19 19:05:29 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/24 19:28:08 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ static int	paint_key_pressed(int key_code, t_painting *painting)
 
 static int	mouse_pressed(int key_code, int x, int y, t_painting *painting)
 {
-	(void)painting; (void)key_code;
-	printf("\tX = %d; Y = %d\n", x, y);
+	(void)painting;
+	(void)key_code;
+	(void)x;
+	(void)y;
 	return (0);
 }
 

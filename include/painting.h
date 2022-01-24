@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/24 18:08:31 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/24 20:20:18 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "geometry.h"
 
 # define PIXEL_SIZE 30
-# define ANGLE_DELTA 5
+# define ANGLE_DELTA 1
 
 // PLAYER_RAD and STEP are relative
 # define PLAYER_RAD 0.2
