@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:36:50 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/19 13:53:02 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 01:02:51 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
+// Free t_ray
 void	paint_destroy_ray_info(t_ray *ray)
 {
 	if (!ray)
@@ -21,6 +22,8 @@ void	paint_destroy_ray_info(t_ray *ray)
 	free(ray);
 }
 
+// Update t_ray's orientation vectors 
+// depending on quarter
 static int	paint_get_ray_info_handler(t_ray *ray)
 {
 	if (!ray)
@@ -50,6 +53,8 @@ static int	paint_get_ray_info_handler(t_ray *ray)
 	return (0);
 }
 
+// Create t_ray struct of player's vector of view.
+// May return NULL
 t_ray	*paint_get_ray_info(t_painting *painting)
 {
 	t_ray	*ray;

@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   painting_movements_1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:36:15 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/14 20:09:16 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 00:40:21 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
+
+// All these functions just change position of player
+//
+// Just to be sure: player's position doesn't depend on
+// PIXEL_SIZE. It's an absolute double value
 
 void	paint_move_left(t_painting *painting)
 {

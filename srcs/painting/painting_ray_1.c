@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 18:32:35 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 01:00:14 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	paint_get_octet(int quarter, int part)
 	return (2 * quarter - 1 + part);
 }
 
+// Check if {pixel_x, pixel_y} pixel belongs to wall.
+// Return 1 if it does, 0 otherwise
 static int	paint_is_wall(t_painting *painting, int octet,
 					int pixel_x, int pixel_y)
 {
@@ -33,6 +35,9 @@ static int	paint_is_wall(t_painting *painting, int octet,
 		return (1);
 	return (0);
 }
+
+// All these functions update [end] of player's vector of view
+// depending on it's octet
 
 static void	paint_append_vector_4(t_ray_getter *vars)
 {
@@ -122,6 +127,7 @@ static void	paint_append_vector_1(t_ray_getter *vars)
 	}
 }
 
+// Update [end] of player's vector of view
 static int	paint_append_vector(t_ray_getter *vars)
 {
 	if (!vars)
@@ -137,6 +143,8 @@ static int	paint_append_vector(t_ray_getter *vars)
 	return (0);
 }
 
+// Update t_ray_getter's [delta], [corner_angle] and [octet].
+// Return 0 if everything is fine, 1 otherwise
 static int	paint_get_delta_and_angle(t_ray_getter *vars)
 {
 	t_vector	*corner_v;
@@ -165,6 +173,9 @@ static int	paint_get_delta_and_angle(t_ray_getter *vars)
 	return (0);
 }
 
+// Just initialization of player's vector of view.
+// It's begin and end point are equal to players position.
+// May return NULL
 static t_vector	*paint_init_ray_vector(t_painting *painting)
 {
 	t_point		*begin;
@@ -191,6 +202,7 @@ static t_vector	*paint_init_ray_vector(t_painting *painting)
 	return (NULL);
 }
 
+// Create player's vector of view
 static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 {	
 	t_ray_getter	vars;
@@ -216,6 +228,11 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 	return (vars.ray_vector);
 }
 
+// Welcome to my doom
+//
+// It gets all information about map,
+// calculate orientation of player's vector of view
+// and draw it
 void	paint_print_ray(t_painting *painting)
 {
 	t_ray			*ray_info;

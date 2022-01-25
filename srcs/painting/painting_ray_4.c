@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:09:13 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/24 20:19:50 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 01:13:22 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
+// Create t_vector from two t_points.
+// May return NULL
 static t_vector	*paint_get_corner_vector_handler(t_point *begin, t_point *end)
 {
 	t_vector	*vector;
@@ -24,6 +26,7 @@ static t_vector	*paint_get_corner_vector_handler(t_point *begin, t_point *end)
 	return (NULL);
 }
 
+// Get x for corner vector
 static int	paint_get_corner_x(int point_x, int quarter)
 {
 	if (quarter == 1)
@@ -52,6 +55,7 @@ static int	paint_get_corner_x(int point_x, int quarter)
 	}
 }
 
+// Get y for corner vector
 static int	paint_get_corner_y(int point_y, int quarter)
 {
 	if (quarter == 1)
@@ -80,6 +84,9 @@ static int	paint_get_corner_y(int point_y, int quarter)
 	}
 }
 
+// Create vector from [point] to corner of the current square
+// depending on quarter.
+// May return NULL
 t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 {
 	t_point		*begin;
@@ -93,6 +100,8 @@ t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 	return (paint_get_corner_vector_handler(begin, end));
 }
 
+// Vector's printer.
+// It draws vector
 static void	paint_vector_printer(t_painting *painting,
 			t_vector *vector, t_color color)
 {
@@ -121,6 +130,7 @@ static void	paint_vector_printer(t_painting *painting,
 	}
 }
 
+// Draw vector in canvas
 void	paint_draw_vector(t_painting *painting, t_vector *vector)
 {
 	if (!painting || !vector)
@@ -128,6 +138,7 @@ void	paint_draw_vector(t_painting *painting, t_vector *vector)
 	paint_vector_printer(painting, vector, COLOR_RAY);
 }
 
+// Delete vector from canvas
 void	paint_erase_vector(t_painting *painting, t_vector *vector)
 {
 	if (!painting || !vector)

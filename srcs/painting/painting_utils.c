@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   painting_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:37:48 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/20 17:28:33 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 01:13:58 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
+// Get distance between {x1, y1} and {x2, y2}
 double	paint_get_dist(double x1, double y1, double x2, double y2)
 {
 	return (sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2)));
 }
 
+// Get module of vector
 double	paint_get_module(double num)
 {
 	return (sqrt(pow(num, 2)));
 }
 
+// Convert t_color to int
 int	paint_get_color(t_color color)
 {
 	if (color == COLOR_WALL)

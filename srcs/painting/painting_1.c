@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   painting_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 18:30:42 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 00:34:24 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
+// Free all and exit
 static void	paint_exit(t_painting *painting)
 {
 	if (!painting)
@@ -22,6 +23,7 @@ static void	paint_exit(t_painting *painting)
 	exit(0);
 }
 
+// Move player and redraw it
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
 	paint_draw_player(painting, COLOR_FIELD);
@@ -36,6 +38,7 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 	paint_draw_player(painting, COLOR_PLAYER);
 }
 
+// Keyboard keys handler. Exit on esc and move on arrows
 static int	paint_key_pressed(int key_code, t_painting *painting)
 {
 	if (key_code == ESC)
@@ -46,6 +49,7 @@ static int	paint_key_pressed(int key_code, t_painting *painting)
 	return (0);
 }
 
+// It does nothing. May be later it will be more usefull
 static int	mouse_pressed(int key_code, int x, int y, t_painting *painting)
 {
 	(void)painting;
@@ -55,6 +59,8 @@ static int	mouse_pressed(int key_code, int x, int y, t_painting *painting)
 	return (0);
 }
 
+// Change player's angle of view relative to north and
+// redraw vector of view
 static int	paint_mouse_move(int x, int y, t_painting *painting)
 {
 	int				*angle;
@@ -83,6 +89,8 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	return (0);
 }
 
+// Init t_painting struct, create window,
+// set up input handlers and loop mlx
 void	paint_init(t_map *map)
 {
 	t_painting	*painting;

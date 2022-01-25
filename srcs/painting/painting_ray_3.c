@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/19 13:52:55 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 01:09:42 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
+// Get quarter from absolute angle of player's view
 int	paint_get_quarter(int angle)
 {
 	if (angle == 360 || (angle >= 0 && angle < 90))
@@ -25,6 +26,7 @@ int	paint_get_quarter(int angle)
 	return (0);
 }
 
+// Convert absolute angle of player's view to an angle inside current quarter
 int	paint_get_quarter_angle(int quarter, int abs_angle)
 {
 	if (quarter == 1)
@@ -42,6 +44,8 @@ int	paint_get_quarter_angle(int quarter, int abs_angle)
 	return (-1);
 }
 
+// Create [end] point of orientation vector depending on t_orient.
+// May return NULL
 static t_point	*paint_get_orient_vector_handler(t_orient orient)
 {
 	if (orient == ORIENT_NORTH)
@@ -55,6 +59,8 @@ static t_point	*paint_get_orient_vector_handler(t_orient orient)
 	return (NULL);
 }
 
+// Create N, E, S or W orientation vector.
+// May return NULL
 t_vector	*paint_get_orient_vector(t_orient orient)
 {
 	t_point		*begin;

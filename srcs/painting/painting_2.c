@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   painting_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 20:03:48 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 00:37:54 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
+// Draw one pixel with defined size PIXEL_SIZE.
+// {x, y} is absolute position of current pixel
+// relative map's array of strings
 void	paint_draw_pixel(t_painting *painting,
 						size_t x, size_t y, t_color color)
 {
@@ -41,6 +44,8 @@ void	paint_draw_pixel(t_painting *painting,
 	}
 }
 
+// Draw player's circle or background.
+// It all depends on {x, y} point of current pixel
 static void	paint_draw_player_handler(t_painting *painting,
 						int x, int y, t_color color)
 {
@@ -61,6 +66,7 @@ static void	paint_draw_player_handler(t_painting *painting,
 			x, y, paint_get_color(COLOR_FIELD));
 }
 
+// Draw player with specified color
 void	paint_draw_player(t_painting *painting, t_color color)
 {
 	int	iter_x;
@@ -86,6 +92,7 @@ void	paint_draw_player(t_painting *painting, t_color color)
 	}
 }
 
+// Draw whole map without player and vectors of view
 void	paint_draw_map(t_painting *painting)
 {
 	size_t	x;
