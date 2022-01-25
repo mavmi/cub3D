@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/24 19:28:08 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 18:30:42 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	paint_init(t_map *map)
 	}
 	painting->map = map;
 	painting->mlx = mlx_init();
-	painting->win = mlx_new_window(painting->mlx, WIDTH, HEIGHT, "cub2D");
+	painting->win = mlx_new_window(painting->mlx, WIDTH, HEIGHT,
+			"etozhe_cub2D");
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
 	mlx_mouse_hook(painting->win, mouse_pressed, painting);

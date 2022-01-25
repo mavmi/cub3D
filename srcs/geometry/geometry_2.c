@@ -6,12 +6,14 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:28:07 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 19:50:14 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 21:00:30 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/geometry.h"
 
+// Compare two points.
+// Return 1 if they are equal, 0 othwewise
 int	geom_cmp_points(t_point *first, t_point *second)
 {
 	if (!first || !second)
@@ -27,6 +29,8 @@ int	geom_cmp_points(t_point *first, t_point *second)
 	return (0);
 }
 
+// Compare two vectors.
+// Return 1 if they are equal, 0 othwewise
 int	geom_cmp_vectors(t_vector *first, t_vector *second)
 {
 	if (!first || !second)
@@ -41,6 +45,8 @@ int	geom_cmp_vectors(t_vector *first, t_vector *second)
 	return (0);
 }
 
+// Copy point.
+// May return NULL
 t_point	*geom_copy_point(t_point *point)
 {
 	if (!point)
@@ -48,6 +54,8 @@ t_point	*geom_copy_point(t_point *point)
 	return (geom_init_point(point->x, point->y, point->z));
 }
 
+// Copy vector.
+// May return NULL
 t_vector	*geom_copy_vector(t_vector *vector)
 {
 	t_point		*begin_cpy;

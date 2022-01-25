@@ -6,12 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:10:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/16 13:12:07 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 21:16:12 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
+// Create new t_player object and
+// fill it with default values.
+// May return NULL
 t_player	*pars_get_empty_player(void)
 {
 	t_player	*player;
@@ -32,6 +35,9 @@ t_player	*pars_get_empty_player(void)
 	return (player);
 }
 
+// Create new t_square object and
+// fill it with default values.
+// May return NULL
 t_square	*pars_get_empty_square(void)
 {
 	t_square	*square;
@@ -45,6 +51,9 @@ t_square	*pars_get_empty_square(void)
 	return (square);
 }
 
+// Create new t_map_line object and
+// fill it with default values.
+// May return NULL
 t_map_line	*pars_get_empty_map_line(void)
 {
 	t_map_line	*map_line;

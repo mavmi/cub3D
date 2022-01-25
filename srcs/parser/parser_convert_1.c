@@ -6,12 +6,14 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:43:34 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/15 17:49:08 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 21:08:30 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
+// Check if current char is player's char.
+// Update map's player struct if it is
 static void	pars_is_player(t_map *map, char c, int x, int y)
 {
 	if (!map || !pars_is_char_valid_player(c) || x < 0 || y < 0)
@@ -32,6 +34,8 @@ static void	pars_is_player(t_map *map, char c, int x, int y)
 		map->player->angle = 270;
 }
 
+// Convert file's char to t_square.
+// May return NULL
 t_square	*pars_char_to_square(t_map *map, char c, int x, int y)
 {
 	t_square	*square;

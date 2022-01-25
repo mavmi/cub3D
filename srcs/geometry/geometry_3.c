@@ -6,12 +6,14 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:58:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/24 19:27:41 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 21:03:41 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/geometry.h"
 
+// Create a vector of sum of vectors [first] and [second].
+// May return NULL
 t_vector	*geom_sum_vectors(t_vector *first, t_vector *second)
 {
 	t_point		*begin_cpy;
@@ -36,6 +38,7 @@ t_vector	*geom_sum_vectors(t_vector *first, t_vector *second)
 	return (geom_init_vector(begin_cpy, end_cpy));
 }
 
+// Get module of vector
 double	geom_vector_get_module(t_vector *vector)
 {
 	if (!vector)
@@ -47,6 +50,7 @@ double	geom_vector_get_module(t_vector *vector)
 	);
 }
 
+// Move begin point of [vector] to [point]
 void	geom_move_vector(t_vector *vector, t_point *point)
 {
 	t_point	delta;
@@ -64,6 +68,7 @@ void	geom_move_vector(t_vector *vector, t_point *point)
 	vector->end->z += delta.z;
 }
 
+// Get angle between two vectors
 double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
 {
 	int			scalar;

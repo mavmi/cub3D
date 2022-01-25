@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:12:44 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/19 14:25:17 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 21:16:52 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	pars_open_file(char *path)
 	return (open(path, O_RDONLY));
 }
 
+// Check if input char is valid square char.
+// Return 1 if it is, 0 otherwise
 int	pars_is_char_valid_square(char c)
 {
 	if (c != VOID && c != EMPTY && c != WALL)
@@ -26,6 +28,8 @@ int	pars_is_char_valid_square(char c)
 	return (1);
 }
 
+// Check if input char is valid player char.
+// Return 1 if it is, 0 otherwise
 int	pars_is_char_valid_player(char c)
 {
 	if (c != NORTH_OR && c != SOUTH_OR
@@ -34,6 +38,8 @@ int	pars_is_char_valid_player(char c)
 	return (1);
 }
 
+// Check if input char is valid square or player char.
+// Return 1 if it is, 0 otherwise
 int	pars_is_char_valid(char c)
 {
 	if (!pars_is_char_valid_square(c) && !pars_is_char_valid_player(c))

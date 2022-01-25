@@ -6,128 +6,162 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/24 22:10:19 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 18:32:35 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-static void	paint_append_vector_4(t_vector *ray_vector, t_ray *ray_info,
-					double corner_angle, int delta)
+static int	paint_get_octet(int quarter, int part)
 {
-	if (ray_info->quarter_angle <= corner_angle)
-	{
-		ray_vector->end->x -= delta;
-		if (ray_vector->end->y % PIXEL_SIZE)
-			ray_vector->end->y = ray_vector->end->y
-				- ray_vector->end->y % PIXEL_SIZE - 1;
-		else
-			ray_vector->end->y = ray_vector->end->y - PIXEL_SIZE - 1;
-	}
-	else if (ray_info->quarter_angle > corner_angle)
-	{
-		if (ray_vector->end->x % PIXEL_SIZE)
-			ray_vector->end->x = ray_vector->end->x
-				- ray_vector->end->x % PIXEL_SIZE - 1;
-		else
-			ray_vector->end->x = ray_vector->end->x - PIXEL_SIZE - 1;
-		ray_vector->end->y -= delta;
-	}
+	return (2 * quarter - 1 + part);
 }
 
-static void	paint_append_vector_3(t_vector *ray_vector, t_ray *ray_info,
-					double corner_angle, int delta)
+static int	paint_is_wall(t_painting *painting, int octet,
+					int pixel_x, int pixel_y)
 {
-	if (ray_info->quarter_angle <= corner_angle)
+	if (octet == 1 || octet == 6 || octet == 7 || octet == 8)
 	{
-		ray_vector->end->x -= delta;
-		if (ray_vector->end->y % PIXEL_SIZE)
-			ray_vector->end->y = ray_vector->end->y
-				- ray_vector->end->y % PIXEL_SIZE + PIXEL_SIZE;
-		else
-			ray_vector->end->y += PIXEL_SIZE;
+		pixel_x--;
+		pixel_y--;
 	}
-	else if (ray_info->quarter_angle > corner_angle)
-	{
-		if (ray_vector->end->x % PIXEL_SIZE)
-			ray_vector->end->x = ray_vector->end->x
-				- ray_vector->end->x % PIXEL_SIZE - 1;
-		else
-			ray_vector->end->x = ray_vector->end->x - PIXEL_SIZE - 1;
-		ray_vector->end->y += delta;
-	}
-}
-
-static void	paint_append_vector_2(t_vector *ray_vector, t_ray *ray_info,
-					double corner_angle, int delta)
-{
-	if (ray_info->quarter_angle <= corner_angle)
-	{
-		ray_vector->end->x += delta;
-		if (ray_vector->end->y % PIXEL_SIZE)
-			ray_vector->end->y = ray_vector->end->y
-				- ray_vector->end->y % PIXEL_SIZE + PIXEL_SIZE;
-		else
-			ray_vector->end->y += PIXEL_SIZE;
-	}
-	else if (ray_info->quarter_angle > corner_angle)
-	{
-		if (ray_vector->end->x % PIXEL_SIZE)
-			ray_vector->end->x = ray_vector->end->x
-				- ray_vector->end->x % PIXEL_SIZE + PIXEL_SIZE;
-		else
-			ray_vector->end->x = ray_vector->end->x + PIXEL_SIZE;
-		ray_vector->end->y += delta;
-	}
-}
-
-static void	paint_append_vector_1(t_vector *ray_vector, t_ray *ray_info,
-					double corner_angle, int delta)
-{
-	if (ray_info->quarter_angle <= corner_angle)
-	{
-		ray_vector->end->x += delta;
-		if (ray_vector->end->y % PIXEL_SIZE)
-			ray_vector->end->y = ray_vector->end->y
-				- ray_vector->end->y % PIXEL_SIZE - 1;
-		else
-			ray_vector->end->y = ray_vector->end->y - PIXEL_SIZE - 1;
-	}
-	else if (ray_info->quarter_angle > corner_angle)
-	{
-		if (ray_vector->end->x % PIXEL_SIZE)
-			ray_vector->end->x = ray_vector->end->x
-				- ray_vector->end->x % PIXEL_SIZE + PIXEL_SIZE;
-		else
-			ray_vector->end->x += PIXEL_SIZE;
-		ray_vector->end->y -= delta;
-	}
-}
-
-static int	paint_append_vector(t_vector *ray_vector, t_ray *ray_info,
-					double corner_angle, int delta)
-{
-	if (!ray_vector || !ray_info)
-		return (1);
-	if (ray_info->quarter == 1)
-		paint_append_vector_1(ray_vector, ray_info, corner_angle, delta);
-	else if (ray_info->quarter == 2)
-		paint_append_vector_2(ray_vector, ray_info, corner_angle, delta);
-	else if (ray_info->quarter == 3)
-		paint_append_vector_3(ray_vector, ray_info, corner_angle, delta);
-	else if (ray_info->quarter == 4)
-		paint_append_vector_4(ray_vector, ray_info, corner_angle, delta);
-	return (0);
-}
-
-static int	paint_is_wall(t_painting *painting, int pixel_x, int pixel_y)
-{
 	pixel_x -= pixel_x % PIXEL_SIZE;
 	pixel_y -= pixel_y % PIXEL_SIZE;
 	pixel_x /= PIXEL_SIZE;
 	pixel_y /= PIXEL_SIZE;
 	if (painting->map->lines[pixel_y]->line[pixel_x]->type == WALL)
 		return (1);
+	return (0);
+}
+
+static void	paint_append_vector_4(t_ray_getter *vars)
+{
+	if (vars->ray_info->quarter_angle <= vars->corner_angle)
+	{
+		vars->ray_vector->end->x -= vars->delta;
+		if (vars->ray_vector->end->y % PIXEL_SIZE)
+			vars->ray_vector->end->y = vars->ray_vector->end->y
+				- vars->ray_vector->end->y % PIXEL_SIZE;
+		else
+			vars->ray_vector->end->y = vars->ray_vector->end->y - PIXEL_SIZE;
+	}
+	else if (vars->ray_info->quarter_angle > vars->corner_angle)
+	{
+		if (vars->ray_vector->end->x % PIXEL_SIZE)
+			vars->ray_vector->end->x = vars->ray_vector->end->x
+				- vars->ray_vector->end->x % PIXEL_SIZE;
+		else
+			vars->ray_vector->end->x = vars->ray_vector->end->x - PIXEL_SIZE;
+		vars->ray_vector->end->y -= vars->delta;
+	}
+}
+
+static void	paint_append_vector_3(t_ray_getter *vars)
+{
+	if (vars->ray_info->quarter_angle <= vars->corner_angle)
+	{
+		vars->ray_vector->end->x -= vars->delta;
+		if (vars->ray_vector->end->y % PIXEL_SIZE)
+			vars->ray_vector->end->y = vars->ray_vector->end->y
+				- vars->ray_vector->end->y % PIXEL_SIZE + PIXEL_SIZE;
+		else
+			vars->ray_vector->end->y += PIXEL_SIZE;
+	}
+	else if (vars->ray_info->quarter_angle > vars->corner_angle)
+	{
+		if (vars->ray_vector->end->x % PIXEL_SIZE)
+			vars->ray_vector->end->x = vars->ray_vector->end->x
+				- vars->ray_vector->end->x % PIXEL_SIZE;
+		else
+			vars->ray_vector->end->x = vars->ray_vector->end->x - PIXEL_SIZE;
+		vars->ray_vector->end->y += vars->delta;
+	}
+}
+
+static void	paint_append_vector_2(t_ray_getter *vars)
+{
+	if (vars->ray_info->quarter_angle <= vars->corner_angle)
+	{
+		vars->ray_vector->end->x += vars->delta;
+		if (vars->ray_vector->end->y % PIXEL_SIZE)
+			vars->ray_vector->end->y = vars->ray_vector->end->y
+				- vars->ray_vector->end->y % PIXEL_SIZE + PIXEL_SIZE;
+		else
+			vars->ray_vector->end->y += PIXEL_SIZE;
+	}
+	else if (vars->ray_info->quarter_angle > vars->corner_angle)
+	{
+		if (vars->ray_vector->end->x % PIXEL_SIZE)
+			vars->ray_vector->end->x = vars->ray_vector->end->x
+				- vars->ray_vector->end->x % PIXEL_SIZE + PIXEL_SIZE;
+		else
+			vars->ray_vector->end->x = vars->ray_vector->end->x + PIXEL_SIZE;
+		vars->ray_vector->end->y += vars->delta;
+	}
+}
+
+static void	paint_append_vector_1(t_ray_getter *vars)
+{
+	if (vars->ray_info->quarter_angle <= vars->corner_angle)
+	{
+		vars->ray_vector->end->x += vars->delta;
+		if (vars->ray_vector->end->y % PIXEL_SIZE)
+			vars->ray_vector->end->y = vars->ray_vector->end->y
+				- vars->ray_vector->end->y % PIXEL_SIZE;
+		else
+			vars->ray_vector->end->y = vars->ray_vector->end->y - PIXEL_SIZE;
+	}
+	else if (vars->ray_info->quarter_angle > vars->corner_angle)
+	{
+		if (vars->ray_vector->end->x % PIXEL_SIZE)
+			vars->ray_vector->end->x = vars->ray_vector->end->x
+				- vars->ray_vector->end->x % PIXEL_SIZE + PIXEL_SIZE;
+		else
+			vars->ray_vector->end->x += PIXEL_SIZE;
+		vars->ray_vector->end->y -= vars->delta;
+	}
+}
+
+static int	paint_append_vector(t_ray_getter *vars)
+{
+	if (!vars)
+		return (1);
+	if (vars->ray_info->quarter == 1)
+		paint_append_vector_1(vars);
+	else if (vars->ray_info->quarter == 2)
+		paint_append_vector_2(vars);
+	else if (vars->ray_info->quarter == 3)
+		paint_append_vector_3(vars);
+	else if (vars->ray_info->quarter == 4)
+		paint_append_vector_4(vars);
+	return (0);
+}
+
+static int	paint_get_delta_and_angle(t_ray_getter *vars)
+{
+	t_vector	*corner_v;
+
+	if (!vars)
+		return (1);
+	corner_v = paint_get_corner_vector(vars->ray_vector->end,
+			vars->ray_info->quarter);
+	if (!corner_v)
+		return (1);
+	vars->corner_angle = geom_get_angle(vars->ray_info->orient_vert,
+			corner_v);
+	if (vars->corner_angle > 90.0)
+		vars->corner_angle -= 90.0;
+	if (vars->ray_info->quarter_angle <= vars->corner_angle)
+		vars->octet = paint_get_octet(vars->ray_info->quarter, 0);
+	else
+		vars->octet = paint_get_octet(vars->ray_info->quarter, 1);
+	if (vars->octet % 2 != 0)
+		vars->delta = sqrt(pow(corner_v->begin->y - corner_v->end->y, 2))
+			* tan(vars->ray_info->quarter_angle * M_PI / 180.0);
+	else
+		vars->delta = sqrt(pow(corner_v->begin->x - corner_v->end->x, 2))
+			* tan((90 - vars->ray_info->quarter_angle) * M_PI / 180.0);
+	geom_destroy_vector(corner_v);
 	return (0);
 }
 
@@ -157,56 +191,29 @@ static t_vector	*paint_init_ray_vector(t_painting *painting)
 	return (NULL);
 }
 
-static int	paint_get_delta_and_angle(double *corner_angle, int *delta,
-					t_ray *ray_info, t_point *begin)
-{
-	t_vector	*corner_vector;
-
-	if (!corner_angle || !delta || !ray_info)
-		return (1);
-	corner_vector = paint_get_corner_vector(begin, ray_info->quarter);
-	if (!corner_vector)
-		return (1);
-	*corner_angle = geom_get_angle(ray_info->orient_vert, corner_vector);
-	if (*corner_angle > 90.0)
-		*corner_angle -= 90.0;
-	if (ray_info->quarter_angle <= *corner_angle)
-		*delta = sqrt(pow(corner_vector->begin->y - corner_vector->end->y, 2))
-			* tan(ray_info->quarter_angle * M_PI / 180.0);
-	else
-		*delta = sqrt(pow(corner_vector->begin->x - corner_vector->end->x, 2))
-			* tan((90 - ray_info->quarter_angle) * M_PI / 180.0);
-	geom_destroy_vector(corner_vector);
-	return (0);
-}
-
 static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 {	
-	int			delta;
-	double		corner_angle;
-	t_vector	*ray_vector;
+	t_ray_getter	vars;
 
 	if (!painting || !ray_info)
 		return (NULL);
-	ray_vector = paint_init_ray_vector(painting);
-	if (!ray_vector)
+	vars.painting = painting;
+	vars.ray_info = ray_info;
+	vars.ray_vector = paint_init_ray_vector(painting);
+	if (!vars.ray_vector)
 		return (NULL);
 	while (1)
 	{
-		if (paint_get_delta_and_angle(&corner_angle, &delta,
-				ray_info, ray_vector->end)
-			|| paint_append_vector(ray_vector, ray_info,
-				corner_angle, delta))
+		if (paint_get_delta_and_angle(&vars) || paint_append_vector(&vars))
 		{
-			geom_destroy_vector(ray_vector);
+			geom_destroy_vector(vars.ray_vector);
 			return (NULL);
 		}
-		if (paint_is_wall(painting, ray_vector->end->x, ray_vector->end->y))
-		{
+		if (paint_is_wall(painting, vars.octet, vars.ray_vector->end->x,
+				vars.ray_vector->end->y))
 			break ;
-		}
 	}	
-	return (ray_vector);
+	return (vars.ray_vector);
 }
 
 void	paint_print_ray(t_painting *painting)

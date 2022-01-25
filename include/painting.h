@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/24 20:20:18 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 18:14:58 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@
 
 typedef enum e_color		t_color;
 typedef enum e_orient		t_orient;
+typedef struct s_ray_getter	t_ray_getter;
 typedef struct s_ray		t_ray;
 typedef struct s_painting	t_painting;
 typedef struct s_movements	t_movements;
 
+// Just colors for mlx_pixel_put
+//
+// paint_get_color(..) function converts it to int
 enum e_color
 {
 	COLOR_WALL,
@@ -55,6 +59,10 @@ enum e_color
 	COLOR_RAY
 };
 
+// Variables to indicate what kind of
+// orienation vector I need
+//
+// paint_get_orient_vector(..)
 enum e_orient
 {
 	ORIENT_NORTH,
@@ -63,6 +71,28 @@ enum e_orient
 	ORIENT_WEST
 };
 
+// Contain information about player's vector of view.
+//
+//                 N(0°)
+//                  |
+//             [4]  |  [1]
+//  W(270°) --------|-------- E(90°)
+//             [3]  |  [2]
+//                  |
+//                S(180°)
+//
+// (0 <= angle < 90)    ==> (quarter == 1)
+// (90 <= angle < 180)  ==> (quarter == 2)
+// (180 <= angle < 270) ==> (quarter == 3)
+// (270 <= angle < 360) ==> (quarter == 4)
+// 
+// [quarter_angle] is an angle inside current quarter
+// relative to the vertical orientation vector
+//
+// Orientation vectors are N, E, S and W
+//
+// paint_get_orient_vector(..) creates required 
+// orientation vector
 struct s_ray
 {
 	int			quarter;
@@ -71,6 +101,8 @@ struct s_ray
 	t_vector	*orient_hor;
 };
 
+// Contain all necssary information about
+// map, player and mlx stuff
 struct s_painting
 {
 	t_map	*map;
@@ -78,12 +110,39 @@ struct s_painting
 	void	*win;
 };
 
+// These values are NOT about pixels or smth.
+// They are about position inside map's array of strings
+//
+// {sq_x, sq_y} - coordinates of current square
+// in which player is.
+//
+// {pl_x, pl_y} - coordinates of player
+//
+// paint_is_move_[somewhere](..) ==> paint_get_vars(..)
 struct s_movements
 {
 	int		sq_x;
 	int		sq_y;
 	double	pl_x;
 	double	pl_y;
+};
+
+// I need it to contain variables
+// for paint_get_ray_vector(..) function
+//
+// [delta] - Y-axis or X-axis shift
+// [octet] - like coordinate axis's quarter, but octet
+// [corner_angle] - angle between corner vector and
+// vertical orientation vector
+// [ray_vector] is what this function creates
+struct s_ray_getter
+{
+	int			delta;
+	int			octet;
+	double		corner_angle;
+	t_ray		*ray_info;
+	t_vector	*ray_vector;
+	t_painting	*painting;
 };
 
 // painting_1.c
