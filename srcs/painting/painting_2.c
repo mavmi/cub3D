@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 00:37:54 by username         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:23:29 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	paint_draw_player_handler(t_painting *painting,
 }
 
 // Draw player with specified color
-void	paint_draw_player(t_painting *painting, t_color color)
+static void	paint_player_printer(t_painting *painting, t_color color)
 {
 	int	iter_x;
 	int	iter_y;
@@ -90,6 +90,22 @@ void	paint_draw_player(t_painting *painting, t_color color)
 		}
 		iter_y++;
 	}
+}
+
+// Draw player in canvas
+void	paint_draw_player(t_painting *painting)
+{
+	if (!painting)
+		return ;
+	paint_player_printer(painting, COLOR_PLAYER);
+}
+
+// Delete player from canvas
+void	paint_erase_player(t_painting *painting)
+{
+	if (!painting)
+		return ;
+	paint_player_printer(painting, COLOR_FIELD);
 }
 
 // Draw whole map without player and vectors of view

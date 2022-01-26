@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 17:45:02 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 15:31:39 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,15 @@ struct s_position
 
 // Player's info.
 // [pos] - current position
+// [ray_of_view] - vector which begins in player's poition
+// and end in the wall
 // [orient] - orientation
 // [angle] - angle between north vector and
 // player's vector of view
 struct s_player
 {
 	t_position	*pos;
+	t_vector	*ray_of_view;
 	char		orient;
 	int			angle;
 };

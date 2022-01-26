@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 14:47:13 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 15:48:13 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
+// It's pro gamer stuff
+# define W 13
+# define A 0
+# define S 1
+# define D 2
 
 typedef enum e_color		t_color;
 typedef enum e_orient		t_orient;
@@ -151,7 +156,8 @@ void		paint_init(t_map *map);
 // painting_2.c
 void		paint_draw_pixel(t_painting *painting,
 				size_t x, size_t y, t_color color);
-void		paint_draw_player(t_painting *painting, t_color color);
+void		paint_draw_player(t_painting *painting);
+void		paint_erase_player(t_painting *painting);
 void		paint_draw_map(t_painting *painting);
 
 // painting_movements_1.c
@@ -167,7 +173,7 @@ int			paint_is_move_up(t_painting *painting);
 int			paint_is_move_down(t_painting *painting);
 
 // painting_ray_1.c
-void		paint_print_ray(t_painting *painting);
+t_vector	*paint_get_ray_of_view(t_painting *painting);
 
 // painting_ray_2.c
 t_ray		*paint_get_ray_info(t_painting *painting);

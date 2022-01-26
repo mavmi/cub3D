@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:10:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 21:16:12 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 15:32:11 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_player	*pars_get_empty_player(void)
 	}
 	player->pos->x = BAD_PL_POS;
 	player->pos->y = BAD_PL_POS;
+	player->ray_of_view = NULL;
 	player->orient = BAD_PL_ORIENT;
 	player->angle = BAD_PL_ANGLE;
 	return (player);

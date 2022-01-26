@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:13:57 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 15:29:43 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,25 +240,19 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 // It gets all information about map,
 // calculate orientation of player's vector of view
 // and draw it
-void	paint_print_ray(t_painting *painting)
+t_vector	*paint_get_ray_of_view(t_painting *painting)
 {
 	t_ray			*ray_info;
-	static t_vector	*ray_vector = NULL;
-	static t_vector	*ray_vector_prev = NULL;
+	t_vector		*ray_vector;
 
 	if (!painting)
-		return ;
+		return (NULL);
 	ray_info = paint_get_ray_info(painting);
 	if (!ray_info)
-		return ;
+		return (NULL);
 	ray_vector = paint_get_ray_vector(painting, ray_info);
-	if (!ray_vector)
-	{
-		paint_destroy_ray_info(ray_info);
-		return ;
-	}
-	paint_erase_vector(painting, ray_vector_prev);
-	paint_draw_vector(painting, ray_vector);
-	ray_vector_prev = ray_vector;
 	paint_destroy_ray_info(ray_info);
+	if (ray_vector)
+		return (ray_vector);
+	return (NULL);
 }

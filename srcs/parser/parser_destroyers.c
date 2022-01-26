@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:14:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 21:15:29 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 15:32:43 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	pars_destroy_player(t_player *player)
 	if (!player)
 		return ;
 	free(player->pos);
+	geom_destroy_vector(player->ray_of_view);
 	free(player);
 }
 

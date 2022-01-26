@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 00:34:24 by username         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:55:44 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,39 @@ static void	paint_exit(t_painting *painting)
 	exit(0);
 }
 
+// Delete old player and vector of view and draw new ones
+static int	paint_redraw_player_and_ray(t_painting *painting)
+{
+	t_vector	*new_ray_vector;	
+
+	if (!painting)
+		return (1);
+	new_ray_vector = paint_get_ray_of_view(painting);
+	if (!new_ray_vector)
+		return (1);
+	paint_erase_vector(painting, painting->map->player->ray_of_view);
+	geom_destroy_vector(painting->map->player->ray_of_view);
+	painting->map->player->ray_of_view = new_ray_vector;
+	paint_draw_vector(painting, painting->map->player->ray_of_view);
+	paint_erase_player(painting);
+	paint_draw_player(painting);
+	return (0);
+}
+
 // Move player and redraw it
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
-	paint_draw_player(painting, COLOR_FIELD);
-	if (key_code == LEFT)
+	paint_erase_player(painting);
+	if (key_code == LEFT || key_code == A)
 		paint_move_left(painting);
-	else if (key_code == RIGHT)
+	else if (key_code == RIGHT || key_code == D)
 		paint_move_right(painting);
-	else if (key_code == UP)
+	else if (key_code == UP || key_code == W)
 		paint_move_up(painting);
-	else if (key_code == DOWN)
+	else if (key_code == DOWN || key_code == S)
 		paint_move_down(painting);
-	paint_draw_player(painting, COLOR_PLAYER);
+	if (paint_redraw_player_and_ray(painting))
+		paint_exit(painting);
 }
 
 // Keyboard keys handler. Exit on esc and move on arrows
@@ -43,8 +63,10 @@ static int	paint_key_pressed(int key_code, t_painting *painting)
 {
 	if (key_code == ESC)
 		paint_exit(painting);
-	if (key_code == LEFT || key_code == RIGHT
-		|| key_code == UP || key_code == DOWN)
+	if (key_code == UP || key_code == LEFT
+		|| key_code == DOWN || key_code == RIGHT
+		|| key_code == W || key_code == A
+		|| key_code == S || key_code == D)
 		paint_handle_arrows(key_code, painting);
 	return (0);
 }
@@ -85,7 +107,8 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	else if (counter > 0 && *angle > 360 - ANGLE_DELTA)
 		*angle = ANGLE_DELTA - (360 - *angle);
 	counter = 0;
-	paint_print_ray(painting);
+	if (paint_redraw_player_and_ray(painting))
+		paint_exit(painting);
 	return (0);
 }
 
@@ -111,6 +134,6 @@ void	paint_init(t_map *map)
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
 	mlx_mouse_hook(painting->win, mouse_pressed, painting);
 	paint_draw_map(painting);
-	paint_draw_player(painting, COLOR_PLAYER);
+	paint_redraw_player_and_ray(painting);
 	mlx_loop(painting->mlx);
 }
