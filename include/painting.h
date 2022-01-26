@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 16:26:06 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 18:03:58 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 // PLAYER_RAD and STEP are relative
 # define PLAYER_RAD 0.2
-# define STEP 0.31
+# define STEP 0.19
 
 # define EPS 0.2
 # define PIXELS_PER_DEGREE 1
@@ -130,11 +130,15 @@ struct s_painting
 //
 // paint_is_move_[somewhere](..) ==> paint_get_vars(..)
 struct s_movements
-{
-	int		sq_x;
-	int		sq_y;
-	double	pl_x;
-	double	pl_y;
+{	
+	double	tl_x;
+	double	tl_y;
+	double	bl_x;
+	double	bl_y;
+	double	tr_x;
+	double	tr_y;
+	double	br_x;
+	double	br_y;
 };
 
 // I need it to contain variables
