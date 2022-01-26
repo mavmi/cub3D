@@ -6,12 +6,13 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:22:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/13 19:23:20 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/25 21:18:40 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/utils.h"
 
+// Get size of array of strings
 size_t	utils_get_str_arr_size(char **arr)
 {
 	size_t	size;
@@ -27,6 +28,7 @@ size_t	utils_get_str_arr_size(char **arr)
 	return (size);
 }
 
+// Free array of strings
 void	utils_destroy_str_arr(char **arr)
 {
 	char	**ptr;

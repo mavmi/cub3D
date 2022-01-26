@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:49 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/18 20:59:01 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 15:04:36 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <math.h>
+
+# include "utils.h"
 
 typedef struct s_point		t_point;
 typedef struct s_vector		t_vector;

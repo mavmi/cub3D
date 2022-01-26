@@ -6,7 +6,7 @@
 #    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/01/19 15:09:23 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/01/26 14:52:18 by pmaryjo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS			=	$(addprefix $(SRCS_DIR)/, main.c)\
 							painting_ray_4.c painting_utils.c)\
 					$(addprefix $(PARSER_DIR)/, parser_1.c parser_convert_1.c parser_convert_2.c\
 							parser_destroyers.c parser_getters.c parser_utils_1.c parser_utils_2.c)\
-					$(addprefix $(UTILS_DIR)/, utils_1.c)
+					$(addprefix $(UTILS_DIR)/, utils_1.c utils_2.c)
 OBJS			=	$(SRCS:.c=.o)
 DEPEN			=	$(SRCS:.c=.d)
 

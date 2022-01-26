@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:58:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 21:03:41 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 15:13:26 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
 		* (vector_2_cpy->end->z - vector_2_cpy->begin->z);
 	if (scalar < 0)
 		scalar *= -1;
-	angle = acos(scalar
-			/ (geom_vector_get_module(vector_1)
-				* geom_vector_get_module(vector_2_cpy))
-			) * (180.0 / M_PI);
+	angle = utils_rad_to_degree(acos(scalar
+				/ (geom_vector_get_module(vector_1)
+					* geom_vector_get_module(vector_2_cpy))
+				));
 	geom_destroy_vector(vector_2_cpy);
 	return (angle);
 }
