@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:55:44 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 16:32:16 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	paint_redraw_player_and_ray(t_painting *painting)
 	paint_draw_vector(painting, painting->map->player->ray_of_view);
 	paint_erase_player(painting);
 	paint_draw_player(painting);
+	mlx_put_image_to_window(painting->mlx, painting->win, painting->img, 0, 0);
 	return (0);
 }
 
@@ -130,6 +131,10 @@ void	paint_init(t_map *map)
 	painting->mlx = mlx_init();
 	painting->win = mlx_new_window(painting->mlx, WIDTH, HEIGHT,
 			"etozhe_cub2D");
+	painting->img = mlx_new_image(painting->mlx, WIDTH, HEIGHT);
+	painting->data_addr = mlx_get_data_addr(painting->img,
+			&painting->bits_per_pixel, &painting->size_line, &painting->endian);
+	mlx_put_image_to_window(painting->mlx, painting->win, painting->img, 0, 0);
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
 	mlx_mouse_hook(painting->win, mouse_pressed, painting);

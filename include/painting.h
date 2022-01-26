@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:48:13 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 16:26:06 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,13 @@ struct s_ray
 struct s_painting
 {
 	t_map	*map;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
 	void	*mlx;
 	void	*win;
+	void	*img;
+	char	*data_addr;
 };
 
 // These values are NOT about pixels or smth.
@@ -193,5 +198,6 @@ void		paint_erase_vector(t_painting *painting, t_vector *vector);
 double		paint_get_dist(double x1, double y1, double x2, double y2);
 double		paint_get_module(double num);
 int			paint_get_color(t_color color);
+void		paint_put_pixel(t_painting *painting, int x, int y, t_color color);
 
 #endif

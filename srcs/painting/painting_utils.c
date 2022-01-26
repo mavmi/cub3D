@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:37:48 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 01:13:58 by username         ###   ########.fr       */
+/*   Updated: 2022/01/26 16:30:32 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ int	paint_get_color(t_color color)
 	if (color == COLOR_RAY)
 		return (0x0000FF);
 	return (0x000000);
+}
+
+void	paint_put_pixel(t_painting *painting, int x, int y, t_color color)
+{
+	int	pos;
+
+	if (!painting)
+		return ;
+	pos = y * painting->size_line + x * (painting->bits_per_pixel / 8);
+	*(int *)(painting->data_addr + pos) = paint_get_color(color);
 }

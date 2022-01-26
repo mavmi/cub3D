@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:23:29 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/26 16:31:39 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ void	paint_draw_pixel(t_painting *painting,
 		{
 			if ((x + x_iter) % PIXEL_SIZE == 0
 				|| (y + y_iter) % PIXEL_SIZE == 0)
-				mlx_pixel_put(painting->mlx, painting->win,
-					x + x_iter, y + y_iter, paint_get_color(COLOR_GRID));
+				paint_put_pixel(painting, x + x_iter, y + y_iter, COLOR_GRID);
 			else
-				mlx_pixel_put(painting->mlx, painting->win,
-					x + x_iter, y + y_iter, paint_get_color(color));
+				paint_put_pixel(painting, x + x_iter, y + y_iter, color);
 			x_iter++;
 		}
 		y_iter++;
@@ -54,16 +52,13 @@ static void	paint_draw_player_handler(t_painting *painting,
 			painting->map->player->pos->x * PIXEL_SIZE,
 			painting->map->player->pos->y * PIXEL_SIZE
 		) < PLAYER_RAD * PIXEL_SIZE)
-		mlx_pixel_put(painting->mlx, painting->win, x, y,
-			paint_get_color(color));
+		paint_put_pixel(painting, x, y, color);
 	if (color != COLOR_FIELD)
 		return ;
 	if (x % PIXEL_SIZE == 0 || y % PIXEL_SIZE == 0)
-		mlx_pixel_put(painting->mlx, painting->win,
-			x, y, paint_get_color(COLOR_GRID));
+		paint_put_pixel(painting, x, y, COLOR_GRID);
 	else
-		mlx_pixel_put(painting->mlx, painting->win,
-			x, y, paint_get_color(COLOR_FIELD));
+		paint_put_pixel(painting, x, y, COLOR_FIELD);
 }
 
 // Draw player with specified color

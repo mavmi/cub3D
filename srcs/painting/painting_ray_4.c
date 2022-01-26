@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:09:13 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 01:13:22 by username         ###   ########.fr       */
+/*   Updated: 2022/01/26 16:31:47 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,10 @@ static void	paint_vector_printer(t_painting *painting,
 	y = vector->begin->y;
 	while (pixels--)
 	{
-		if ((int)x % PIXEL_SIZE != 0 || (int)y % PIXEL_SIZE != 0)
-			mlx_pixel_put(painting->mlx, painting->win,
-				x, y, paint_get_color(color));
+		if ((int)x % PIXEL_SIZE == 0 || (int)y % PIXEL_SIZE == 0)
+			paint_put_pixel(painting, x, y, COLOR_GRID);
+		else
+			paint_put_pixel(painting, x, y, color);
 		x += dx;
 		y += dy;
 	}
