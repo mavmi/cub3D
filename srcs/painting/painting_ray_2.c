@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:36:50 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 01:02:51 by username         ###   ########.fr       */
+/*   Updated: 2022/01/27 18:57:11 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,15 @@ static int	paint_get_ray_info_handler(t_ray *ray)
 
 // Create t_ray struct of player's vector of view.
 // May return NULL
-t_ray	*paint_get_ray_info(t_painting *painting)
+t_ray	*paint_get_ray_info(int angle)
 {
 	t_ray	*ray;
 
-	if (!painting)
-		return (NULL);
 	ray = (t_ray *)malloc(sizeof(t_ray));
 	if (!ray)
 		return (NULL);
-	ray->quarter = paint_get_quarter(painting->map->player->angle);
-	ray->quarter_angle = paint_get_quarter_angle(ray->quarter,
-			painting->map->player->angle);
+	ray->quarter = paint_get_quarter(angle);
+	ray->quarter_angle = paint_get_quarter_angle(ray->quarter, angle);
 	if (ray->quarter_angle == -1 || paint_get_ray_info_handler(ray))
 	{
 		paint_destroy_ray_info(ray);

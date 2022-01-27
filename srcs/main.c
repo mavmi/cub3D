@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:02:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 13:27:46 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 18:55:28 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void	run(int argc, char **argv)
 int main(int argc, char **argv)
 {
 	(void)argc; (void)argv;
+	
 	(void)test_print_str_arr;
 	(void)test_print_point;
 	(void)test_print_vector;

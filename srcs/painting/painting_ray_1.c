@@ -6,17 +6,14 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 18:49:27 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 18:58:55 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-// Get quarter depending on [quarter], [quarter_angle] and [corner_angle]
-static int	paint_get_octet(int quarter, int part)
-{
-	return (2 * quarter - 1 + part);
-}
+// All these functions are about decreasing ray vector's coordinates
+// at the end of cycle iteration
 
 static int	paint_decrease_coord_assignment(t_decrease *decr)
 {
@@ -117,6 +114,12 @@ static void	paint_decrease_coord(t_ray_getter *vars, double *x, double *y)
 		*y -= decr.delta;
 	else if (vars->octet == 6 || vars->octet == 8)
 		*x -= decr.delta;
+}
+
+// Get quarter depending on [quarter], [quarter_angle] and [corner_angle]
+static int	paint_get_octet(int quarter, int part)
+{
+	return (2 * quarter - 1 + part);
 }
 
 static int	paint_is_wall(t_ray_getter *vars, double x, double y)
@@ -333,7 +336,7 @@ t_vector	*paint_get_ray_of_view(t_painting *painting)
 
 	if (!painting)
 		return (NULL);
-	ray_info = paint_get_ray_info(painting);
+	ray_info = paint_get_ray_info(painting->map->player->angle);
 	if (!ray_info)
 		return (NULL);
 	ray_vector = paint_get_ray_vector(painting, ray_info);

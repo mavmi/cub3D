@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 18:35:58 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 18:57:30 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ int			paint_is_move_down(t_painting *painting);
 t_vector	*paint_get_ray_of_view(t_painting *painting);
 
 // painting_ray_2.c
-t_ray		*paint_get_ray_info(t_painting *painting);
+t_ray		*paint_get_ray_info(int angle);
 void		paint_destroy_ray_info(t_ray *ray);
 
 // painting_ray_3.c

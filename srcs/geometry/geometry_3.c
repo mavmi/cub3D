@@ -6,26 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:58:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 13:18:33 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 18:55:06 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/geometry.h"
-
-//static void	test_print_point(t_point *point)
-//{
-//	printf("{x = %f, y = %f}\n", point->x, point->y);
-//}
-
-//static void	test_print_vector(t_vector *vector)
-//{
-//	printf("[\n");
-//	printf("\tbegin: ");
-//	test_print_point(vector->begin);
-//	printf("\tend: ");
-//	test_print_point(vector->end);
-//	printf("]\n");
-//}
 
 // Create a vector of sum of vectors [first] and [second].
 // May return NULL
