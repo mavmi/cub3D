@@ -6,32 +6,33 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 12:16:25 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:08:54 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
 // Get quarter from absolute angle of player's view
-int	paint_get_quarter(int angle)
+int	paint_get_quarter(double angle)
 {
-	if (angle == 360 || (angle >= 0 && angle < 90))
+	if (utils_are_doubles_equal(angle, 360)
+		|| (utils_is_greater_or_eq(angle, 0) && angle < 90))
 		return (1);
-	if (angle >= 90 && angle < 180)
+	if (utils_is_greater_or_eq(angle, 90) && angle < 180)
 		return (2);
-	if (angle >= 180 && angle < 270)
+	if (utils_is_greater_or_eq(angle, 180) && angle < 270)
 		return (3);
-	if (angle >= 270 && angle < 360)
+	if (utils_is_greater_or_eq(angle, 270) && angle < 360)
 		return (4);
 	return (0);
 }
 
 // Convert absolute angle of player's view to an angle inside current quarter
-int	paint_get_quarter_angle(int quarter, int abs_angle)
+int	paint_get_quarter_angle(int quarter, double abs_angle)
 {
 	if (quarter == 1)
 	{
-		if (abs_angle == 360)
+		if (utils_are_doubles_equal(abs_angle, 360))
 			return (0);
 		return (abs_angle);
 	}

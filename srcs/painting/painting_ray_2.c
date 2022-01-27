@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:36:50 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 18:57:11 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:03:18 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	paint_get_ray_info_handler(t_ray *ray)
 
 // Create t_ray struct of player's vector of view.
 // May return NULL
-t_ray	*paint_get_ray_info(int angle)
+t_ray	*paint_get_ray_info(double angle)
 {
 	t_ray	*ray;
 

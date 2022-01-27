@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_movements_1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:36:15 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 00:40:21 by username         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:21:02 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	paint_move_left(t_painting *painting)
 {
 	if (paint_is_move_left(painting))
 	{
-		painting->map->player->pos->x -= STEP;
+		painting->map->player->pos->x -= PL_STEP;
 	}
 }
 
@@ -29,7 +29,7 @@ void	paint_move_right(t_painting *painting)
 {
 	if (paint_is_move_right(painting))
 	{
-		painting->map->player->pos->x += STEP;
+		painting->map->player->pos->x += PL_STEP;
 	}
 }
 
@@ -37,7 +37,7 @@ void	paint_move_up(t_painting *painting)
 {
 	if (paint_is_move_up(painting))
 	{
-		painting->map->player->pos->y -= STEP;
+		painting->map->player->pos->y -= PL_STEP;
 	}
 }
 
@@ -45,6 +45,6 @@ void	paint_move_down(t_painting *painting)
 {
 	if (paint_is_move_down(painting))
 	{
-		painting->map->player->pos->y += STEP;
+		painting->map->player->pos->y += PL_STEP;
 	}
 }

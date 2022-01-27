@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 18:57:30 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:21:39 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 # include "painting.h"
 # include "geometry.h"
 
+// Just utils
+# define EPS 0.2
 # define PIXEL_SIZE 30
-# define ANGLE_DELTA 1
+# define ANGLE_DELTA 0.8
+# define PIXELS_PER_DEGREE 1
 
 // PLAYER_RAD and STEP are relative
-# define PLAYER_RAD 0.2
-# define STEP 0.19
-
-# define EPS 0.2
-# define PIXELS_PER_DEGREE 1
+# define PL_RAD 0.17
+# define PL_STEP 0.19
 
 # define WIDTH 1200
 # define HEIGHT 600
@@ -121,6 +121,7 @@ struct s_painting
 	char	*data_addr;
 };
 
+// Just vars for paint_decrease_coord(..) function
 struct s_decrease
 {
 	double			*x;
@@ -193,12 +194,12 @@ int			paint_is_move_down(t_painting *painting);
 t_vector	*paint_get_ray_of_view(t_painting *painting);
 
 // painting_ray_2.c
-t_ray		*paint_get_ray_info(int angle);
+t_ray		*paint_get_ray_info(double angle);
 void		paint_destroy_ray_info(t_ray *ray);
 
 // painting_ray_3.c
-int			paint_get_quarter(int angle);
-int			paint_get_quarter_angle(int quarter, int abs_angle);
+int			paint_get_quarter(double angle);
+int			paint_get_quarter_angle(int quarter, double abs_angle);
 t_vector	*paint_get_orient_vector(t_orient orient);
 
 // painting_ray_4.c

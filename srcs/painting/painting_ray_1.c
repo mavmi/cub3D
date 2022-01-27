@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 18:58:55 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:24:26 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static int	paint_decrease_coord_assignment(t_decrease *decr)
 {
 	if (decr->vars->painting->map
-		->lines[(int)decr->tmp_y]->line[(int)decr->tmp_x]->type == WALL)
+		->lines[(int)decr->tmp_y]->line[(int)decr->tmp_x]->type == MAP_SQ_WALL)
 	{
 		*decr->x = decr->tmp_x;
 		*decr->y = decr->tmp_y;
@@ -125,7 +125,7 @@ static int	paint_get_octet(int quarter, int part)
 static int	paint_is_wall(t_ray_getter *vars, double x, double y)
 {
 	paint_decrease_coord(vars, &x, &y);
-	if (vars->painting->map->lines[(int)y]->line[(int)x]->type == WALL)
+	if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_WALL)
 		return (1);
 	return (0);
 }

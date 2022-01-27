@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:15:03 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 12:00:23 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:06:59 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int		utils_is_double_integer(double a);
 int		utils_are_doubles_equal(double a, double b);
 double	utils_round_double_up(double a);
 double	utils_round_double_down(double a);
+int		utils_is_greater_or_eq(double a, double b);
 
 #endif

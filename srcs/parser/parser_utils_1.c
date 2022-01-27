@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:12:44 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 21:16:52 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:16:53 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	pars_open_file(char *path)
 // Return 1 if it is, 0 otherwise
 int	pars_is_char_valid_square(char c)
 {
-	if (c != VOID && c != EMPTY && c != WALL)
+	if (c != MAP_SQ_VOID && c != MAP_SQ_EMPTY && c != MAP_SQ_WALL)
 		return (0);
 	return (1);
 }
@@ -32,8 +32,8 @@ int	pars_is_char_valid_square(char c)
 // Return 1 if it is, 0 otherwise
 int	pars_is_char_valid_player(char c)
 {
-	if (c != NORTH_OR && c != SOUTH_OR
-		&& c != EAST_OR && c != WEST_OR)
+	if (c != MAP_OR_NORTH && c != MAP_OR_SOUTH
+		&& c != MAP_OR_EAST && c != MAP_OR_WEST)
 		return (0);
 	return (1);
 }

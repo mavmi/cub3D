@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 12:25:59 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:10:05 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	mouse_pressed(int key_code, int x, int y, t_painting *painting)
 // redraw vector of view
 static int	paint_mouse_move(int x, int y, t_painting *painting)
 {
-	int				*angle;
+	double			*angle;
 	static int		counter = 0;
 	static int		previous_x = 0;
 

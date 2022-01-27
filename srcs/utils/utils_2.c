@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 14:52:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 13:22:56 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:06:37 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,13 @@ double	utils_round_double_up(double a)
 double	utils_round_double_down(double a)
 {
 	return ((int)a);
+}
+
+// Check if [a] is greater or equal than [b].
+// Return 1 if it is, 0 otherwise
+int	utils_is_greater_or_eq(double a, double b)
+{
+	if (utils_are_doubles_equal(a, b) || a > b)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:31:39 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:16:56 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@
 # define BAD_SQ_POS -1
 # define BAD_PL_ORIENT '+'
 # define BAD_PL_POS -1.0
-# define BAD_PL_ANGLE -1
+# define BAD_PL_ANGLE -1.0
 
-# define VOID ' '
-# define EMPTY '0'
-# define WALL '1'
-# define NORTH_OR 'N'
-# define SOUTH_OR 'S'
-# define EAST_OR 'E'
-# define WEST_OR 'W'
+# define MAP_SQ_VOID ' '
+# define MAP_SQ_EMPTY '0'
+# define MAP_SQ_WALL '1'
+# define MAP_OR_NORTH 'N'
+# define MAP_OR_SOUTH 'S'
+# define MAP_OR_EAST 'E'
+# define MAP_OR_WEST 'W'
 
 typedef struct s_position	t_position;
 typedef struct s_player		t_player;
@@ -62,10 +62,10 @@ struct s_position
 // player's vector of view
 struct s_player
 {
-	t_position	*pos;
-	t_vector	*ray_of_view;
 	char		orient;
-	int			angle;
+	double		angle;
+	t_vector	*ray_of_view;
+	t_position	*pos;
 };
 
 // Elementary element of map.

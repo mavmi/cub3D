@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 12:49:44 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:19:59 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	paint_draw_player_handler(t_painting *painting,
 			x, y,
 			painting->map->player->pos->x * PIXEL_SIZE,
 			painting->map->player->pos->y * PIXEL_SIZE
-		) < PLAYER_RAD * PIXEL_SIZE)
+		) < PL_RAD * PIXEL_SIZE)
 		paint_put_pixel(painting, x, y, color);
 	if (color != COLOR_FIELD)
 		return ;
@@ -71,13 +71,13 @@ static void	paint_player_printer(t_painting *painting, t_color color)
 
 	if (!painting)
 		return ;
-	tl_x = ((double)painting->map->player->pos->x - PLAYER_RAD) * PIXEL_SIZE;
-	tl_y = ((double)painting->map->player->pos->y - PLAYER_RAD) * PIXEL_SIZE;
+	tl_x = ((double)painting->map->player->pos->x - PL_RAD) * PIXEL_SIZE;
+	tl_y = ((double)painting->map->player->pos->y - PL_RAD) * PIXEL_SIZE;
 	iter_y = 0;
-	while (iter_y < (int)(2 * PLAYER_RAD * PIXEL_SIZE))
+	while (iter_y < (int)(2 * PL_RAD * PIXEL_SIZE))
 	{
 		iter_x = 0;
-		while (iter_x < (int)(2 * PLAYER_RAD * PIXEL_SIZE))
+		while (iter_x < (int)(2 * PL_RAD * PIXEL_SIZE))
 		{
 			paint_draw_player_handler(painting, tl_x + iter_x,
 				tl_y + iter_y, color);
@@ -117,7 +117,7 @@ void	paint_draw_map(t_painting *painting)
 		x = 0;
 		while (x < painting->map->lines[y]->width)
 		{
-			if (painting->map->lines[y]->line[x]->type == WALL)
+			if (painting->map->lines[y]->line[x]->type == MAP_SQ_WALL)
 				paint_draw_pixel(painting, x, y, COLOR_WALL);
 			else
 				paint_draw_pixel(painting, x, y, COLOR_FIELD);
