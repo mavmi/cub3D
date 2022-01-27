@@ -6,7 +6,7 @@
 #    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/01/26 14:52:18 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/01/27 19:29:41 by pmaryjo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ HDRS			=	$(addprefix $(HDRS_DIR)/, geometry.h get_next_line.h painting.h parser.
 SRCS			=	$(addprefix $(SRCS_DIR)/, main.c)\
 					$(addprefix $(GEOM_DIR)/, geometry_1.c geometry_2.c geometry_3.c)\
 					$(addprefix $(GNL_DIR)/, get_next_line.c get_next_line_utils.c)\
-					$(addprefix $(PAINTING_DIR)/, painting_1.c painting_2.c  painting_movements_1.c\
+					$(addprefix $(PAINTING_DIR)/, painting_1.c painting_2.c painting_3.c painting_movements_1.c\
 							painting_movements_2.c painting_ray_1.c painting_ray_2.c painting_ray_3.c\
 							painting_ray_4.c painting_utils.c)\
 					$(addprefix $(PARSER_DIR)/, parser_1.c parser_convert_1.c parser_convert_2.c\

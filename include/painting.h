@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:21:39 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 19:31:26 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 // Just utils
 # define EPS 0.2
+# define FOV 60.0
+# define CAMERA_DIST 1.0
 # define PIXEL_SIZE 30
 # define ANGLE_DELTA 0.8
 # define PIXELS_PER_DEGREE 1
@@ -177,6 +179,9 @@ void		paint_draw_pixel(t_painting *painting,
 void		paint_draw_player(t_painting *painting);
 void		paint_erase_player(t_painting *painting);
 void		paint_draw_map(t_painting *painting);
+
+// painting_3.c
+void		paint_draw_room(t_painting *painting);
 
 // painting_movements_1.c
 void		paint_move_left(t_painting *painting);
