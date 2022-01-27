@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 18:03:58 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 18:35:58 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef enum e_orient		t_orient;
 typedef struct s_ray_getter	t_ray_getter;
 typedef struct s_ray		t_ray;
 typedef struct s_painting	t_painting;
+typedef struct s_decrease	t_decrease;
 typedef struct s_movements	t_movements;
 
 // Just colors for mlx_pixel_put
@@ -120,13 +121,20 @@ struct s_painting
 	char	*data_addr;
 };
 
+struct s_decrease
+{
+	double			*x;
+	double			*y;
+	double			delta;
+	double			tmp_x;
+	double			tmp_y;
+	t_ray_getter	*vars;
+};
+
 // These values are NOT about pixels or smth.
 // They are about position inside map's array of strings
 //
-// {sq_x, sq_y} - coordinates of current square
-// in which player is.
-//
-// {pl_x, pl_y} - coordinates of player
+// All of them are coordinates of player square's corners
 //
 // paint_is_move_[somewhere](..) ==> paint_get_vars(..)
 struct s_movements
@@ -151,8 +159,8 @@ struct s_movements
 // [ray_vector] is what this function creates
 struct s_ray_getter
 {
-	int			delta;
 	int			octet;
+	double		delta;
 	double		corner_angle;
 	t_ray		*ray_info;
 	t_vector	*ray_vector;

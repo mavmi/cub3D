@@ -6,18 +6,33 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 14:52:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 14:59:26 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 13:22:56 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/utils.h"
 
-double	utils_degree_to_rad(double degree)
+int	utils_is_double_integer(double a)
 {
-	return (degree * M_PI / 180.0);
+	if (utils_are_doubles_equal(a, (int)a))
+		return (1);
+	return (0);
 }
 
-double	utils_rad_to_degree(double rad)
+// Return 1 if values are equal, 0 otherwise
+int	utils_are_doubles_equal(double a, double b)
 {
-	return (rad * 180.0 / M_PI);
+	if (sqrt(pow(a - b, 2)) < 1e-3)
+		return (1);
+	return (0);
+}
+
+double	utils_round_double_up(double a)
+{
+	return ((int)a + 1);
+}
+
+double	utils_round_double_down(double a)
+{
+	return ((int)a);
 }

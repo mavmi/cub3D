@@ -6,11 +6,26 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:58:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:13:26 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 13:18:33 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/geometry.h"
+
+//static void	test_print_point(t_point *point)
+//{
+//	printf("{x = %f, y = %f}\n", point->x, point->y);
+//}
+
+//static void	test_print_vector(t_vector *vector)
+//{
+//	printf("[\n");
+//	printf("\tbegin: ");
+//	test_print_point(vector->begin);
+//	printf("\tend: ");
+//	test_print_point(vector->end);
+//	printf("]\n");
+//}
 
 // Create a vector of sum of vectors [first] and [second].
 // May return NULL
@@ -45,8 +60,7 @@ double	geom_vector_get_module(t_vector *vector)
 		return (0.0);
 	return (
 		sqrt(pow(vector->end->x - vector->begin->x, 2)
-			+ pow(vector->end->y - vector->begin->y, 2)
-			+ pow(vector->end->z - vector->begin->z, 2))
+			+ pow(vector->end->y - vector->begin->y, 2))
 	);
 }
 
@@ -59,19 +73,16 @@ void	geom_move_vector(t_vector *vector, t_point *point)
 		return ;
 	delta.x = point->x - vector->begin->x;
 	delta.y = point->y - vector->begin->y;
-	delta.z = point->z - vector->begin->z;
 	vector->begin->x = point->x;
 	vector->begin->y = point->y;
-	vector->begin->z = point->z;
 	vector->end->x += delta.x;
 	vector->end->y += delta.y;
-	vector->end->z += delta.z;
 }
 
 // Get angle between two vectors
 double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
 {
-	int			scalar;
+	double		scalar;
 	double		angle;
 	t_vector	*vector_2_cpy;	
 
@@ -84,11 +95,9 @@ double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
 	scalar = (vector_1->end->x - vector_1->begin->x)
 		* (vector_2_cpy->end->x - vector_2_cpy->begin->x)
 		+ (vector_1->end->y - vector_1->begin->y)
-		* (vector_2_cpy->end->y - vector_2_cpy->begin->y)
-		+ (vector_1->end->z - vector_1->begin->z)
-		* (vector_2_cpy->end->z - vector_2_cpy->begin->z);
-	if (scalar < 0)
-		scalar *= -1;
+		* (vector_2_cpy->end->y - vector_2_cpy->begin->y);
+	if (scalar < 0.0)
+		scalar *= -1.0;
 	angle = utils_rad_to_degree(acos(scalar
 				/ (geom_vector_get_module(vector_1)
 					* geom_vector_get_module(vector_2_cpy))

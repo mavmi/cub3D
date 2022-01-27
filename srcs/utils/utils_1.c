@@ -6,11 +6,21 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:22:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 21:18:40 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:59:04 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/utils.h"
+
+double	utils_degree_to_rad(double degree)
+{
+	return (degree * M_PI / 180.0);
+}
+
+double	utils_rad_to_degree(double rad)
+{
+	return (rad * 180.0 / M_PI);
+}
 
 // Get size of array of strings
 size_t	utils_get_str_arr_size(char **arr)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <username@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 01:09:42 by username         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:16:25 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ int	paint_get_quarter_angle(int quarter, int abs_angle)
 static t_point	*paint_get_orient_vector_handler(t_orient orient)
 {
 	if (orient == ORIENT_NORTH)
-		return (geom_init_point(0, 1, 0));
+		return (geom_init_point(0, 1));
 	else if (orient == ORIENT_EAST)
-		return (geom_init_point(1, 0, 0));
+		return (geom_init_point(1, 0));
 	else if (orient == ORIENT_SOUTH)
-		return (geom_init_point(0, -1, 0));
+		return (geom_init_point(0, -1));
 	else if (orient == ORIENT_WEST)
-		return (geom_init_point(-1, 0, 0));
+		return (geom_init_point(-1, 0));
 	return (NULL);
 }
 
@@ -70,7 +70,7 @@ t_vector	*paint_get_orient_vector(t_orient orient)
 	if (orient != ORIENT_NORTH && orient != ORIENT_EAST
 		&& orient != ORIENT_SOUTH && orient != ORIENT_WEST)
 		return (NULL);
-	begin = geom_init_point(0, 0, 0);
+	begin = geom_init_point(0, 0);
 	end = paint_get_orient_vector_handler(orient);
 	if (!begin || !end)
 	{

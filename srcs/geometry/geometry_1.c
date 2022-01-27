@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 15:49:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 20:59:14 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:22:04 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	geom_destroy_vector(t_vector *vector)
 
 // Create point with specified values.
 // May return NULL
-t_point	*geom_init_point(int x, int y, int z)
+t_point	*geom_init_point(double x, double y)
 {
 	t_point	*point;
 
@@ -41,7 +41,6 @@ t_point	*geom_init_point(int x, int y, int z)
 		return (point);
 	point->x = x;
 	point->y = y;
-	point->z = z;
 	return (point);
 }
 

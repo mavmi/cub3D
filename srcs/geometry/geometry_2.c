@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:28:07 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 21:00:30 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:28:09 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	geom_cmp_points(t_point *first, t_point *second)
 	if (!first || !second)
 		return (0);
 	if (
-		first->x == second->x
-		&& first->y == second->y
-		&& first->z == second->z
+		utils_are_doubles_equal(first->x, second->x)
+		&& utils_are_doubles_equal(first->y, second->y)
 	)
 	{
 		return (1);
@@ -51,7 +50,7 @@ t_point	*geom_copy_point(t_point *point)
 {
 	if (!point)
 		return (NULL);
-	return (geom_init_point(point->x, point->y, point->z));
+	return (geom_init_point(point->x, point->y));
 }
 
 // Copy vector.

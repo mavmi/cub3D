@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:49 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:04:36 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:21:44 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ typedef struct s_vector		t_vector;
 
 struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
 };
 
 struct s_vector
@@ -38,7 +37,7 @@ struct s_vector
 // geometry_1.c
 void		geom_destroy_point(t_point *point);
 void		geom_destroy_vector(t_vector *vector);
-t_point		*geom_init_point(int x, int y, int z);
+t_point		*geom_init_point(double x, double y);
 t_vector	*geom_init_vector(t_point *begin, t_point *end);
 
 // geometry_2.c

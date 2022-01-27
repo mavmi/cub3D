@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:02:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/24 17:07:57 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 13:27:46 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	test_print_str_arr(char **arr)
 
 static void	test_print_point(t_point *point)
 {
-	printf("{x = %d, y = %d, z = %d}\n", point->x, point->y, point->z);
+	printf("{x = %f, y = %f}\n", point->x, point->y);
 }
 
 static void	test_print_vector(t_vector *vector)
@@ -104,11 +104,11 @@ static void	test_print_map(t_map *map)
 
 static void	test_vector(void)
 {
-	t_point		*begin_1 = geom_init_point(1, 1, 0);
-	t_point		*end_1 = geom_init_point(2, 2, 0);
+	t_point		*begin_1 = geom_init_point(1, 1);
+	t_point		*end_1 = geom_init_point(2, 2);
 
-	t_point		*begin_2 = geom_init_point(-3, -3, 0);
-	t_point		*end_2 = geom_init_point(-6, -6, 0);
+	t_point		*begin_2 = geom_init_point(-3, -3);
+	t_point		*end_2 = geom_init_point(-6, -6);
 
 	t_vector	*vector_1 = geom_init_vector(begin_1, end_1);
 	t_vector	*vector_2 = geom_init_vector(begin_2, end_2);
@@ -125,11 +125,11 @@ static void	test_vector(void)
 
 static void	test_angle(void)
 {
-	t_point		*begin_1 = geom_init_point(0, 0, 0);
-	t_point		*end_1 = geom_init_point(0, 1, 0);
+	t_point		*begin_1 = geom_init_point(0, 0);
+	t_point		*end_1 = geom_init_point(0, 1);
 
-	t_point		*begin_2 = geom_init_point(0, 0, 0);
-	t_point		*end_2 = geom_init_point(1, 1, 0);
+	t_point		*begin_2 = geom_init_point(0, 0);
+	t_point		*end_2 = geom_init_point(1, 1);
 
 	t_vector	*vector_1 = geom_init_vector(begin_1, end_1);
 	t_vector	*vector_2 = geom_init_vector(begin_2, end_2);

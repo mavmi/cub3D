@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:29:43 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/27 18:49:27 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,111 @@ static int	paint_get_octet(int quarter, int part)
 	return (2 * quarter - 1 + part);
 }
 
-static void	paint_decrease_coord(int *x, int *y, int octet)
+static int	paint_decrease_coord_assignment(t_decrease *decr)
 {
-	if (octet == 1 || octet == 7)
-		(*y)--;
-	if (octet == 6 || octet == 8)
-		(*x)--;
+	if (decr->vars->painting->map
+		->lines[(int)decr->tmp_y]->line[(int)decr->tmp_x]->type == WALL)
+	{
+		*decr->x = decr->tmp_x;
+		*decr->y = decr->tmp_y;
+		return (1);
+	}
+	return (0);
 }
 
-// Check if {pixel_x, pixel_y} pixel belongs to wall.
-// Return 1 if it does, 0 otherwise
-static int	paint_is_wall(t_painting *painting, int octet,
-					int pixel_x, int pixel_y)
-{	
-	paint_decrease_coord(&pixel_x, &pixel_y, octet);
-	pixel_x -= pixel_x % PIXEL_SIZE;
-	pixel_y -= pixel_y % PIXEL_SIZE;
-	pixel_x /= PIXEL_SIZE;
-	pixel_y /= PIXEL_SIZE;
-	if (painting->map->lines[pixel_y]->line[pixel_x]->type == WALL)
+static void	paint_decrease_coord_7_8(t_decrease *decr)
+{
+	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
+	decr->tmp_y = *decr->y;
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+	decr->tmp_x = *decr->x;
+	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
+	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+}
+
+static void	paint_decrease_coord_5_6(t_decrease *decr)
+{
+	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
+	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+	decr->tmp_x = *decr->x;
+	decr->tmp_y = *decr->y;
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
+	decr->tmp_y = *decr->y;
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+}
+
+static void	paint_decrease_coord_3_4(t_decrease *decr)
+{
+	decr->tmp_x = *decr->x;
+	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+	decr->tmp_x = *decr->x;
+	decr->tmp_y = *decr->y;
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
+	decr->tmp_y = *decr->y;
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+}
+
+static void	paint_decrease_coord_1_2(t_decrease *decr)
+{
+	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
+	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+	decr->tmp_x = *decr->x;
+	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+	decr->tmp_x = *decr->x;
+	decr->tmp_y = *decr->y;
+	if (paint_decrease_coord_assignment(decr))
+		return ;
+}
+
+static void	paint_decrease_coord(t_ray_getter *vars, double *x, double *y)
+{
+	t_decrease	decr;
+
+	decr.x = x;
+	decr.y = y;
+	decr.delta = 0.1;
+	decr.vars = vars;
+	if (utils_is_double_integer(*x) && utils_is_double_integer(*y))
+	{
+		if (vars->octet == 7 || vars->octet == 8)
+			paint_decrease_coord_7_8(&decr);
+		if (vars->octet == 5 || vars->octet == 6)
+			paint_decrease_coord_5_6(&decr);
+		if (vars->octet == 3 || vars->octet == 4)
+			paint_decrease_coord_3_4(&decr);
+		if (vars->octet == 1 || vars->octet == 2)
+			paint_decrease_coord_1_2(&decr);
+	}
+	else if (vars->octet == 1 || vars->octet == 7)
+		*y -= decr.delta;
+	else if (vars->octet == 6 || vars->octet == 8)
+		*x -= decr.delta;
+}
+
+static int	paint_is_wall(t_ray_getter *vars, double x, double y)
+{
+	paint_decrease_coord(vars, &x, &y);
+	if (vars->painting->map->lines[(int)y]->line[(int)x]->type == WALL)
 		return (1);
 	return (0);
 }
@@ -49,19 +135,19 @@ static void	paint_append_vector_4(t_ray_getter *vars)
 	if (vars->octet == 7)
 	{
 		vars->ray_vector->end->x -= vars->delta;
-		if (vars->ray_vector->end->y % PIXEL_SIZE)
-			vars->ray_vector->end->y = vars->ray_vector->end->y
-				- vars->ray_vector->end->y % PIXEL_SIZE;
+		if (utils_is_double_integer(vars->ray_vector->end->y))
+			vars->ray_vector->end->y -= 1.0;
 		else
-			vars->ray_vector->end->y = vars->ray_vector->end->y - PIXEL_SIZE;
+			vars->ray_vector->end->y
+				= utils_round_double_down(vars->ray_vector->end->y);
 	}
 	else if (vars->octet == 8)
-	{
-		if (vars->ray_vector->end->x % PIXEL_SIZE)
-			vars->ray_vector->end->x = vars->ray_vector->end->x
-				- vars->ray_vector->end->x % PIXEL_SIZE;
+	{	
+		if (utils_is_double_integer(vars->ray_vector->end->x))
+			vars->ray_vector->end->x -= 1.0;
 		else
-			vars->ray_vector->end->x = vars->ray_vector->end->x - PIXEL_SIZE;
+			vars->ray_vector->end->x
+				= utils_round_double_down(vars->ray_vector->end->x);
 		vars->ray_vector->end->y -= vars->delta;
 	}
 }
@@ -71,19 +157,19 @@ static void	paint_append_vector_3(t_ray_getter *vars)
 	if (vars->octet == 5)
 	{
 		vars->ray_vector->end->x -= vars->delta;
-		if (vars->ray_vector->end->y % PIXEL_SIZE)
-			vars->ray_vector->end->y = vars->ray_vector->end->y
-				- vars->ray_vector->end->y % PIXEL_SIZE + PIXEL_SIZE;
+		if (utils_is_double_integer(vars->ray_vector->end->y))
+			vars->ray_vector->end->y += 1.0;
 		else
-			vars->ray_vector->end->y += PIXEL_SIZE;
+			vars->ray_vector->end->y
+				= utils_round_double_up(vars->ray_vector->end->y);
 	}
 	else if (vars->octet == 6)
 	{
-		if (vars->ray_vector->end->x % PIXEL_SIZE)
-			vars->ray_vector->end->x = vars->ray_vector->end->x
-				- vars->ray_vector->end->x % PIXEL_SIZE;
+		if (utils_is_double_integer(vars->ray_vector->end->x))
+			vars->ray_vector->end->x -= 1.0;
 		else
-			vars->ray_vector->end->x = vars->ray_vector->end->x - PIXEL_SIZE;
+			vars->ray_vector->end->x
+				= utils_round_double_down(vars->ray_vector->end->x);
 		vars->ray_vector->end->y += vars->delta;
 	}
 }
@@ -93,19 +179,19 @@ static void	paint_append_vector_2(t_ray_getter *vars)
 	if (vars->octet == 3)
 	{
 		vars->ray_vector->end->x += vars->delta;
-		if (vars->ray_vector->end->y % PIXEL_SIZE)
-			vars->ray_vector->end->y = vars->ray_vector->end->y
-				- vars->ray_vector->end->y % PIXEL_SIZE + PIXEL_SIZE;
+		if (utils_is_double_integer(vars->ray_vector->end->y))
+			vars->ray_vector->end->y += 1.0;
 		else
-			vars->ray_vector->end->y += PIXEL_SIZE;
+			vars->ray_vector->end->y
+				= utils_round_double_up(vars->ray_vector->end->y);
 	}
 	else if (vars->octet == 4)
 	{
-		if (vars->ray_vector->end->x % PIXEL_SIZE)
-			vars->ray_vector->end->x = vars->ray_vector->end->x
-				- vars->ray_vector->end->x % PIXEL_SIZE + PIXEL_SIZE;
+		if (utils_is_double_integer(vars->ray_vector->end->x))
+			vars->ray_vector->end->x += 1.0;
 		else
-			vars->ray_vector->end->x = vars->ray_vector->end->x + PIXEL_SIZE;
+			vars->ray_vector->end->x
+				= utils_round_double_up(vars->ray_vector->end->x);
 		vars->ray_vector->end->y += vars->delta;
 	}
 }
@@ -115,19 +201,19 @@ static void	paint_append_vector_1(t_ray_getter *vars)
 	if (vars->octet == 1)
 	{
 		vars->ray_vector->end->x += vars->delta;
-		if (vars->ray_vector->end->y % PIXEL_SIZE)
-			vars->ray_vector->end->y = vars->ray_vector->end->y
-				- vars->ray_vector->end->y % PIXEL_SIZE;
+		if (utils_is_double_integer(vars->ray_vector->end->y))
+			vars->ray_vector->end->y -= 1.0;
 		else
-			vars->ray_vector->end->y = vars->ray_vector->end->y - PIXEL_SIZE;
+			vars->ray_vector->end->y
+				= utils_round_double_down(vars->ray_vector->end->y);
 	}
 	else if (vars->octet == 2)
-	{
-		if (vars->ray_vector->end->x % PIXEL_SIZE)
-			vars->ray_vector->end->x = vars->ray_vector->end->x
-				- vars->ray_vector->end->x % PIXEL_SIZE + PIXEL_SIZE;
+	{			
+		if (utils_is_double_integer(vars->ray_vector->end->x))
+			vars->ray_vector->end->x += 1.0;
 		else
-			vars->ray_vector->end->x += PIXEL_SIZE;
+			vars->ray_vector->end->x
+				= utils_round_double_up(vars->ray_vector->end->x);
 		vars->ray_vector->end->y -= vars->delta;
 	}
 }
@@ -189,10 +275,10 @@ static t_vector	*paint_init_ray_vector(t_painting *painting)
 
 	if (!painting)
 		return (NULL);
-	begin = geom_init_point(painting->map->player->pos->x * PIXEL_SIZE,
-			painting->map->player->pos->y * PIXEL_SIZE, 0);
-	end = geom_init_point(painting->map->player->pos->x * PIXEL_SIZE,
-			painting->map->player->pos->y * PIXEL_SIZE, 0);
+	begin = geom_init_point(painting->map->player->pos->x,
+			painting->map->player->pos->y);
+	end = geom_init_point(painting->map->player->pos->x,
+			painting->map->player->pos->y);
 	if (!begin || !end)
 	{
 		geom_destroy_point(begin);
@@ -226,12 +312,12 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 			geom_destroy_vector(vars.ray_vector);
 			return (NULL);
 		}
-		if (paint_is_wall(painting, vars.octet, vars.ray_vector->end->x,
+		if (paint_is_wall(&vars, vars.ray_vector->end->x,
 				vars.ray_vector->end->y))
 			break ;
-		paint_decrease_coord(&vars.ray_vector->end->x,
-			&vars.ray_vector->end->y, vars.octet);
-	}	
+		paint_decrease_coord(&vars, &vars.ray_vector->end->x,
+			&vars.ray_vector->end->y);
+	}
 	return (vars.ray_vector);
 }
 
