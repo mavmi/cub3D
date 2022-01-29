@@ -6,11 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:09:13 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 16:01:33 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/29 13:45:25 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/painting.h"
+#include "../../../include/painting.h"
 
 // Create t_vector from two t_points.
 // May return NULL

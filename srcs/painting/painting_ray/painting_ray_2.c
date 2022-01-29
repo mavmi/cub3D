@@ -6,11 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:36:50 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:03:18 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/29 13:45:31 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/painting.h"
+#include "../../../include/painting.h"
 
 // Free t_ray
 void	paint_destroy_ray_info(t_ray *ray)

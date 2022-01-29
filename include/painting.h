@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:31:26 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/29 18:13:51 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,10 @@ struct s_ray_getter
 	t_painting	*painting;
 };
 
+/******************************
+	./
+******************************/
+
 // painting_1.c
 void		paint_init(t_map *map);
 
@@ -181,7 +185,7 @@ void		paint_erase_player(t_painting *painting);
 void		paint_draw_map(t_painting *painting);
 
 // painting_3.c
-void		paint_draw_room(t_painting *painting);
+int			paint_draw_room(t_painting *painting);
 
 // painting_movements_1.c
 void		paint_move_left(t_painting *painting);
@@ -195,8 +199,18 @@ int			paint_is_move_right(t_painting *painting);
 int			paint_is_move_up(t_painting *painting);
 int			paint_is_move_down(t_painting *painting);
 
+// painting_utils.c
+double		paint_get_dist(double x1, double y1, double x2, double y2);
+double		paint_get_module(double num);
+int			paint_get_color(t_color color);
+void		paint_put_pixel(t_painting *painting, int x, int y, t_color color);
+
+/******************************
+	./painting_ray/
+******************************/
+
 // painting_ray_1.c
-t_vector	*paint_get_ray_of_view(t_painting *painting);
+t_vector	*paint_get_ray_of_view(t_painting *painting, double angle);
 
 // painting_ray_2.c
 t_ray		*paint_get_ray_info(double angle);
@@ -211,11 +225,5 @@ t_vector	*paint_get_orient_vector(t_orient orient);
 t_vector	*paint_get_corner_vector(t_point *point, int quarter);
 void		paint_draw_vector(t_painting *painting, t_vector *vector);
 void		paint_erase_vector(t_painting *painting, t_vector *vector);
-
-// painting_utils.c
-double		paint_get_dist(double x1, double y1, double x2, double y2);
-double		paint_get_module(double num);
-int			paint_get_color(t_color color);
-void		paint_put_pixel(t_painting *painting, int x, int y, t_color color);
 
 #endif

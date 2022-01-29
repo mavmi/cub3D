@@ -6,11 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:20:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:21:02 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/29 13:51:07 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/painting.h"
+#include "../../../include/painting.h"
 
 // Create t_movements struct to handle current movement.
 // It's just easier to contain all of them inside only one struct

@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:10:05 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/29 18:15:54 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	paint_redraw_player_and_ray(t_painting *painting)
 
 	if (!painting)
 		return (1);
-	new_ray_vector = paint_get_ray_of_view(painting);
+	new_ray_vector = paint_get_ray_of_view(painting,
+			painting->map->player->angle);
 	if (!new_ray_vector)
 		return (1);
 	paint_erase_vector(painting, painting->map->player->ray_of_view);
@@ -55,8 +56,10 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 		paint_move_up(painting);
 	else if (key_code == DOWN || key_code == S)
 		paint_move_down(painting);
-	if (paint_redraw_player_and_ray(painting))
+	if (paint_draw_room(painting))
 		paint_exit(painting);
+	//if (paint_redraw_player_and_ray(painting))
+	//	paint_exit(painting);
 }
 
 // Keyboard keys handler. Exit on esc and move on arrows
@@ -108,9 +111,11 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	else if (counter > 0 && *angle > 360 - ANGLE_DELTA)
 		*angle = ANGLE_DELTA - (360 - *angle);
 	counter = 0;
-	if (paint_redraw_player_and_ray(painting))
+	if (paint_draw_room(painting))
 		paint_exit(painting);
 	return (0);
+	//if (paint_redraw_player_and_ray(painting))
+	//	paint_exit(painting);
 }
 
 // Init t_painting struct, create window,

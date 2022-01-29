@@ -6,11 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:08:54 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/29 13:45:28 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/painting.h"
+#include "../../../include/painting.h"
 
 // Get quarter from absolute angle of player's view
 int	paint_get_quarter(double angle)

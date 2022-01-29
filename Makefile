@@ -6,40 +6,43 @@
 #    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/01/27 19:29:41 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/01/29 13:50:36 by pmaryjo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=	cub3D
-
-
-HDRS_DIR		=	include
-SRCS_DIR		=	srcs
-GEOM_DIR		=	$(SRCS_DIR)/geometry
-GNL_DIR			=	$(SRCS_DIR)/get_next_line
-PAINTING_DIR	=	$(SRCS_DIR)/painting
-PARSER_DIR		=	$(SRCS_DIR)/parser
-UTILS_DIR		=	$(SRCS_DIR)/utils
-LIBFT_DIR		=	libft
-MLX_DIR			=	minilibx
-
-
-LIBFT			=	$(LIBFT_DIR)/libft.a
-MLX				=	$(MLX_DIR)/libmlx.a
-
-
-HDRS			=	$(addprefix $(HDRS_DIR)/, geometry.h get_next_line.h painting.h parser.h utils.h)
-SRCS			=	$(addprefix $(SRCS_DIR)/, main.c)\
-					$(addprefix $(GEOM_DIR)/, geometry_1.c geometry_2.c geometry_3.c)\
-					$(addprefix $(GNL_DIR)/, get_next_line.c get_next_line_utils.c)\
-					$(addprefix $(PAINTING_DIR)/, painting_1.c painting_2.c painting_3.c painting_movements_1.c\
-							painting_movements_2.c painting_ray_1.c painting_ray_2.c painting_ray_3.c\
-							painting_ray_4.c painting_utils.c)\
-					$(addprefix $(PARSER_DIR)/, parser_1.c parser_convert_1.c parser_convert_2.c\
-							parser_destroyers.c parser_getters.c parser_utils_1.c parser_utils_2.c)\
-					$(addprefix $(UTILS_DIR)/, utils_1.c utils_2.c)
-OBJS			=	$(SRCS:.c=.o)
-DEPEN			=	$(SRCS:.c=.d)
+NAME				=	cub3D
+	
+	
+HDRS_DIR			=	include
+SRCS_DIR			=	srcs
+GEOM_DIR			=	$(SRCS_DIR)/geometry
+GNL_DIR				=	$(SRCS_DIR)/get_next_line
+PAINTING_DIR		=	$(SRCS_DIR)/painting
+PAINTING_RAY_DIR	=	$(PAINTING_DIR)/painting_ray
+PAINTING_MOVE_DIR	=	$(PAINTING_DIR)/painting_movements
+PARSER_DIR			=	$(SRCS_DIR)/parser
+UTILS_DIR			=	$(SRCS_DIR)/utils
+LIBFT_DIR			=	libft
+MLX_DIR				=	minilibx
+	
+	
+LIBFT				=	$(LIBFT_DIR)/libft.a
+MLX					=	$(MLX_DIR)/libmlx.a
+	
+	
+HDRS				=	$(addprefix $(HDRS_DIR)/, geometry.h get_next_line.h painting.h parser.h utils.h)
+SRCS				=	$(addprefix $(SRCS_DIR)/, main.c)\
+						$(addprefix $(GEOM_DIR)/, geometry_1.c geometry_2.c geometry_3.c)\
+						$(addprefix $(GNL_DIR)/, get_next_line.c get_next_line_utils.c)\
+						$(addprefix $(PAINTING_DIR)/, painting_1.c painting_2.c painting_3.c painting_utils.c)\
+						$(addprefix $(PAINTING_MOVE_DIR)/, painting_movements_1.c painting_movements_2.c)\
+						$(addprefix $(PAINTING_RAY_DIR)/, painting_ray_1.c painting_ray_2.c painting_ray_3.c\
+								painting_ray_4.c)\
+						$(addprefix $(PARSER_DIR)/, parser_1.c parser_convert_1.c parser_convert_2.c\
+								parser_destroyers.c parser_getters.c parser_utils_1.c parser_utils_2.c)\
+						$(addprefix $(UTILS_DIR)/, utils_1.c utils_2.c)
+OBJS				=	$(SRCS:.c=.o)
+DEPEN				=	$(SRCS:.c=.d)
 
 
 CC				=	gcc

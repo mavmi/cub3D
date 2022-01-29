@@ -6,11 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:24:26 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/29 18:13:55 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/painting.h"
+#include "../../../include/painting.h"
 
 // All these functions are about decreasing ray vector's coordinates
 // at the end of cycle iteration
@@ -329,7 +329,7 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 // It gets all information about map,
 // calculate orientation of player's vector of view
 // and draw it
-t_vector	*paint_get_ray_of_view(t_painting *painting)
+t_vector	*paint_get_ray_of_view(t_painting *painting, double angle)
 {
 	t_ray			*ray_info;
 	t_vector		*ray_vector;

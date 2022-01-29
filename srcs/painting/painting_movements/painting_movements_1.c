@@ -6,11 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:36:15 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:21:02 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/29 13:51:12 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/painting.h"
+#include "../../../include/painting.h"
 
 // All these functions just change position of player
 //
