@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/29 18:15:54 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/30 16:19:55 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	paint_exit(t_painting *painting)
 }
 
 // Delete old player and vector of view and draw new ones
+/*
 static int	paint_redraw_player_and_ray(t_painting *painting)
 {
 	t_vector	*new_ray_vector;	
@@ -43,11 +44,11 @@ static int	paint_redraw_player_and_ray(t_painting *painting)
 	mlx_put_image_to_window(painting->mlx, painting->win, painting->img, 0, 0);
 	return (0);
 }
+*/
 
 // Move player and redraw it
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
-	paint_erase_player(painting);
 	if (key_code == LEFT || key_code == A)
 		paint_move_left(painting);
 	else if (key_code == RIGHT || key_code == D)
@@ -58,8 +59,6 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 		paint_move_down(painting);
 	if (paint_draw_room(painting))
 		paint_exit(painting);
-	//if (paint_redraw_player_and_ray(painting))
-	//	paint_exit(painting);
 }
 
 // Keyboard keys handler. Exit on esc and move on arrows
@@ -114,8 +113,6 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	if (paint_draw_room(painting))
 		paint_exit(painting);
 	return (0);
-	//if (paint_redraw_player_and_ray(painting))
-	//	paint_exit(painting);
 }
 
 // Init t_painting struct, create window,
@@ -135,7 +132,7 @@ void	paint_init(t_map *map)
 	painting->map = map;
 	painting->mlx = mlx_init();
 	painting->win = mlx_new_window(painting->mlx, WIDTH, HEIGHT,
-			"etozhe_cub2D");
+			"etozhe_cub3D");
 	painting->img = mlx_new_image(painting->mlx, WIDTH, HEIGHT);
 	painting->data_addr = mlx_get_data_addr(painting->img,
 			&painting->bits_per_pixel, &painting->size_line, &painting->endian);
@@ -143,7 +140,6 @@ void	paint_init(t_map *map)
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
 	mlx_mouse_hook(painting->win, mouse_pressed, painting);
-	paint_draw_map(painting);
-	paint_redraw_player_and_ray(painting);
+	paint_draw_room(painting);
 	mlx_loop(painting->mlx);
 }

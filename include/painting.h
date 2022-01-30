@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/29 18:13:51 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/30 16:25:11 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 # define FOV 60.0
 # define CAMERA_DIST 1.0
 # define PIXEL_SIZE 30
-# define ANGLE_DELTA 0.8
-# define PIXELS_PER_DEGREE 1
+# define ANGLE_DELTA 1.5
+# define PIXELS_PER_DEGREE 3
 
 // PLAYER_RAD and STEP are relative
 # define PL_RAD 0.17
 # define PL_STEP 0.19
 
 # define WIDTH 1200
-# define HEIGHT 600
+# define HEIGHT 800
 
 # define ESC 53
 # define UP 126
@@ -47,13 +47,14 @@
 # define S 1
 # define D 2
 
-typedef enum e_color		t_color;
-typedef enum e_orient		t_orient;
-typedef struct s_ray_getter	t_ray_getter;
-typedef struct s_ray		t_ray;
-typedef struct s_painting	t_painting;
-typedef struct s_decrease	t_decrease;
-typedef struct s_movements	t_movements;
+typedef enum e_color			t_color;
+typedef enum e_orient			t_orient;
+typedef struct s_ray_getter		t_ray_getter;
+typedef struct s_ray			t_ray;
+typedef struct s_painting		t_painting;
+typedef struct s_ray_of_view	t_ray_of_view;	
+typedef struct s_decrease		t_decrease;
+typedef struct s_movements		t_movements;
 
 // Just colors for mlx_pixel_put
 //
@@ -64,7 +65,14 @@ enum e_color
 	COLOR_GRID,
 	COLOR_PLAYER,
 	COLOR_FIELD,
-	COLOR_RAY
+	COLOR_RAY,
+	COLOR_BLACK,
+	COLOR_YELLOW,
+	COLOR_GREEN,
+	COLOR_NORTH,
+	COLOR_EAST,
+	COLOR_SOUTH,
+	COLOR_WEST
 };
 
 // Variables to indicate what kind of
@@ -123,6 +131,12 @@ struct s_painting
 	char	*data_addr;
 };
 
+struct s_ray_of_view
+{
+	t_vector	*ray_of_view;
+	t_orient	orient;
+};
+
 // Just vars for paint_decrease_coord(..) function
 struct s_decrease
 {
@@ -162,12 +176,12 @@ struct s_movements
 // [ray_vector] is what this function creates
 struct s_ray_getter
 {
-	int			octet;
-	double		delta;
-	double		corner_angle;
-	t_ray		*ray_info;
-	t_vector	*ray_vector;
-	t_painting	*painting;
+	int				octet;
+	double			delta;
+	double			corner_angle;
+	t_ray			*ray_info;
+	t_ray_of_view	*ray_of_view;
+	t_painting		*painting;
 };
 
 /******************************
@@ -175,55 +189,56 @@ struct s_ray_getter
 ******************************/
 
 // painting_1.c
-void		paint_init(t_map *map);
+void			paint_init(t_map *map);
 
 // painting_2.c
-void		paint_draw_pixel(t_painting *painting,
-				size_t x, size_t y, t_color color);
-void		paint_draw_player(t_painting *painting);
-void		paint_erase_player(t_painting *painting);
-void		paint_draw_map(t_painting *painting);
+void			paint_draw_pixel(t_painting *painting,
+					size_t x, size_t y, t_color color);
+void			paint_draw_player(t_painting *painting);
+void			paint_erase_player(t_painting *painting);
+void			paint_draw_map(t_painting *painting);
 
 // painting_3.c
-int			paint_draw_room(t_painting *painting);
+int				paint_draw_room(t_painting *painting);
 
 // painting_movements_1.c
-void		paint_move_left(t_painting *painting);
-void		paint_move_right(t_painting *painting);
-void		paint_move_up(t_painting *painting);
-void		paint_move_down(t_painting *painting);
+void			paint_move_left(t_painting *painting);
+void			paint_move_right(t_painting *painting);
+void			paint_move_up(t_painting *painting);
+void			paint_move_down(t_painting *painting);
 
 // painting_movements_2.c
-int			paint_is_move_left(t_painting *painting);
-int			paint_is_move_right(t_painting *painting);
-int			paint_is_move_up(t_painting *painting);
-int			paint_is_move_down(t_painting *painting);
+int				paint_is_move_left(t_painting *painting);
+int				paint_is_move_right(t_painting *painting);
+int				paint_is_move_up(t_painting *painting);
+int				paint_is_move_down(t_painting *painting);
 
 // painting_utils.c
-double		paint_get_dist(double x1, double y1, double x2, double y2);
-double		paint_get_module(double num);
-int			paint_get_color(t_color color);
-void		paint_put_pixel(t_painting *painting, int x, int y, t_color color);
+double			paint_get_dist(double x1, double y1, double x2, double y2);
+double			paint_get_module(double num);
+int				paint_get_color(t_color color);
+void			paint_put_pixel(t_painting *painting, int x, int y, t_color color);
 
 /******************************
 	./painting_ray/
 ******************************/
 
 // painting_ray_1.c
-t_vector	*paint_get_ray_of_view(t_painting *painting, double angle);
+void			paint_destroy_ray_of_view(t_ray_of_view *ray_of_view);
+t_ray_of_view	*paint_get_ray_of_view(t_painting *painting, double angle);
 
 // painting_ray_2.c
-t_ray		*paint_get_ray_info(double angle);
-void		paint_destroy_ray_info(t_ray *ray);
+t_ray			*paint_get_ray_info(double angle);
+void			paint_destroy_ray_info(t_ray *ray);
 
 // painting_ray_3.c
-int			paint_get_quarter(double angle);
-int			paint_get_quarter_angle(int quarter, double abs_angle);
-t_vector	*paint_get_orient_vector(t_orient orient);
+int				paint_get_quarter(double angle);
+int				paint_get_quarter_angle(int quarter, double abs_angle);
+t_vector		*paint_get_orient_vector(t_orient orient);
 
 // painting_ray_4.c
-t_vector	*paint_get_corner_vector(t_point *point, int quarter);
-void		paint_draw_vector(t_painting *painting, t_vector *vector);
-void		paint_erase_vector(t_painting *painting, t_vector *vector);
+t_vector		*paint_get_corner_vector(t_point *point, int quarter);
+void			paint_draw_vector(t_painting *painting, t_vector *vector);
+void			paint_erase_vector(t_painting *painting, t_vector *vector);
 
 #endif

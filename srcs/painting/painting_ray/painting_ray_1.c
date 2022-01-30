@@ -6,11 +6,21 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/29 18:13:55 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/01/30 16:22:56 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
+
+void	paint_destroy_ray_of_view(t_ray_of_view *ray_of_view)
+{
+	if (!ray_of_view)
+		return ;
+	geom_destroy_vector(ray_of_view->ray_of_view);
+	free(ray_of_view);
+}
+
+
 
 // All these functions are about decreasing ray vector's coordinates
 // at the end of cycle iteration
@@ -32,15 +42,24 @@ static void	paint_decrease_coord_7_8(t_decrease *decr)
 	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = *decr->y;
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_WEST;
 		return ;
+	}
 	decr->tmp_x = *decr->x;
 	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_NORTH;
 		return ;
+	}
 	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_NORTH;
 		return ;
+	}
 }
 
 static void	paint_decrease_coord_5_6(t_decrease *decr)
@@ -48,15 +67,24 @@ static void	paint_decrease_coord_5_6(t_decrease *decr)
 	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_WEST;
 		return ;
+	}
 	decr->tmp_x = *decr->x;
 	decr->tmp_y = *decr->y;
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_SOUTH;
 		return ;
+	}
 	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = *decr->y;
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_SOUTH;
 		return ;
+	}
 }
 
 static void	paint_decrease_coord_3_4(t_decrease *decr)
@@ -64,15 +92,24 @@ static void	paint_decrease_coord_3_4(t_decrease *decr)
 	decr->tmp_x = *decr->x;
 	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_EAST;
 		return ;
+	}
 	decr->tmp_x = *decr->x;
 	decr->tmp_y = *decr->y;
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_SOUTH;
 		return ;
+	}
 	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = *decr->y;
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_SOUTH;
 		return ;
+	}
 }
 
 static void	paint_decrease_coord_1_2(t_decrease *decr)
@@ -80,15 +117,24 @@ static void	paint_decrease_coord_1_2(t_decrease *decr)
 	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_NORTH;
 		return ;
+	}
 	decr->tmp_x = *decr->x;
 	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_NORTH;
 		return ;
+	}
 	decr->tmp_x = *decr->x;
 	decr->tmp_y = *decr->y;
 	if (paint_decrease_coord_assignment(decr))
+	{
+		decr->vars->ray_of_view->orient = ORIENT_EAST;
 		return ;
+	}
 }
 
 static void	paint_decrease_coord(t_ray_getter *vars, double *x, double *y)
@@ -111,10 +157,18 @@ static void	paint_decrease_coord(t_ray_getter *vars, double *x, double *y)
 			paint_decrease_coord_1_2(&decr);
 	}
 	else if (vars->octet == 1 || vars->octet == 7)
+	{
 		*y -= decr.delta;
+		vars->ray_of_view->orient = ORIENT_NORTH;
+	}
 	else if (vars->octet == 6 || vars->octet == 8)
+	{
 		*x -= decr.delta;
+		vars->ray_of_view->orient = ORIENT_WEST;
+	}
 }
+
+
 
 // Get quarter depending on [quarter], [quarter_angle] and [corner_angle]
 static int	paint_get_octet(int quarter, int part)
@@ -130,6 +184,8 @@ static int	paint_is_wall(t_ray_getter *vars, double x, double y)
 	return (0);
 }
 
+
+
 // All these functions update [end] of player's vector of view
 // depending on it's octet
 
@@ -137,21 +193,21 @@ static void	paint_append_vector_4(t_ray_getter *vars)
 {
 	if (vars->octet == 7)
 	{
-		vars->ray_vector->end->x -= vars->delta;
-		if (utils_is_double_integer(vars->ray_vector->end->y))
-			vars->ray_vector->end->y -= 1.0;
+		vars->ray_of_view->ray_of_view->end->x -= vars->delta;
+		if (utils_is_double_integer(vars->ray_of_view->ray_of_view->end->y))
+			vars->ray_of_view->ray_of_view->end->y -= 1.0;
 		else
-			vars->ray_vector->end->y
-				= utils_round_double_down(vars->ray_vector->end->y);
+			vars->ray_of_view->ray_of_view->end->y
+				= utils_round_double_down(vars->ray_of_view->ray_of_view->end->y);
 	}
 	else if (vars->octet == 8)
 	{	
-		if (utils_is_double_integer(vars->ray_vector->end->x))
-			vars->ray_vector->end->x -= 1.0;
+		if (utils_is_double_integer(vars->ray_of_view->ray_of_view->end->x))
+			vars->ray_of_view->ray_of_view->end->x -= 1.0;
 		else
-			vars->ray_vector->end->x
-				= utils_round_double_down(vars->ray_vector->end->x);
-		vars->ray_vector->end->y -= vars->delta;
+			vars->ray_of_view->ray_of_view->end->x
+				= utils_round_double_down(vars->ray_of_view->ray_of_view->end->x);
+		vars->ray_of_view->ray_of_view->end->y -= vars->delta;
 	}
 }
 
@@ -159,21 +215,21 @@ static void	paint_append_vector_3(t_ray_getter *vars)
 {
 	if (vars->octet == 5)
 	{
-		vars->ray_vector->end->x -= vars->delta;
-		if (utils_is_double_integer(vars->ray_vector->end->y))
-			vars->ray_vector->end->y += 1.0;
+		vars->ray_of_view->ray_of_view->end->x -= vars->delta;
+		if (utils_is_double_integer(vars->ray_of_view->ray_of_view->end->y))
+			vars->ray_of_view->ray_of_view->end->y += 1.0;
 		else
-			vars->ray_vector->end->y
-				= utils_round_double_up(vars->ray_vector->end->y);
+			vars->ray_of_view->ray_of_view->end->y
+				= utils_round_double_up(vars->ray_of_view->ray_of_view->end->y);
 	}
 	else if (vars->octet == 6)
 	{
-		if (utils_is_double_integer(vars->ray_vector->end->x))
-			vars->ray_vector->end->x -= 1.0;
+		if (utils_is_double_integer(vars->ray_of_view->ray_of_view->end->x))
+			vars->ray_of_view->ray_of_view->end->x -= 1.0;
 		else
-			vars->ray_vector->end->x
-				= utils_round_double_down(vars->ray_vector->end->x);
-		vars->ray_vector->end->y += vars->delta;
+			vars->ray_of_view->ray_of_view->end->x
+				= utils_round_double_down(vars->ray_of_view->ray_of_view->end->x);
+		vars->ray_of_view->ray_of_view->end->y += vars->delta;
 	}
 }
 
@@ -181,21 +237,21 @@ static void	paint_append_vector_2(t_ray_getter *vars)
 {
 	if (vars->octet == 3)
 	{
-		vars->ray_vector->end->x += vars->delta;
-		if (utils_is_double_integer(vars->ray_vector->end->y))
-			vars->ray_vector->end->y += 1.0;
+		vars->ray_of_view->ray_of_view->end->x += vars->delta;
+		if (utils_is_double_integer(vars->ray_of_view->ray_of_view->end->y))
+			vars->ray_of_view->ray_of_view->end->y += 1.0;
 		else
-			vars->ray_vector->end->y
-				= utils_round_double_up(vars->ray_vector->end->y);
+			vars->ray_of_view->ray_of_view->end->y
+				= utils_round_double_up(vars->ray_of_view->ray_of_view->end->y);
 	}
 	else if (vars->octet == 4)
 	{
-		if (utils_is_double_integer(vars->ray_vector->end->x))
-			vars->ray_vector->end->x += 1.0;
+		if (utils_is_double_integer(vars->ray_of_view->ray_of_view->end->x))
+			vars->ray_of_view->ray_of_view->end->x += 1.0;
 		else
-			vars->ray_vector->end->x
-				= utils_round_double_up(vars->ray_vector->end->x);
-		vars->ray_vector->end->y += vars->delta;
+			vars->ray_of_view->ray_of_view->end->x
+				= utils_round_double_up(vars->ray_of_view->ray_of_view->end->x);
+		vars->ray_of_view->ray_of_view->end->y += vars->delta;
 	}
 }
 
@@ -203,23 +259,25 @@ static void	paint_append_vector_1(t_ray_getter *vars)
 {
 	if (vars->octet == 1)
 	{
-		vars->ray_vector->end->x += vars->delta;
-		if (utils_is_double_integer(vars->ray_vector->end->y))
-			vars->ray_vector->end->y -= 1.0;
+		vars->ray_of_view->ray_of_view->end->x += vars->delta;
+		if (utils_is_double_integer(vars->ray_of_view->ray_of_view->end->y))
+			vars->ray_of_view->ray_of_view->end->y -= 1.0;
 		else
-			vars->ray_vector->end->y
-				= utils_round_double_down(vars->ray_vector->end->y);
+			vars->ray_of_view->ray_of_view->end->y
+				= utils_round_double_down(vars->ray_of_view->ray_of_view->end->y);
 	}
 	else if (vars->octet == 2)
 	{			
-		if (utils_is_double_integer(vars->ray_vector->end->x))
-			vars->ray_vector->end->x += 1.0;
+		if (utils_is_double_integer(vars->ray_of_view->ray_of_view->end->x))
+			vars->ray_of_view->ray_of_view->end->x += 1.0;
 		else
-			vars->ray_vector->end->x
-				= utils_round_double_up(vars->ray_vector->end->x);
-		vars->ray_vector->end->y -= vars->delta;
+			vars->ray_of_view->ray_of_view->end->x
+				= utils_round_double_up(vars->ray_of_view->ray_of_view->end->x);
+		vars->ray_of_view->ray_of_view->end->y -= vars->delta;
 	}
 }
+
+
 
 // Update [end] of player's vector of view
 static int	paint_append_vector(t_ray_getter *vars)
@@ -237,6 +295,8 @@ static int	paint_append_vector(t_ray_getter *vars)
 	return (0);
 }
 
+
+
 // Update t_ray_getter's [delta], [corner_angle] and [octet].
 // Return 0 if everything is fine, 1 otherwise
 static int	paint_get_delta_angle_octet(t_ray_getter *vars)
@@ -245,7 +305,7 @@ static int	paint_get_delta_angle_octet(t_ray_getter *vars)
 
 	if (!vars)
 		return (1);
-	corner_v = paint_get_corner_vector(vars->ray_vector->end,
+	corner_v = paint_get_corner_vector(vars->ray_of_view->ray_of_view->end,
 			vars->ray_info->quarter);
 	if (!corner_v)
 		return (1);
@@ -296,8 +356,26 @@ static t_vector	*paint_init_ray_vector(t_painting *painting)
 	return (NULL);
 }
 
+static t_ray_of_view	*paint_init_ray_of_view(t_painting *painting)
+{
+	t_ray_of_view	*ray_of_view;
+
+	if (!painting)
+		return (NULL);
+	ray_of_view = (t_ray_of_view *)malloc(sizeof(t_ray_of_view));
+	if (!ray_of_view)
+		return (NULL);
+	ray_of_view->ray_of_view = paint_init_ray_vector(painting);
+	if (ray_of_view->ray_of_view)
+		return (ray_of_view);
+	paint_destroy_ray_of_view(ray_of_view);
+	return (NULL);
+}
+
+
+
 // Create player's vector of view
-static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
+static t_ray_of_view	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 {	
 	t_ray_getter	vars;
 
@@ -305,23 +383,25 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 		return (NULL);
 	vars.painting = painting;
 	vars.ray_info = ray_info;
-	vars.ray_vector = paint_init_ray_vector(painting);
-	if (!vars.ray_vector)
+	vars.ray_of_view = paint_init_ray_of_view(painting);
+	if (!vars.ray_of_view)
 		return (NULL);
 	while (1)
 	{
 		if (paint_get_delta_angle_octet(&vars) || paint_append_vector(&vars))
 		{
-			geom_destroy_vector(vars.ray_vector);
+			paint_destroy_ray_of_view(vars.ray_of_view);
 			return (NULL);
 		}
-		if (paint_is_wall(&vars, vars.ray_vector->end->x,
-				vars.ray_vector->end->y))
-			break ;
-		paint_decrease_coord(&vars, &vars.ray_vector->end->x,
-			&vars.ray_vector->end->y);
+		if (paint_is_wall(&vars, vars.ray_of_view->ray_of_view->end->x,
+				vars.ray_of_view->ray_of_view->end->y))
+		{
+			
+			return (vars.ray_of_view);
+		}
+		paint_decrease_coord(&vars, &vars.ray_of_view->ray_of_view->end->x,
+			&vars.ray_of_view->ray_of_view->end->y);
 	}
-	return (vars.ray_vector);
 }
 
 // Welcome to my doom
@@ -329,19 +409,19 @@ static t_vector	*paint_get_ray_vector(t_painting *painting, t_ray *ray_info)
 // It gets all information about map,
 // calculate orientation of player's vector of view
 // and draw it
-t_vector	*paint_get_ray_of_view(t_painting *painting, double angle)
+t_ray_of_view	*paint_get_ray_of_view(t_painting *painting, double angle)
 {
 	t_ray			*ray_info;
-	t_vector		*ray_vector;
+	t_ray_of_view	*ray_of_view;
 
 	if (!painting)
 		return (NULL);
-	ray_info = paint_get_ray_info(painting->map->player->angle);
+	ray_info = paint_get_ray_info(angle);
 	if (!ray_info)
 		return (NULL);
-	ray_vector = paint_get_ray_vector(painting, ray_info);
+	ray_of_view = paint_get_ray_vector(painting, ray_info);
 	paint_destroy_ray_info(ray_info);
-	if (ray_vector)
-		return (ray_vector);
+	if (ray_of_view)
+		return (ray_of_view);
 	return (NULL);
 }
