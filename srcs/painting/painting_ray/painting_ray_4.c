@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:09:13 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/29 13:45:25 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 12:37:08 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,51 +90,4 @@ t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 	end = geom_init_point(paint_get_corner_x(point->x, quarter),
 			paint_get_corner_y(point->y, quarter));
 	return (paint_get_corner_vector_handler(begin, end));
-}
-
-// Vector's printer.
-// It draws vector
-static void	paint_vector_printer(t_painting *painting,
-			t_vector *vector, t_color color)
-{
-	double	dx;
-	double	dy;
-	double	x;
-	double	y;
-	int		pixels;
-
-	if (!painting || !vector)
-		return ;
-	dx = (int)((vector->end->x - vector->begin->x) * PIXEL_SIZE);
-	dy = (int)((vector->end->y - vector->begin->y) * PIXEL_SIZE);
-	pixels = sqrt(pow(dx, 2) + pow(dy, 2));
-	dx /= pixels;
-	dy /= pixels;
-	x = vector->begin->x * PIXEL_SIZE;
-	y = vector->begin->y * PIXEL_SIZE;
-	while (pixels--)
-	{
-		if ((int)x % PIXEL_SIZE == 0 || (int)y % PIXEL_SIZE == 0)
-			paint_put_pixel(painting, x, y, COLOR_GRID);
-		else
-			paint_put_pixel(painting, x, y, color);
-		x += dx;
-		y += dy;
-	}
-}
-
-// Draw vector in canvas
-void	paint_draw_vector(t_painting *painting, t_vector *vector)
-{
-	if (!painting || !vector)
-		return ;
-	paint_vector_printer(painting, vector, COLOR_RAY);
-}
-
-// Delete vector from canvas
-void	paint_erase_vector(t_painting *painting, t_vector *vector)
-{
-	if (!painting || !vector)
-		return ;
-	paint_vector_printer(painting, vector, COLOR_FIELD);
 }

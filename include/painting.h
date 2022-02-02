@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/30 16:25:11 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 14:18:02 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_painting		t_painting;
 typedef struct s_ray_of_view	t_ray_of_view;	
 typedef struct s_decrease		t_decrease;
 typedef struct s_movements		t_movements;
+typedef struct s_room_data		t_room_data;
 
 // Just colors for mlx_pixel_put
 //
@@ -133,7 +134,7 @@ struct s_painting
 
 struct s_ray_of_view
 {
-	t_vector	*ray_of_view;
+	t_vector	*ray;
 	t_orient	orient;
 };
 
@@ -184,6 +185,17 @@ struct s_ray_getter
 	t_painting		*painting;
 };
 
+struct s_room_data
+{
+	int				x;
+	int				y;
+	int				height;
+	double			len;
+	double			angle;
+	double			angle_delta;
+	t_ray_of_view	*ray_of_view;
+};
+
 /******************************
 	./
 ******************************/
@@ -191,15 +203,16 @@ struct s_ray_getter
 // painting_1.c
 void			paint_init(t_map *map);
 
-// painting_2.c
-void			paint_draw_pixel(t_painting *painting,
-					size_t x, size_t y, t_color color);
-void			paint_draw_player(t_painting *painting);
-void			paint_erase_player(t_painting *painting);
-void			paint_draw_map(t_painting *painting);
+// painting_utils.c
+double			paint_get_dist(double x1, double y1, double x2, double y2);
+double			paint_get_module(double num);
+int				paint_get_color(t_color color);
+void			paint_put_pixel(t_painting *painting, int x, int y,
+					t_color color);
 
-// painting_3.c
-int				paint_draw_room(t_painting *painting);
+/******************************
+	./painting_movements/
+******************************/
 
 // painting_movements_1.c
 void			paint_move_left(t_painting *painting);
@@ -213,11 +226,22 @@ int				paint_is_move_right(t_painting *painting);
 int				paint_is_move_up(t_painting *painting);
 int				paint_is_move_down(t_painting *painting);
 
-// painting_utils.c
-double			paint_get_dist(double x1, double y1, double x2, double y2);
-double			paint_get_module(double num);
-int				paint_get_color(t_color color);
-void			paint_put_pixel(t_painting *painting, int x, int y, t_color color);
+/******************************
+	./painting_minimap/
+******************************/
+
+// painting_minimap_1.c
+void			paint_minimap_draw_pixel(t_painting *painting,
+					size_t x, size_t y, t_color color);
+void			paint_minimap_draw_map(t_painting *painting);
+
+// painting_minimap_2.c
+void			paint_minimap_draw_player(t_painting *painting);
+void			paint_minimap_erase_player(t_painting *painting);
+
+// painting_minimap_3.c
+void			paint_draw_vector(t_painting *painting, t_vector *vector);
+void			paint_erase_vector(t_painting *painting, t_vector *vector);
 
 /******************************
 	./painting_ray/
@@ -240,5 +264,30 @@ t_vector		*paint_get_orient_vector(t_orient orient);
 t_vector		*paint_get_corner_vector(t_point *point, int quarter);
 void			paint_draw_vector(t_painting *painting, t_vector *vector);
 void			paint_erase_vector(t_painting *painting, t_vector *vector);
+
+// painting_ray_5.c
+int				paint_append_vector(t_ray_getter *vars);
+
+// painting_ray_6.c
+void			paint_decrease_coord(t_ray_getter *vars, double *x, double *y);
+
+// painting_ray_7.c
+void			paint_set_ray_orient(t_ray_getter *vars);
+int				paint_decrease_coord_assignment(t_decrease *decr);
+int				paint_get_octet(int quarter, int part);
+int				paint_is_wall(t_ray_getter *vars, double x, double y);
+int				paint_get_delta_angle_octet(t_ray_getter *vars);
+
+/******************************
+	./painting_room/
+******************************/
+
+// painting_room_1.c
+int				paint_room_draw_room(t_painting *painting);
+
+// painting_room_2.c
+double			paint_room_decrease_angle(double angle, double delta);
+double			paint_room_increase_angle(double angle, double delta);
+t_color			paint_room_get_color_from_orien(t_orient orient);
 
 #endif

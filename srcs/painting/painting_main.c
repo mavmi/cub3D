@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   painting_1.c                                       :+:      :+:    :+:   */
+/*   painting_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/30 16:19:55 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 12:22:35 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,6 @@ static void	paint_exit(t_painting *painting)
 	exit(0);
 }
 
-// Delete old player and vector of view and draw new ones
-/*
-static int	paint_redraw_player_and_ray(t_painting *painting)
-{
-	t_vector	*new_ray_vector;	
-
-	if (!painting)
-		return (1);
-	new_ray_vector = paint_get_ray_of_view(painting,
-			painting->map->player->angle);
-	if (!new_ray_vector)
-		return (1);
-	paint_erase_vector(painting, painting->map->player->ray_of_view);
-	geom_destroy_vector(painting->map->player->ray_of_view);
-	painting->map->player->ray_of_view = new_ray_vector;
-	paint_draw_vector(painting, painting->map->player->ray_of_view);
-	paint_erase_player(painting);
-	paint_draw_player(painting);
-	mlx_put_image_to_window(painting->mlx, painting->win, painting->img, 0, 0);
-	return (0);
-}
-*/
-
 // Move player and redraw it
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
@@ -57,7 +34,7 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 		paint_move_up(painting);
 	else if (key_code == DOWN || key_code == S)
 		paint_move_down(painting);
-	if (paint_draw_room(painting))
+	if (paint_room_draw_room(painting))
 		paint_exit(painting);
 }
 
@@ -71,16 +48,6 @@ static int	paint_key_pressed(int key_code, t_painting *painting)
 		|| key_code == W || key_code == A
 		|| key_code == S || key_code == D)
 		paint_handle_arrows(key_code, painting);
-	return (0);
-}
-
-// It does nothing. May be later it will be more usefull
-static int	mouse_pressed(int key_code, int x, int y, t_painting *painting)
-{
-	(void)painting;
-	(void)key_code;
-	(void)x;
-	(void)y;
 	return (0);
 }
 
@@ -110,7 +77,7 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	else if (counter > 0 && *angle > 360 - ANGLE_DELTA)
 		*angle = ANGLE_DELTA - (360 - *angle);
 	counter = 0;
-	if (paint_draw_room(painting))
+	if (paint_room_draw_room(painting))
 		paint_exit(painting);
 	return (0);
 }
@@ -139,7 +106,6 @@ void	paint_init(t_map *map)
 	mlx_put_image_to_window(painting->mlx, painting->win, painting->img, 0, 0);
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
-	mlx_mouse_hook(painting->win, mouse_pressed, painting);
-	paint_draw_room(painting);
+	paint_room_draw_room(painting);
 	mlx_loop(painting->mlx);
 }

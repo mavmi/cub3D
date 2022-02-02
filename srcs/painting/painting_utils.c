@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:37:48 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/30 16:26:50 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 13:05:24 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ int	paint_get_color(t_color color)
 		return (0xFFFF00);
 	if (color == COLOR_RAY)
 		return (0x0000FF);
-		
 	if (color == COLOR_BLACK)
 		return (0x000000);
 	if (color == COLOR_YELLOW)
 		return (0xFFFF00);
 	if (color == COLOR_GREEN)
 		return (0x008000);
-	
 	if (color == COLOR_NORTH)
 		return (0x003EFF);
 	if (color == COLOR_SOUTH)
@@ -51,7 +49,6 @@ int	paint_get_color(t_color color)
 		return (0x00FF87);
 	if (color == COLOR_WEST)
 		return (0xFF8000);
-
 	return (0x000000);
 }
 

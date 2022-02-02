@@ -6,24 +6,28 @@
 #    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/01/29 13:50:36 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/02/02 13:21:28 by pmaryjo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				=	cub3D
+NAME					=	cub3D
 	
 	
-HDRS_DIR			=	include
-SRCS_DIR			=	srcs
-GEOM_DIR			=	$(SRCS_DIR)/geometry
-GNL_DIR				=	$(SRCS_DIR)/get_next_line
-PAINTING_DIR		=	$(SRCS_DIR)/painting
-PAINTING_RAY_DIR	=	$(PAINTING_DIR)/painting_ray
-PAINTING_MOVE_DIR	=	$(PAINTING_DIR)/painting_movements
-PARSER_DIR			=	$(SRCS_DIR)/parser
-UTILS_DIR			=	$(SRCS_DIR)/utils
-LIBFT_DIR			=	libft
-MLX_DIR				=	minilibx
+HDRS_DIR				=	include
+SRCS_DIR				=	srcs
+GEOM_DIR				=	$(SRCS_DIR)/geometry
+GNL_DIR					=	$(SRCS_DIR)/get_next_line
+
+PAINTING_DIR			=	$(SRCS_DIR)/painting
+PAINTING_MINIMAP_DIR	=	$(PAINTING_DIR)/painting_minimap
+PAINTING_MOVE_DIR		=	$(PAINTING_DIR)/painting_movements
+PAINTING_RAY_DIR		=	$(PAINTING_DIR)/painting_ray
+PAINTING_ROOM_DIR		=	$(PAINTING_DIR)/painting_room
+	
+PARSER_DIR				=	$(SRCS_DIR)/parser
+UTILS_DIR				=	$(SRCS_DIR)/utils
+LIBFT_DIR				=	libft
+MLX_DIR					=	minilibx
 	
 	
 LIBFT				=	$(LIBFT_DIR)/libft.a
@@ -34,10 +38,14 @@ HDRS				=	$(addprefix $(HDRS_DIR)/, geometry.h get_next_line.h painting.h parser
 SRCS				=	$(addprefix $(SRCS_DIR)/, main.c)\
 						$(addprefix $(GEOM_DIR)/, geometry_1.c geometry_2.c geometry_3.c)\
 						$(addprefix $(GNL_DIR)/, get_next_line.c get_next_line_utils.c)\
-						$(addprefix $(PAINTING_DIR)/, painting_1.c painting_2.c painting_3.c painting_utils.c)\
+						\
+						$(addprefix $(PAINTING_DIR)/, painting_main.c painting_utils.c)\
+						$(addprefix $(PAINTING_MINIMAP_DIR)/, painting_minimap_1.c painting_minimap_2.c)\
 						$(addprefix $(PAINTING_MOVE_DIR)/, painting_movements_1.c painting_movements_2.c)\
 						$(addprefix $(PAINTING_RAY_DIR)/, painting_ray_1.c painting_ray_2.c painting_ray_3.c\
-								painting_ray_4.c)\
+								painting_ray_4.c painting_ray_5.c painting_ray_6.c painting_ray_7.c)\
+						$(addprefix $(PAINTING_ROOM_DIR)/, painting_room_1.c painting_room_2.c)\
+						\
 						$(addprefix $(PARSER_DIR)/, parser_1.c parser_convert_1.c parser_convert_2.c\
 								parser_destroyers.c parser_getters.c parser_utils_1.c parser_utils_2.c)\
 						$(addprefix $(UTILS_DIR)/, utils_1.c utils_2.c)
@@ -96,7 +104,19 @@ norm:
 			@norminette $(GNL_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
 
 			@echo "$(BLUE)\n\t*** PAINTING ***$(NC)"
-			@norminette $(PAINTING_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+			@norminette $(PAINTING_DIR)/*.c | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+
+			@echo "$(BLUE)\n\t*** PAINTING MINIMAP ***$(NC)"
+			@norminette $(PAINTING_MINIMAP_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+
+			@echo "$(BLUE)\n\t*** PAINTING MOVEMENTS ***$(NC)"
+			@norminette $(PAINTING_MOVE_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+
+			@echo "$(BLUE)\n\t*** PAINTING RAY ***$(NC)"
+			@norminette $(PAINTING_RAY_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+
+			@echo "$(BLUE)\n\t*** PAINTING ROOM ***$(NC)"
+			@norminette $(PAINTING_ROOM_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
 
 			@echo "$(BLUE)\n\t*** PARSER ***$(NC)"
 			@norminette $(PARSER_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
