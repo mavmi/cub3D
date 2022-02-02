@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 12:22:35 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 16:42:12 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,18 @@ static void	paint_exit(t_painting *painting)
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
 	if (key_code == LEFT || key_code == A)
-		paint_move_left(painting);
+		painting->map->player->angle
+			= paint_room_decrease_angle(painting->map->player->angle,
+				ANGLE_DELTA);
 	else if (key_code == RIGHT || key_code == D)
-		paint_move_right(painting);
+		painting->map->player->angle
+			= paint_room_increase_angle(painting->map->player->angle,
+				ANGLE_DELTA);
 	else if (key_code == UP || key_code == W)
-		paint_move_up(painting);
+		paint_movements_move_up(painting);
 	else if (key_code == DOWN || key_code == S)
-		paint_move_down(painting);
-	if (paint_room_draw_room(painting))
-		paint_exit(painting);
+		paint_movements_move_down(painting);
+	paint_room_draw_room(painting);
 }
 
 // Keyboard keys handler. Exit on esc and move on arrows

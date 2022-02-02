@@ -6,7 +6,7 @@
 #    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/02/02 13:21:28 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/02/02 16:33:46 by pmaryjo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRCS				=	$(addprefix $(SRCS_DIR)/, main.c)\
 						\
 						$(addprefix $(PAINTING_DIR)/, painting_main.c painting_utils.c)\
 						$(addprefix $(PAINTING_MINIMAP_DIR)/, painting_minimap_1.c painting_minimap_2.c)\
-						$(addprefix $(PAINTING_MOVE_DIR)/, painting_movements_1.c painting_movements_2.c)\
+						$(addprefix $(PAINTING_MOVE_DIR)/, painting_movements_1.c)\
 						$(addprefix $(PAINTING_RAY_DIR)/, painting_ray_1.c painting_ray_2.c painting_ray_3.c\
 								painting_ray_4.c painting_ray_5.c painting_ray_6.c painting_ray_7.c)\
 						$(addprefix $(PAINTING_ROOM_DIR)/, painting_room_1.c painting_room_2.c)\

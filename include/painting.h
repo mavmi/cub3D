@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 14:18:02 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 16:47:27 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,14 +157,14 @@ struct s_decrease
 // paint_is_move_[somewhere](..) ==> paint_get_vars(..)
 struct s_movements
 {	
-	double	tl_x;
-	double	tl_y;
-	double	bl_x;
-	double	bl_y;
-	double	tr_x;
-	double	tr_y;
-	double	br_x;
-	double	br_y;
+	double			x;
+	double			y;
+	double			len;
+	double			cos_;
+	double			sin_;
+	double			angle;
+	t_vector		*vector;
+	t_ray_of_view	*ray_of_view;
 };
 
 // I need it to contain variables
@@ -215,16 +215,8 @@ void			paint_put_pixel(t_painting *painting, int x, int y,
 ******************************/
 
 // painting_movements_1.c
-void			paint_move_left(t_painting *painting);
-void			paint_move_right(t_painting *painting);
-void			paint_move_up(t_painting *painting);
-void			paint_move_down(t_painting *painting);
-
-// painting_movements_2.c
-int				paint_is_move_left(t_painting *painting);
-int				paint_is_move_right(t_painting *painting);
-int				paint_is_move_up(t_painting *painting);
-int				paint_is_move_down(t_painting *painting);
+void			paint_movements_move_up(t_painting *painting);
+void			paint_movements_move_down(t_painting *painting);
 
 /******************************
 	./painting_minimap/
@@ -240,43 +232,48 @@ void			paint_minimap_draw_player(t_painting *painting);
 void			paint_minimap_erase_player(t_painting *painting);
 
 // painting_minimap_3.c
-void			paint_draw_vector(t_painting *painting, t_vector *vector);
-void			paint_erase_vector(t_painting *painting, t_vector *vector);
+void			paint_minimap_draw_vector(t_painting *painting,
+					t_vector *vector);
+void			paint_minimap_erase_vector(t_painting *painting,
+					t_vector *vector);
 
 /******************************
 	./painting_ray/
 ******************************/
 
 // painting_ray_1.c
-void			paint_destroy_ray_of_view(t_ray_of_view *ray_of_view);
-t_ray_of_view	*paint_get_ray_of_view(t_painting *painting, double angle);
+void			paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view);
+t_ray_of_view	*paint_ray_get_ray_of_view(t_painting *painting, double angle);
 
 // painting_ray_2.c
-t_ray			*paint_get_ray_info(double angle);
-void			paint_destroy_ray_info(t_ray *ray);
+t_ray			*paint_ray_get_ray_info(double angle);
+void			paint_ray_destroy_ray_info(t_ray *ray);
 
 // painting_ray_3.c
-int				paint_get_quarter(double angle);
-int				paint_get_quarter_angle(int quarter, double abs_angle);
-t_vector		*paint_get_orient_vector(t_orient orient);
+int				paint_ray_get_quarter(double angle);
+int				paint_ray_get_quarter_angle(int quarter, double abs_angle);
+t_vector		*paint_ray_get_orient_vector(t_orient orient);
 
 // painting_ray_4.c
-t_vector		*paint_get_corner_vector(t_point *point, int quarter);
-void			paint_draw_vector(t_painting *painting, t_vector *vector);
-void			paint_erase_vector(t_painting *painting, t_vector *vector);
+t_vector		*paint_ray_get_corner_vector(t_point *point, int quarter);
+void			paint_minimap_draw_vector(t_painting *painting,
+					t_vector *vector);
+void			paint_minimap_erase_vector(t_painting *painting,
+					t_vector *vector);
 
 // painting_ray_5.c
-int				paint_append_vector(t_ray_getter *vars);
+int				paint_ray_append_vector(t_ray_getter *vars);
 
 // painting_ray_6.c
-void			paint_decrease_coord(t_ray_getter *vars, double *x, double *y);
+void			paint_ray_decrease_coord(t_ray_getter *vars,
+					double *x, double *y);
 
 // painting_ray_7.c
-void			paint_set_ray_orient(t_ray_getter *vars);
-int				paint_decrease_coord_assignment(t_decrease *decr);
-int				paint_get_octet(int quarter, int part);
-int				paint_is_wall(t_ray_getter *vars, double x, double y);
-int				paint_get_delta_angle_octet(t_ray_getter *vars);
+void			paint_ray_set_ray_orient(t_ray_getter *vars);
+int				paint_ray_decrease_coord_assignment(t_decrease *decr);
+int				paint_ray_get_octet(int quarter, int part);
+int				paint_ray_is_wall(t_ray_getter *vars, double x, double y);
+int				paint_ray_get_delta_angle_octet(t_ray_getter *vars);
 
 /******************************
 	./painting_room/

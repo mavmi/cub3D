@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:36:47 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 12:37:09 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 16:39:58 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Vector's printer.
 // It draws vector
-static void	paint_vector_printer(t_painting *painting,
+static void	paint_minimap_vector_printer(t_painting *painting,
 			t_vector *vector, t_color color)
 {
 	double	dx;
@@ -44,17 +44,17 @@ static void	paint_vector_printer(t_painting *painting,
 }
 
 // Draw vector in canvas
-void	paint_draw_vector(t_painting *painting, t_vector *vector)
+void	paint_minimap_draw_vector(t_painting *painting, t_vector *vector)
 {
 	if (!painting || !vector)
 		return ;
-	paint_vector_printer(painting, vector, COLOR_RAY);
+	paint_minimap_vector_printer(painting, vector, COLOR_RAY);
 }
 
 // Delete vector from canvas
-void	paint_erase_vector(t_painting *painting, t_vector *vector)
+void	paint_minimap_erase_vector(t_painting *painting, t_vector *vector)
 {
 	if (!painting || !vector)
 		return ;
-	paint_vector_printer(painting, vector, COLOR_FIELD);
+	paint_minimap_vector_printer(painting, vector, COLOR_FIELD);
 }

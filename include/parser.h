@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 19:16:56 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 16:37:16 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ struct s_player
 	char		orient;
 	double		angle;
 	t_vector	*ray_of_view;
-	t_position	*pos;
+	t_point		*pos;
 };
 
 // Elementary element of map.

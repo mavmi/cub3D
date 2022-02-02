@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:29:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 14:24:24 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 16:43:43 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	paint_room_draw_room(t_painting *painting)
 	data = paint_room_get_data(painting);
 	while (data.x++ < WIDTH)
 	{
-		data.ray_of_view = paint_get_ray_of_view(painting, data.angle);
+		data.ray_of_view = paint_ray_get_ray_of_view(painting, data.angle);
 		if (!data.ray_of_view)
 			return (1);
 		data.len = geom_vector_get_module(data.ray_of_view->ray);
-		paint_destroy_ray_of_view(data.ray_of_view);
+		paint_ray_destroy_ray_of_view(data.ray_of_view);
 		data.angle = paint_room_increase_angle(data.angle, data.angle_delta);
 		data.height = HEIGHT / data.len;
 		data.y = 0;

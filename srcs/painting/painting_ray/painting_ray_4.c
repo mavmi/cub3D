@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:09:13 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 12:37:08 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 16:45:06 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 // Create t_vector from two t_points.
 // May return NULL
-static t_vector	*paint_get_corner_vector_handler(t_point *begin, t_point *end)
+static t_vector	*paint_ray_get_corner_vector_handler(t_point *begin,
+					t_point *end)
 {
 	t_vector	*vector;
 
@@ -27,7 +28,7 @@ static t_vector	*paint_get_corner_vector_handler(t_point *begin, t_point *end)
 }
 
 // Get x for corner vector
-static int	paint_get_corner_x(double point_x, int quarter)
+static int	paint_ray_get_corner_x(double point_x, int quarter)
 {
 	if (quarter == 1)
 	{
@@ -52,7 +53,7 @@ static int	paint_get_corner_x(double point_x, int quarter)
 }
 
 // Get y for corner vector
-static int	paint_get_corner_y(double point_y, int quarter)
+static int	paint_ray_get_corner_y(double point_y, int quarter)
 {
 	if (quarter == 1)
 	{
@@ -79,7 +80,7 @@ static int	paint_get_corner_y(double point_y, int quarter)
 // Create vector from [point] to corner of the current square
 // depending on quarter.
 // May return NULL
-t_vector	*paint_get_corner_vector(t_point *point, int quarter)
+t_vector	*paint_ray_get_corner_vector(t_point *point, int quarter)
 {
 	t_point		*begin;
 	t_point		*end;
@@ -87,7 +88,7 @@ t_vector	*paint_get_corner_vector(t_point *point, int quarter)
 	if (!point || quarter < 1 || quarter > 4)
 		return (NULL);
 	begin = geom_init_point(point->x, point->y);
-	end = geom_init_point(paint_get_corner_x(point->x, quarter),
-			paint_get_corner_y(point->y, quarter));
-	return (paint_get_corner_vector_handler(begin, end));
+	end = geom_init_point(paint_ray_get_corner_x(point->x, quarter),
+			paint_ray_get_corner_y(point->y, quarter));
+	return (paint_ray_get_corner_vector_handler(begin, end));
 }
