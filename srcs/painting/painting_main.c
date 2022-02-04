@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:42:12 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 16:44:38 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,22 @@ static void	paint_exit(t_painting *painting)
 // Move player and redraw it
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
-	if (key_code == LEFT || key_code == A)
+	if (key_code == LEFT)
 		painting->map->player->angle
 			= paint_room_decrease_angle(painting->map->player->angle,
-				ANGLE_DELTA);
-	else if (key_code == RIGHT || key_code == D)
+				ANGLE_DELTA_KEY);
+	else if (key_code == RIGHT)
 		painting->map->player->angle
 			= paint_room_increase_angle(painting->map->player->angle,
-				ANGLE_DELTA);
+				ANGLE_DELTA_KEY);
 	else if (key_code == UP || key_code == W)
-		paint_movements_move_up(painting);
+		paint_movements_move(painting, MOVE_FORWARD);
 	else if (key_code == DOWN || key_code == S)
-		paint_movements_move_down(painting);
+		paint_movements_move(painting, MOVE_BACK);
+	else if (key_code == A)
+		paint_movements_move(painting, MOVE_LEFT);
+	else if (key_code == D)
+		paint_movements_move(painting, MOVE_RIGHT);
 	paint_room_draw_room(painting);
 }
 
@@ -62,7 +66,6 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	static int		counter = 0;
 	static int		previous_x = 0;
 
-	(void)y;
 	if (x < previous_x)
 		counter--;
 	else
@@ -71,23 +74,24 @@ static int	paint_mouse_move(int x, int y, t_painting *painting)
 	if (!counter || counter % PIXELS_PER_DEGREE != 0)
 		return (0);
 	angle = &painting->map->player->angle;
-	if (counter < 0 && *angle > ANGLE_DELTA)
-		(*angle) -= ANGLE_DELTA;
-	else if (counter < 0 && *angle <= ANGLE_DELTA)
-		*angle = 360 + *angle - ANGLE_DELTA;
-	else if (counter > 0 && *angle <= 360 - ANGLE_DELTA)
-		(*angle) += ANGLE_DELTA;
-	else if (counter > 0 && *angle > 360 - ANGLE_DELTA)
-		*angle = ANGLE_DELTA - (360 - *angle);
+	if (counter < 0 && *angle > ANGLE_DELTA_MOUSE)
+		(*angle) = paint_room_decrease_angle(*angle, ANGLE_DELTA_MOUSE);
+	else if (counter < 0 && *angle <= ANGLE_DELTA_MOUSE)
+		(*angle) = paint_room_decrease_angle(*angle, ANGLE_DELTA_MOUSE);
+	else if (counter > 0 && *angle <= 360 - ANGLE_DELTA_MOUSE)
+		(*angle) = paint_room_increase_angle(*angle, ANGLE_DELTA_MOUSE);
+	else if (counter > 0 && *angle > 360 - ANGLE_DELTA_MOUSE)
+		(*angle) = paint_room_increase_angle(*angle, ANGLE_DELTA_MOUSE);
 	counter = 0;
+	mlx_mouse_move(painting->win, WIDTH / 2, HEIGHT / 2);
 	if (paint_room_draw_room(painting))
 		paint_exit(painting);
-	return (0);
+	return (y);
 }
 
 // Init t_painting struct, create window,
 // set up input handlers and loop mlx
-void	paint_init(t_map *map)
+void	paint_3d(t_map *map)
 {
 	t_painting	*painting;
 
@@ -109,6 +113,7 @@ void	paint_init(t_map *map)
 	mlx_put_image_to_window(painting->mlx, painting->win, painting->img, 0, 0);
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
+	mlx_mouse_hide();
 	paint_room_draw_room(painting);
 	mlx_loop(painting->mlx);
 }

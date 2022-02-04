@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:21:19 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 13:22:02 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/02 21:41:05 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ double	paint_room_increase_angle(double angle, double delta)
 	return (delta - (360.0 - angle));
 }
 
-t_color	paint_room_get_color_from_orien(t_orient orient)
+t_color	paint_room_orient_to_color(t_orient orient)
 {
 	if (orient == ORIENT_NORTH)
 		return (COLOR_NORTH);

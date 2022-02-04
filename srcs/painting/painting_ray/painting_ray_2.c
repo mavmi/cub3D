@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:36:50 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:44:25 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 15:06:43 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ t_ray	*paint_ray_get_ray_info(double angle)
 		return (NULL);
 	ray->quarter = paint_ray_get_quarter(angle);
 	ray->quarter_angle = paint_ray_get_quarter_angle(ray->quarter, angle);
-	if (ray->quarter_angle == -1 || paint_ray_get_ray_info_handler(ray))
+	if (utils_are_doubles_equal(ray->quarter_angle, -1.0)
+		|| paint_ray_get_ray_info_handler(ray))
 	{
 		paint_ray_destroy_ray_info(ray);
 		return (NULL);

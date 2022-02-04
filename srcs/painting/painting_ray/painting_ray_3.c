@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:44:25 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 12:36:16 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ int	paint_ray_get_quarter(double angle)
 }
 
 // Convert absolute angle of player's view to an angle inside current quarter
-int	paint_ray_get_quarter_angle(int quarter, double abs_angle)
+double	paint_ray_get_quarter_angle(int quarter, double abs_angle)
 {
 	if (quarter == 1)
 	{
-		if (utils_are_doubles_equal(abs_angle, 360))
-			return (0);
+		if (utils_are_doubles_equal(abs_angle, 360.0))
+			return (0.0);
 		return (abs_angle);
 	}
 	if (quarter == 2)
-		return (90 - (abs_angle - 90));
+		return (90.0 - (abs_angle - 90.0));
 	if (quarter == 3)
-		return (abs_angle - 180);
+		return (abs_angle - 180.0);
 	if (quarter == 4)
-		return (90 - (abs_angle - 270));
-	return (-1);
+		return (90.0 - (abs_angle - 270.0));
+	return (-1.0);
 }
 
 // Create [end] point of orientation vector depending on t_orient.

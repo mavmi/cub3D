@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:47:27 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 16:36:15 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@
 # define FOV 60.0
 # define CAMERA_DIST 1.0
 # define PIXEL_SIZE 30
-# define ANGLE_DELTA 1.5
+# define ANGLE_DELTA_KEY 5
+# define ANGLE_DELTA_MOUSE 4
 # define PIXELS_PER_DEGREE 3
 
 // PLAYER_RAD and STEP are relative
 # define PL_RAD 0.17
-# define PL_STEP 0.19
+# define PL_STEP 0.69
 
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 1000
+# define HEIGHT 1000
+# define RECT_HEIGHT 300
 
 # define ESC 53
 # define UP 126
@@ -49,6 +51,8 @@
 
 typedef enum e_color			t_color;
 typedef enum e_orient			t_orient;
+typedef enum e_movement			t_movement;
+
 typedef struct s_ray_getter		t_ray_getter;
 typedef struct s_ray			t_ray;
 typedef struct s_painting		t_painting;
@@ -88,6 +92,14 @@ enum e_orient
 	ORIENT_WEST
 };
 
+enum e_movement
+{
+	MOVE_FORWARD,
+	MOVE_BACK,
+	MOVE_LEFT,
+	MOVE_RIGHT
+};
+
 // Contain information about player's vector of view.
 //
 //                 N(0°)
@@ -113,7 +125,7 @@ enum e_orient
 struct s_ray
 {
 	int			quarter;
-	int			quarter_angle;
+	double		quarter_angle;
 	t_vector	*orient_vert;
 	t_vector	*orient_hor;
 };
@@ -189,8 +201,10 @@ struct s_room_data
 {
 	int				x;
 	int				y;
-	int				height;
-	double			len;
+	int				wall_start;
+	int				wall_end;
+	int				wall_height;
+	double			ray_len;
 	double			angle;
 	double			angle_delta;
 	t_ray_of_view	*ray_of_view;
@@ -200,8 +214,8 @@ struct s_room_data
 	./
 ******************************/
 
-// painting_1.c
-void			paint_init(t_map *map);
+// painting_3d.c
+void			paint_3d(t_map *map);
 
 // painting_utils.c
 double			paint_get_dist(double x1, double y1, double x2, double y2);
@@ -215,8 +229,7 @@ void			paint_put_pixel(t_painting *painting, int x, int y,
 ******************************/
 
 // painting_movements_1.c
-void			paint_movements_move_up(t_painting *painting);
-void			paint_movements_move_down(t_painting *painting);
+void			paint_movements_move(t_painting *painting, t_movement movement);
 
 /******************************
 	./painting_minimap/
@@ -251,7 +264,7 @@ void			paint_ray_destroy_ray_info(t_ray *ray);
 
 // painting_ray_3.c
 int				paint_ray_get_quarter(double angle);
-int				paint_ray_get_quarter_angle(int quarter, double abs_angle);
+double			paint_ray_get_quarter_angle(int quarter, double abs_angle);
 t_vector		*paint_ray_get_orient_vector(t_orient orient);
 
 // painting_ray_4.c
@@ -285,6 +298,6 @@ int				paint_room_draw_room(t_painting *painting);
 // painting_room_2.c
 double			paint_room_decrease_angle(double angle, double delta);
 double			paint_room_increase_angle(double angle, double delta);
-t_color			paint_room_get_color_from_orien(t_orient orient);
+t_color			paint_room_orient_to_color(t_orient orient);
 
 #endif
