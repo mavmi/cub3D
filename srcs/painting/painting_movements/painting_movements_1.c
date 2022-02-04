@@ -6,15 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:36:15 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 16:45:04 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 17:53:55 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
-static t_movements	paint_movements_get_vars(t_painting *p, t_movement movement)
+static t_move_vars	paint_movements_get_vars(t_painting *p, t_movement movement)
 {
-	t_movements	vars;
+	t_move_vars	vars;
 
 	vars.vector = paint_ray_get_orient_vector(ORIENT_SOUTH);
 	vars.vector->end->y *= PL_STEP;
@@ -40,7 +40,7 @@ static t_movements	paint_movements_get_vars(t_painting *p, t_movement movement)
 
 void	paint_movements_move(t_painting *painting, t_movement movement)
 {
-	t_movements	vars;
+	t_move_vars	vars;
 
 	if (!vars.vector || !vars.ray_of_view)
 		return ;

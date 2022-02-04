@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:37:16 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 17:52:15 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include "geometry.h"
 # include "get_next_line.h"
 
-# define SQ_SIZE 1
-
 # define BAD_SQ_TYPE '-'
 # define BAD_SQ_POS -1
 # define BAD_PL_ORIENT '+'
@@ -39,19 +37,10 @@
 # define MAP_OR_EAST 'E'
 # define MAP_OR_WEST 'W'
 
-typedef struct s_position	t_position;
 typedef struct s_player		t_player;
 typedef struct s_square		t_square;
 typedef struct s_map_line	t_map_line;
 typedef struct s_map		t_map;
-
-// Just to save player's position relative to
-// the very beginning of map's array of strings
-struct s_position
-{
-	double	x;
-	double	y;
-};
 
 // Player's info.
 // [pos] - current position
@@ -126,8 +115,5 @@ int			pars_is_char_valid_square(char c);
 int			pars_is_char_valid_player(char c);
 int			pars_is_char_valid(char c);
 int			pars_is_str_valid(char *str);
-
-// parser_utils_2.c
-t_position	*pars_copy_position(t_position *pos);
 
 #endif

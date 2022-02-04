@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 16:36:15 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 18:22:51 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,20 @@
 # include "painting.h"
 # include "geometry.h"
 
-// Just utils
-# define EPS 0.2
-# define FOV 60.0
-# define CAMERA_DIST 1.0
-# define PIXEL_SIZE 30
+# define PL_STEP 0.37
 # define ANGLE_DELTA_KEY 5
-# define ANGLE_DELTA_MOUSE 4
-# define PIXELS_PER_DEGREE 3
+# define ANGLE_DELTA_MOUSE 7
+# define PIXELS_PER_DEGREE 4
 
-// PLAYER_RAD and STEP are relative
+// 3D
+# define FOV 60.0
+
+// 2D
+# define PIXEL_SIZE 30
 # define PL_RAD 0.17
-# define PL_STEP 0.69
 
 # define WIDTH 1000
 # define HEIGHT 1000
-# define RECT_HEIGHT 300
 
 # define ESC 53
 # define UP 126
@@ -53,13 +51,13 @@ typedef enum e_color			t_color;
 typedef enum e_orient			t_orient;
 typedef enum e_movement			t_movement;
 
-typedef struct s_ray_getter		t_ray_getter;
+typedef struct s_ray_vars		t_ray_vars;
 typedef struct s_ray			t_ray;
 typedef struct s_painting		t_painting;
 typedef struct s_ray_of_view	t_ray_of_view;	
 typedef struct s_decrease		t_decrease;
-typedef struct s_movements		t_movements;
-typedef struct s_room_data		t_room_data;
+typedef struct s_move_vars		t_move_vars;
+typedef struct s_room_vars		t_room_vars;
 
 // Just colors for mlx_pixel_put
 //
@@ -158,7 +156,7 @@ struct s_decrease
 	double			delta;
 	double			tmp_x;
 	double			tmp_y;
-	t_ray_getter	*vars;
+	t_ray_vars		*vars;
 };
 
 // These values are NOT about pixels or smth.
@@ -167,7 +165,7 @@ struct s_decrease
 // All of them are coordinates of player square's corners
 //
 // paint_is_move_[somewhere](..) ==> paint_get_vars(..)
-struct s_movements
+struct s_move_vars
 {	
 	double			x;
 	double			y;
@@ -187,7 +185,7 @@ struct s_movements
 // [corner_angle] - angle between corner vector and
 // vertical orientation vector
 // [ray_vector] is what this function creates
-struct s_ray_getter
+struct s_ray_vars
 {
 	int				octet;
 	double			delta;
@@ -197,7 +195,7 @@ struct s_ray_getter
 	t_painting		*painting;
 };
 
-struct s_room_data
+struct s_room_vars
 {
 	int				x;
 	int				y;
@@ -275,18 +273,18 @@ void			paint_minimap_erase_vector(t_painting *painting,
 					t_vector *vector);
 
 // painting_ray_5.c
-int				paint_ray_append_vector(t_ray_getter *vars);
+int				paint_ray_append_vector(t_ray_vars *vars);
 
 // painting_ray_6.c
-void			paint_ray_decrease_coord(t_ray_getter *vars,
+void			paint_ray_decrease_coord(t_ray_vars *vars,
 					double *x, double *y);
 
 // painting_ray_7.c
-void			paint_ray_set_ray_orient(t_ray_getter *vars);
+void			paint_ray_set_ray_orient(t_ray_vars *vars);
 int				paint_ray_decrease_coord_assignment(t_decrease *decr);
 int				paint_ray_get_octet(int quarter, int part);
-int				paint_ray_is_wall(t_ray_getter *vars, double x, double y);
-int				paint_ray_get_delta_angle_octet(t_ray_getter *vars);
+int				paint_ray_is_wall(t_ray_vars *vars, double x, double y);
+int				paint_ray_get_delta_angle_octet(t_ray_vars *vars);
 
 /******************************
 	./painting_room/

@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:47:27 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 17:53:48 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static t_ray_of_view	*paint_ray_init_ray_of_view(t_painting *painting)
 static t_ray_of_view	*paint_ray_get_ray_vector(t_painting *painting,
 							t_ray *ray_info)
 {	
-	t_ray_getter	vars;
+	t_ray_vars	vars;
 
 	if (!painting || !ray_info)
 		return (NULL);

@@ -6,15 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:29:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 15:06:39 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 17:54:01 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
-static t_room_data	paint_room_get_data(t_painting *painting)
+static t_room_vars	paint_room_get_data(t_painting *painting)
 {
-	t_room_data	room_data;
+	t_room_vars	room_data;
 
 	room_data.x = 0;
 	room_data.y = 0;
@@ -24,11 +24,11 @@ static t_room_data	paint_room_get_data(t_painting *painting)
 	room_data.ray_len = 0.0;
 	room_data.angle_delta = FOV / WIDTH;
 	room_data.angle = paint_room_decrease_angle(painting->map->player->angle,
-			FOV / 2 + room_data.angle_delta);
+			FOV / 2);
 	return (room_data);
 }
 
-static int	paint_room_update_vars(t_room_data *data, t_painting *painting)
+static int	paint_room_update_vars(t_room_vars *data, t_painting *painting)
 {
 	data->ray_of_view = paint_ray_get_ray_of_view(painting, data->angle);
 	if (!data->ray_of_view)
@@ -49,7 +49,7 @@ static int	paint_room_update_vars(t_room_data *data, t_painting *painting)
 
 int	paint_room_draw_room(t_painting *painting)
 {
-	t_room_data	data;
+	t_room_vars	data;
 
 	data = paint_room_get_data(painting);
 	while (data.x < WIDTH)

@@ -6,13 +6,13 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:00:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 21:36:45 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 17:53:48 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
-void	paint_ray_set_ray_orient(t_ray_getter *vars)
+void	paint_ray_set_ray_orient(t_ray_vars *vars)
 {
 	if (vars->octet == 1 || vars->octet == 7)
 		vars->ray_of_view->orient = ORIENT_NORTH;
@@ -42,7 +42,7 @@ int	paint_ray_get_octet(int quarter, int part)
 	return (2 * quarter - 1 + part);
 }
 
-int	paint_ray_is_wall(t_ray_getter *vars, double x, double y)
+int	paint_ray_is_wall(t_ray_vars *vars, double x, double y)
 {
 	paint_ray_decrease_coord(vars, &x, &y);
 	if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_WALL)
@@ -52,7 +52,7 @@ int	paint_ray_is_wall(t_ray_getter *vars, double x, double y)
 
 // Update t_ray_getter's [delta], [corner_angle] and [octet].
 // Return 0 if everything is fine, 1 otherwise
-int	paint_ray_get_delta_angle_octet(t_ray_getter *vars)
+int	paint_ray_get_delta_angle_octet(t_ray_vars *vars)
 {
 	t_vector	*corner_v;
 

@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:45:36 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 17:53:48 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // All these functions update [end] of player's vector of view
 // depending on it's octet
 
-static void	paint_ray_append_vector_4(t_ray_getter *vars)
+static void	paint_ray_append_vector_4(t_ray_vars *vars)
 {
 	if (vars->octet == 7)
 	{
@@ -37,7 +37,7 @@ static void	paint_ray_append_vector_4(t_ray_getter *vars)
 	}
 }
 
-static void	paint_ray_append_vector_3(t_ray_getter *vars)
+static void	paint_ray_append_vector_3(t_ray_vars *vars)
 {
 	if (vars->octet == 5)
 	{
@@ -59,7 +59,7 @@ static void	paint_ray_append_vector_3(t_ray_getter *vars)
 	}
 }
 
-static void	paint_ray_append_vector_2(t_ray_getter *vars)
+static void	paint_ray_append_vector_2(t_ray_vars *vars)
 {
 	if (vars->octet == 3)
 	{
@@ -81,7 +81,7 @@ static void	paint_ray_append_vector_2(t_ray_getter *vars)
 	}
 }
 
-static void	paint_ray_append_vector_1(t_ray_getter *vars)
+static void	paint_ray_append_vector_1(t_ray_vars *vars)
 {
 	if (vars->octet == 1)
 	{
@@ -104,7 +104,7 @@ static void	paint_ray_append_vector_1(t_ray_getter *vars)
 }
 
 // Update [end] of player's vector of view
-int	paint_ray_append_vector(t_ray_getter *vars)
+int	paint_ray_append_vector(t_ray_vars *vars)
 {
 	if (!vars)
 		return (1);

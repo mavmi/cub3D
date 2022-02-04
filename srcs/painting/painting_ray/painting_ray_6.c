@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:59:52 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 16:13:26 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/04 18:09:19 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static void	paint_ray_decrease_coord_1_2(t_decrease *decr)
 	}
 }
 
-void	paint_ray_decrease_coord(t_ray_getter *vars, double *x, double *y)
+void	paint_ray_decrease_coord(t_ray_vars *vars, double *x, double *y)
 {
 	t_decrease	decr;
 
