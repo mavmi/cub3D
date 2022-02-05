@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:02:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 16:50:38 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/05 17:38:40 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	run(int argc, char **argv)
 		printf("Parser error\n");
 		exit(1);
 	}
-	paint_3d(map);
+	paint(map);
 }
 
 int	main(int argc, char **argv)

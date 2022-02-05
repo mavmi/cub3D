@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:36:47 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:39:58 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/05 17:24:11 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ static void	paint_minimap_vector_printer(t_painting *painting,
 
 	if (!painting || !vector)
 		return ;
-	dx = (int)((vector->end->x - vector->begin->x) * PIXEL_SIZE);
-	dy = (int)((vector->end->y - vector->begin->y) * PIXEL_SIZE);
+	dx = (int)((vector->end->x - vector->begin->x) * MAP_SQ_SIZE);
+	dy = (int)((vector->end->y - vector->begin->y) * MAP_SQ_SIZE);
 	pixels = sqrt(pow(dx, 2) + pow(dy, 2));
 	dx /= pixels;
 	dy /= pixels;
-	x = vector->begin->x * PIXEL_SIZE;
-	y = vector->begin->y * PIXEL_SIZE;
+	x = vector->begin->x * MAP_SQ_SIZE;
+	y = vector->begin->y * MAP_SQ_SIZE;
 	while (pixels--)
 	{
-		if ((int)x % PIXEL_SIZE == 0 || (int)y % PIXEL_SIZE == 0)
-			paint_put_pixel(painting, x, y, COLOR_GRID);
+		if ((int)x % MAP_SQ_SIZE == 0 || (int)y % MAP_SQ_SIZE == 0)
+			paint_put_pixel(&painting->minimap, x, y, COLOR_GRID);
 		else
-			paint_put_pixel(painting, x, y, color);
+			paint_put_pixel(&painting->minimap, x, y, color);
 		x += dx;
 		y += dy;
 	}

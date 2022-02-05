@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:59:52 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 18:09:19 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/05 17:27:04 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	paint_ray_decrease_coord(t_ray_vars *vars, double *x, double *y)
 
 	decr.x = x;
 	decr.y = y;
-	decr.delta = 0.0001;
+	decr.delta = 1e-6;
 	decr.vars = vars;
 	if (utils_is_double_integer(*x) && utils_is_double_integer(*y))
 	{

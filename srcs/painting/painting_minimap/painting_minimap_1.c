@@ -6,62 +6,49 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:38:24 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/05 20:51:58 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
-// Draw one pixel with defined size PIXEL_SIZE.
-// {x, y} is absolute position of current pixel
-// relative map's array of strings
-void	paint_minimap_draw_pixel(t_painting *painting,
-						size_t x, size_t y, t_color color)
-{
-	int	x_iter;
-	int	y_iter;
-
-	if (!painting || x < 0 || y < 0)
-		return ;
-	x *= PIXEL_SIZE;
-	y *= PIXEL_SIZE;
-	y_iter = 0;
-	while (y_iter < PIXEL_SIZE)
-	{
-		x_iter = 0;
-		while (x_iter < PIXEL_SIZE)
-		{
-			if ((x + x_iter) % PIXEL_SIZE == 0
-				|| (y + y_iter) % PIXEL_SIZE == 0)
-				paint_put_pixel(painting, x + x_iter, y + y_iter, COLOR_GRID);
-			else
-				paint_put_pixel(painting, x + x_iter, y + y_iter, color);
-			x_iter++;
-		}
-		y_iter++;
-	}
-}
-
-// Draw whole map without any additional stuff
 void	paint_minimap_draw_map(t_painting *painting)
 {
+	char	t;
 	size_t	x;
 	size_t	y;
+	size_t	sq_x;
+	size_t	sq_y;
 
 	if (!painting)
 		return ;
 	y = 0;
-	while (y < painting->map->height)
+	while (y < MAP_HEIGHT)
 	{
 		x = 0;
-		while (x < painting->map->lines[y]->width)
+		sq_y = (y - y % MAP_SQ_SIZE) / MAP_SQ_SIZE;
+		while (x < MAP_WIDTH)
 		{
-			if (painting->map->lines[y]->line[x]->type == MAP_SQ_WALL)
-				paint_minimap_draw_pixel(painting, x, y, COLOR_WALL);
+			sq_x = (x - x % MAP_SQ_SIZE) / MAP_SQ_SIZE;
+			if (sq_y < painting->map->height && sq_x < painting->map->lines[sq_y]->width)
+			{
+				t = painting->map->lines[sq_y]->line[sq_x]->type;
+				if (t != MAP_SQ_VOID && (!(x % MAP_SQ_SIZE) || !(y % MAP_SQ_SIZE)))
+					paint_put_pixel(&painting->minimap, x, y, COLOR_GRID);
+				else if (t == MAP_SQ_WALL)
+					paint_put_pixel(&painting->minimap, x, y, COLOR_WALL);
+				else if (t == MAP_SQ_EMPTY)
+					paint_put_pixel(&painting->minimap, x, y, COLOR_FIELD);
+				else if (t == MAP_SQ_VOID)
+					paint_put_pixel(&painting->minimap, x, y, COLOR_TRANSPARENT);
+			}
 			else
-				paint_minimap_draw_pixel(painting, x, y, COLOR_FIELD);
+				paint_put_pixel(&painting->minimap, x, y, COLOR_TRANSPARENT);
 			x++;
 		}
 		y++;
 	}
+	paint_minimap_draw_player(painting);
+	mlx_put_image_to_window(painting->mlx, painting->win,
+		painting->minimap.img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 18:22:51 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/05 20:52:19 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,11 @@
 # include "painting.h"
 # include "geometry.h"
 
+# define MOUSE_HIDE 1
 # define PL_STEP 0.37
 # define ANGLE_DELTA_KEY 5
 # define ANGLE_DELTA_MOUSE 7
 # define PIXELS_PER_DEGREE 4
-
-// 3D
-# define FOV 60.0
-
-// 2D
-# define PIXEL_SIZE 30
-# define PL_RAD 0.17
-
-# define WIDTH 1000
-# define HEIGHT 1000
 
 # define ESC 53
 # define UP 126
@@ -47,12 +38,24 @@
 # define S 1
 # define D 2
 
+// 3D
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
+# define FOV 60.0
+
+// 2D
+# define MAP_WIDTH 1000
+# define MAP_HEIGHT 300
+# define MAP_SQ_SIZE 14
+# define MAP_PL_RAD 0.23
+
 typedef enum e_color			t_color;
 typedef enum e_orient			t_orient;
 typedef enum e_movement			t_movement;
 
 typedef struct s_ray_vars		t_ray_vars;
 typedef struct s_ray			t_ray;
+typedef struct s_drawable		t_drawable;
 typedef struct s_painting		t_painting;
 typedef struct s_ray_of_view	t_ray_of_view;	
 typedef struct s_decrease		t_decrease;
@@ -75,7 +78,8 @@ enum e_color
 	COLOR_NORTH,
 	COLOR_EAST,
 	COLOR_SOUTH,
-	COLOR_WEST
+	COLOR_WEST,
+	COLOR_TRANSPARENT
 };
 
 // Variables to indicate what kind of
@@ -128,18 +132,24 @@ struct s_ray
 	t_vector	*orient_hor;
 };
 
+struct s_drawable
+{
+	int		endian;
+	int		size_line;
+	int		bits_per_pixel;
+	void	*img;
+	char	*img_addr;
+};
+
 // Contain all necssary information about
 // map, player and mlx stuff
 struct s_painting
 {
-	t_map	*map;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*data_addr;
+	t_map		*map;
+	void		*mlx;
+	void		*win;
+	t_drawable	room;
+	t_drawable	minimap;
 };
 
 struct s_ray_of_view
@@ -212,14 +222,20 @@ struct s_room_vars
 	./
 ******************************/
 
-// painting_3d.c
-void			paint_3d(t_map *map);
+// painting_event_handlers.c
+void			paint_exit(t_painting *painting);
+int				paint_draw_all(t_painting *painting);
+int				paint_key_pressed(int key_code, t_painting *painting);
+int				paint_mouse_move(int x, int y, t_painting *painting);
+
+// painting_main.c
+void			paint(t_map *map);
 
 // painting_utils.c
 double			paint_get_dist(double x1, double y1, double x2, double y2);
 double			paint_get_module(double num);
 int				paint_get_color(t_color color);
-void			paint_put_pixel(t_painting *painting, int x, int y,
+void			paint_put_pixel(t_drawable *drawable, int x, int y,
 					t_color color);
 
 /******************************
@@ -234,7 +250,7 @@ void			paint_movements_move(t_painting *painting, t_movement movement);
 ******************************/
 
 // painting_minimap_1.c
-void			paint_minimap_draw_pixel(t_painting *painting,
+void			paint_minimap_draw_sq(t_painting *painting,
 					size_t x, size_t y, t_color color);
 void			paint_minimap_draw_map(t_painting *painting);
 
