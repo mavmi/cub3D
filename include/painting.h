@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 18:25:26 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/06 20:36:22 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@
 // 2D
 # define MAP_WIDTH 250
 # define MAP_HEIGHT 250
-# define MAP_DELTA 100
-# define MAP_SQ_SIZE 15
-# define MAP_PL_RAD 0.17
+# define MAP_DELTA 75
+# define MAP_SQ_SIZE 10
+# define MAP_PL_RAD 0.23
 
 typedef enum e_color			t_color;
 typedef enum e_orient			t_orient;

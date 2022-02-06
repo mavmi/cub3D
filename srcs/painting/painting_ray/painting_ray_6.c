@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:59:52 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/05 17:27:04 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/06 20:39:20 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void	paint_ray_decrease_coord_7_8(t_decrease *decr)
 		decr->vars->ray_of_view->orient = ORIENT_NORTH;
 		return ;
 	}
-	/*decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
+	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
 	if (paint_ray_decrease_coord_assignment(decr))
 	{
 		decr->vars->ray_of_view->orient = ORIENT_NORTH;
 		return ;
-	}*/
+	}
 }
 
 static void	paint_ray_decrease_coord_5_6(t_decrease *decr)
@@ -53,13 +53,13 @@ static void	paint_ray_decrease_coord_5_6(t_decrease *decr)
 		decr->vars->ray_of_view->orient = ORIENT_SOUTH;
 		return ;
 	}
-	/*decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
+	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = *decr->y;
 	if (paint_ray_decrease_coord_assignment(decr))
 	{
 		decr->vars->ray_of_view->orient = ORIENT_SOUTH;
 		return ;
-	}*/
+	}
 }
 
 static void	paint_ray_decrease_coord_3_4(t_decrease *decr)
@@ -71,13 +71,13 @@ static void	paint_ray_decrease_coord_3_4(t_decrease *decr)
 		decr->vars->ray_of_view->orient = ORIENT_EAST;
 		return ;
 	}
-	/*decr->tmp_x = *decr->x;
+	decr->tmp_x = *decr->x;
 	decr->tmp_y = *decr->y;
 	if (paint_ray_decrease_coord_assignment(decr))
 	{
 		decr->vars->ray_of_view->orient = ORIENT_SOUTH;
 		return ;
-	}*/
+	}
 	decr->tmp_x = utils_round_double_down(*decr->x - decr->delta);
 	decr->tmp_y = *decr->y;
 	if (paint_ray_decrease_coord_assignment(decr))
@@ -96,13 +96,13 @@ static void	paint_ray_decrease_coord_1_2(t_decrease *decr)
 		decr->vars->ray_of_view->orient = ORIENT_NORTH;
 		return ;
 	}
-	/*decr->tmp_x = *decr->x;
+	decr->tmp_x = *decr->x;
 	decr->tmp_y = utils_round_double_down(*decr->y - decr->delta);
 	if (paint_ray_decrease_coord_assignment(decr))
 	{
-		decr->vars->ray_of_view->orient = ORIENT_NORTH;
+		decr->vars->ray_of_view->orient = ORIENT_EAST;
 		return ;
-	}*/
+	}
 	decr->tmp_x = *decr->x;
 	decr->tmp_y = *decr->y;
 	if (paint_ray_decrease_coord_assignment(decr))
@@ -118,7 +118,7 @@ void	paint_ray_decrease_coord(t_ray_vars *vars, double *x, double *y)
 
 	decr.x = x;
 	decr.y = y;
-	decr.delta = 1e-6;
+	decr.delta = 1e-3;
 	decr.vars = vars;
 	if (utils_is_double_integer(*x) && utils_is_double_integer(*y))
 	{
@@ -130,6 +130,7 @@ void	paint_ray_decrease_coord(t_ray_vars *vars, double *x, double *y)
 			paint_ray_decrease_coord_3_4(&decr);
 		if (vars->octet == 1 || vars->octet == 2)
 			paint_ray_decrease_coord_1_2(&decr);
+		return ;
 	}
 	else if (vars->octet == 1 || vars->octet == 7)
 		*y -= decr.delta;
