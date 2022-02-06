@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/05 20:52:19 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/06 18:25:26 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@
 # define FOV 60.0
 
 // 2D
-# define MAP_WIDTH 1000
-# define MAP_HEIGHT 300
-# define MAP_SQ_SIZE 14
-# define MAP_PL_RAD 0.23
+# define MAP_WIDTH 250
+# define MAP_HEIGHT 250
+# define MAP_DELTA 100
+# define MAP_SQ_SIZE 15
+# define MAP_PL_RAD 0.17
 
 typedef enum e_color			t_color;
 typedef enum e_orient			t_orient;
@@ -145,9 +146,11 @@ struct s_drawable
 // map, player and mlx stuff
 struct s_painting
 {
-	t_map		*map;
+	int			minimap_x;
+	int			minimap_y;
 	void		*mlx;
 	void		*win;
+	t_map		*map;
 	t_drawable	room;
 	t_drawable	minimap;
 };
@@ -253,6 +256,7 @@ void			paint_movements_move(t_painting *painting, t_movement movement);
 void			paint_minimap_draw_sq(t_painting *painting,
 					size_t x, size_t y, t_color color);
 void			paint_minimap_draw_map(t_painting *painting);
+void			paint_minimap_draw(t_painting *painting);
 
 // painting_minimap_2.c
 void			paint_minimap_draw_player(t_painting *painting);

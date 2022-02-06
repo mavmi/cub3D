@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:32:43 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/05 17:23:54 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/06 18:10:24 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ static void	paint_minimap_draw_player_handler(t_painting *painting,
 {
 	if (paint_get_dist(
 			x, y,
-			painting->map->player->pos->x * MAP_SQ_SIZE,
-			painting->map->player->pos->y * MAP_SQ_SIZE
+			painting->map->player->pos->x * MAP_SQ_SIZE - painting->minimap_x,
+			painting->map->player->pos->y * MAP_SQ_SIZE - painting->minimap_y
 		) < MAP_PL_RAD * MAP_SQ_SIZE)
 		paint_put_pixel(&painting->minimap, x, y, color);
 	if (color != COLOR_FIELD)
 		return ;
-	if (x % MAP_SQ_SIZE == 0 || y % MAP_SQ_SIZE == 0)
+	if ((x + painting->minimap_x) % MAP_SQ_SIZE == 0
+		|| (y + painting->minimap_y) % MAP_SQ_SIZE == 0)
 		paint_put_pixel(&painting->minimap, x, y, COLOR_GRID);
 	else
 		paint_put_pixel(&painting->minimap, x, y, COLOR_FIELD);
@@ -41,8 +42,10 @@ static void	paint_minimap_player_printer(t_painting *painting, t_color color)
 
 	if (!painting)
 		return ;
-	tl_x = ((double)painting->map->player->pos->x - MAP_PL_RAD) * MAP_SQ_SIZE;
-	tl_y = ((double)painting->map->player->pos->y - MAP_PL_RAD) * MAP_SQ_SIZE;
+	tl_x = (painting->map->player->pos->x - MAP_PL_RAD) * MAP_SQ_SIZE
+		- painting->minimap_x;
+	tl_y = (painting->map->player->pos->y - MAP_PL_RAD) * MAP_SQ_SIZE
+		- painting->minimap_y;
 	iter_y = 0;
 	while (iter_y < (int)(2 * MAP_PL_RAD * MAP_SQ_SIZE))
 	{

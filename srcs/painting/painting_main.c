@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/05 18:48:05 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/06 15:47:25 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ static t_painting	*paint_get_struct(t_map *map)
 	p->room.img_addr = mlx_get_data_addr(p->room.img,
 			&p->room.bits_per_pixel, &p->room.size_line,
 			&p->room.endian);
+	p->minimap_x = (int)p->map->player->pos->x * MAP_SQ_SIZE;
+	p->minimap_y = (int)p->map->player->pos->y * MAP_SQ_SIZE;
 	return (p);
 }
 
-static int	paint_a(void *data)
+static int	paint_cross(void *data)
 {
 	t_painting	*painting;
 
@@ -50,7 +52,7 @@ static void	paint_set_up_handlers(t_painting *painting)
 		painting->room.img, 0, 0);
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
-	mlx_hook(painting->win, 17, 0L, paint_a, painting);
+	mlx_hook(painting->win, 17, 0L, paint_cross, painting);
 	if (MOUSE_HIDE)
 		mlx_mouse_hide();
 }
@@ -71,6 +73,7 @@ void	paint(t_map *map)
 	}
 	paint_set_up_handlers(painting);
 	paint_minimap_draw_map(painting);
+	paint_minimap_draw(painting);
 	paint_draw_all(painting);
 	mlx_loop(painting->mlx);
 }

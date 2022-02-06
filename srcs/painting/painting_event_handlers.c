@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:37:02 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/05 18:47:41 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/06 15:10:13 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ int	paint_draw_all(t_painting *painting)
 		return (1);
 	if (paint_room_draw_room(painting))
 		return (1);
-	paint_minimap_draw_map(painting);
+	paint_minimap_draw(painting);
 	return (0);
 }
 
 // Move player and redraw it
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
+	paint_minimap_erase_player(painting);
 	if (key_code == LEFT)
 		painting->map->player->angle
 			= paint_room_decrease_angle(painting->map->player->angle,

@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:36:15 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 17:53:55 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/06 15:39:42 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	paint_movements_move(t_painting *painting, t_movement movement)
 	if (!vars.vector || !vars.ray_of_view)
 		return ;
 	vars = paint_movements_get_vars(painting, movement);
-	if (vars.len > PL_STEP + 0.25)
+	if (vars.len > PL_STEP + 0.2)
 	{
 		vars.cos_ = cos(utils_degree_to_rad(vars.angle));
 		vars.sin_ = sin(utils_degree_to_rad(vars.angle));
