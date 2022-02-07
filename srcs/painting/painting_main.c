@@ -6,11 +6,19 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 15:47:25 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 21:03:55 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
+
+static void	paint_load_images(t_painting *p)
+{
+	p->t_north = paint_get_image(p, "./textures/NO.xpm");
+	p->t_east = paint_get_image(p, "./textures/EA.xpm");
+	p->t_south = paint_get_image(p, "./textures/SO.xpm");
+	p->t_west = paint_get_image(p, "./textures/WE.xpm");
+}
 
 static t_painting	*paint_get_struct(t_map *map)
 {
@@ -32,6 +40,7 @@ static t_painting	*paint_get_struct(t_map *map)
 			&p->room.endian);
 	p->minimap_x = (int)p->map->player->pos->x * MAP_SQ_SIZE;
 	p->minimap_y = (int)p->map->player->pos->y * MAP_SQ_SIZE;
+	paint_load_images(p);
 	return (p);
 }
 
@@ -57,8 +66,6 @@ static void	paint_set_up_handlers(t_painting *painting)
 		mlx_mouse_hide();
 }
 
-// Init t_painting struct, create window,
-// set up input handlers and loop mlx
 void	paint(t_map *map)
 {
 	t_painting	*painting;
@@ -70,7 +77,7 @@ void	paint(t_map *map)
 	{
 		pars_destroy_map(map);
 		exit(1);
-	}
+	}	
 	paint_set_up_handlers(painting);
 	paint_minimap_draw_map(painting);
 	paint_minimap_draw(painting);

@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:37:02 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 15:10:13 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 21:09:22 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ void	paint_exit(t_painting *painting)
 	if (painting)
 	{
 		pars_destroy_map(painting->map);
+		mlx_destroy_image(painting->mlx, painting->minimap.img);
+		mlx_destroy_image(painting->mlx, painting->room.img);
+		mlx_destroy_image(painting->mlx, painting->t_north->drawable.img);
+		free(painting->t_north);
+		mlx_destroy_image(painting->mlx, painting->t_east->drawable.img);
+		free(painting->t_east);
+		mlx_destroy_image(painting->mlx, painting->t_south->drawable.img);
+		free(painting->t_south);
+		mlx_destroy_image(painting->mlx, painting->t_west->drawable.img);
+		free(painting->t_west);
 		mlx_destroy_window(painting->mlx, painting->win);
 		free(painting);
 	}

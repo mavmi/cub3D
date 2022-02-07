@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:36:47 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/05 17:24:11 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 16:57:12 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	paint_minimap_vector_printer(t_painting *painting,
 	while (pixels--)
 	{
 		if ((int)x % MAP_SQ_SIZE == 0 || (int)y % MAP_SQ_SIZE == 0)
-			paint_put_pixel(&painting->minimap, x, y, COLOR_GRID);
+			paint_put_color(&painting->minimap, x, y, COLOR_GRID);
 		else
-			paint_put_pixel(&painting->minimap, x, y, color);
+			paint_put_color(&painting->minimap, x, y, color);
 		x += dx;
 		y += dy;
 	}

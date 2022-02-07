@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 20:36:22 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 21:04:57 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef enum e_movement			t_movement;
 
 typedef struct s_ray_vars		t_ray_vars;
 typedef struct s_ray			t_ray;
+typedef struct s_image			t_image;
 typedef struct s_drawable		t_drawable;
 typedef struct s_painting		t_painting;
 typedef struct s_ray_of_view	t_ray_of_view;	
@@ -80,6 +81,8 @@ enum e_color
 	COLOR_EAST,
 	COLOR_SOUTH,
 	COLOR_WEST,
+	COLOR_CEIL,
+	COLOR_FLOOR,
 	COLOR_TRANSPARENT
 };
 
@@ -142,6 +145,13 @@ struct s_drawable
 	char	*img_addr;
 };
 
+struct s_image
+{
+	int			w;
+	int			h;
+	t_drawable	drawable;
+};
+
 // Contain all necssary information about
 // map, player and mlx stuff
 struct s_painting
@@ -153,6 +163,10 @@ struct s_painting
 	t_map		*map;
 	t_drawable	room;
 	t_drawable	minimap;
+	t_image		*t_north;
+	t_image		*t_east;
+	t_image		*t_south;
+	t_image		*t_west;
 };
 
 struct s_ray_of_view
@@ -215,9 +229,12 @@ struct s_room_vars
 	int				wall_start;
 	int				wall_end;
 	int				wall_height;
+	double			text_x;
+	double			text_y;
 	double			ray_len;
 	double			angle;
 	double			angle_delta;
+	t_image			*image;
 	t_ray_of_view	*ray_of_view;
 };
 
@@ -231,6 +248,9 @@ int				paint_draw_all(t_painting *painting);
 int				paint_key_pressed(int key_code, t_painting *painting);
 int				paint_mouse_move(int x, int y, t_painting *painting);
 
+// painting_files.c
+t_image			*paint_get_image(t_painting *painting, char *file_name);
+
 // painting_main.c
 void			paint(t_map *map);
 
@@ -238,8 +258,9 @@ void			paint(t_map *map);
 double			paint_get_dist(double x1, double y1, double x2, double y2);
 double			paint_get_module(double num);
 int				paint_get_color(t_color color);
-void			paint_put_pixel(t_drawable *drawable, int x, int y,
+void			paint_put_color(t_drawable *drawable, int x, int y,
 					t_color color);
+void			paint_put_pixel(t_drawable *drawable, int x, int y, int pixel);
 
 /******************************
 	./painting_movements/

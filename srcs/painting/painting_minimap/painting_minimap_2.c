@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:32:43 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 18:10:24 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 16:57:12 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static void	paint_minimap_draw_player_handler(t_painting *painting,
 			painting->map->player->pos->x * MAP_SQ_SIZE - painting->minimap_x,
 			painting->map->player->pos->y * MAP_SQ_SIZE - painting->minimap_y
 		) < MAP_PL_RAD * MAP_SQ_SIZE)
-		paint_put_pixel(&painting->minimap, x, y, color);
+		paint_put_color(&painting->minimap, x, y, color);
 	if (color != COLOR_FIELD)
 		return ;
 	if ((x + painting->minimap_x) % MAP_SQ_SIZE == 0
 		|| (y + painting->minimap_y) % MAP_SQ_SIZE == 0)
-		paint_put_pixel(&painting->minimap, x, y, COLOR_GRID);
+		paint_put_color(&painting->minimap, x, y, COLOR_GRID);
 	else
-		paint_put_pixel(&painting->minimap, x, y, COLOR_FIELD);
+		paint_put_color(&painting->minimap, x, y, COLOR_FIELD);
 }
 
 // Draw player with specified color

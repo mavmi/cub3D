@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 19:10:40 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 16:57:12 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static void	paint_minimap_draw_map_line(t_painting *painting,
 			t = painting->map->lines[sq_y]->line[sq_x]->type;
 			if (t != MAP_SQ_VOID && (!(abs_x % MAP_SQ_SIZE)
 					|| !(abs_y % MAP_SQ_SIZE)))
-				paint_put_pixel(&painting->minimap, x, y, COLOR_GRID);
+				paint_put_color(&painting->minimap, x, y, COLOR_GRID);
 			else
-				paint_put_pixel(&painting->minimap, x, y,
+				paint_put_color(&painting->minimap, x, y,
 					paint_minimap_type_to_color(t));
 		}
 		else
-			paint_put_pixel(&painting->minimap, x, y, COLOR_TRANSPARENT);
+			paint_put_color(&painting->minimap, x, y, COLOR_TRANSPARENT);
 		x++;
 	}
 }

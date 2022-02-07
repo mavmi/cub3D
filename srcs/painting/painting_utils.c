@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:37:48 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 18:12:31 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 19:27:55 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,14 @@ int	paint_get_color(t_color color)
 		return (0x228b22);
 	if (color == COLOR_TRANSPARENT)
 		return (0xFF000000);
+	if (color == COLOR_CEIL)
+		return (0xdeb3b9);
+	if (color == COLOR_FLOOR)
+		return (0x304545);
 	return (0x000000);
 }
 
-void	paint_put_pixel(t_drawable *drawable, int x, int y, t_color color)
+void	paint_put_color(t_drawable *drawable, int x, int y, t_color color)
 {
 	int	pos;
 
@@ -58,4 +62,14 @@ void	paint_put_pixel(t_drawable *drawable, int x, int y, t_color color)
 		return ;
 	pos = y * drawable->size_line + x * (drawable->bits_per_pixel / 8);
 	*(int *)(drawable->img_addr + pos) = paint_get_color(color);
+}
+
+void	paint_put_pixel(t_drawable *drawable, int x, int y, int pixel)
+{
+	int	pos;
+
+	if (!drawable)
+		return ;
+	pos = y * drawable->size_line + x * (drawable->bits_per_pixel / 8);
+	*(int *)(drawable->img_addr + pos) = pixel;
 }
