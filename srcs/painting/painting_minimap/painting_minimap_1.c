@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 16:57:12 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 21:12:39 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ static t_color	paint_minimap_type_to_color(char type)
 		return (COLOR_WALL);
 	else if (type == MAP_SQ_EMPTY)
 		return (COLOR_FIELD);
-	else if (type == MAP_SQ_VOID)
+	else
 		return (COLOR_TRANSPARENT);
-	return (COLOR_BLACK);
 }
 
 static void	paint_minimap_draw_map_line(t_painting *painting,

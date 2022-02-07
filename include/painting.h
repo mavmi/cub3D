@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 21:04:57 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/07 21:15:02 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,6 @@ enum e_color
 	COLOR_GRID,
 	COLOR_PLAYER,
 	COLOR_FIELD,
-	COLOR_RAY,
-	COLOR_BLACK,
-	COLOR_YELLOW,
-	COLOR_GREEN,
-	COLOR_NORTH,
-	COLOR_EAST,
-	COLOR_SOUTH,
-	COLOR_WEST,
 	COLOR_CEIL,
 	COLOR_FLOOR,
 	COLOR_TRANSPARENT
@@ -283,12 +275,6 @@ void			paint_minimap_draw(t_painting *painting);
 void			paint_minimap_draw_player(t_painting *painting);
 void			paint_minimap_erase_player(t_painting *painting);
 
-// painting_minimap_3.c
-void			paint_minimap_draw_vector(t_painting *painting,
-					t_vector *vector);
-void			paint_minimap_erase_vector(t_painting *painting,
-					t_vector *vector);
-
 /******************************
 	./painting_ray/
 ******************************/
@@ -337,6 +323,5 @@ int				paint_room_draw_room(t_painting *painting);
 // painting_room_2.c
 double			paint_room_decrease_angle(double angle, double delta);
 double			paint_room_increase_angle(double angle, double delta);
-t_color			paint_room_orient_to_color(t_orient orient);
 
 #endif
