@@ -6,14 +6,11 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 17:53:48 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:03:28 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
-
-// All these functions update [end] of player's vector of view
-// depending on it's octet
 
 static void	paint_ray_append_vector_4(t_ray_vars *vars)
 {
@@ -103,7 +100,9 @@ static void	paint_ray_append_vector_1(t_ray_vars *vars)
 	}
 }
 
-// Update [end] of player's vector of view
+/*
+	Update [end] of player's vector of view
+*/
 int	paint_ray_append_vector(t_ray_vars *vars)
 {
 	if (!vars)

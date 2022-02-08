@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 17:52:15 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:15:40 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,28 @@ typedef struct s_square		t_square;
 typedef struct s_map_line	t_map_line;
 typedef struct s_map		t_map;
 
-// Player's info.
-// [pos] - current position
-// [ray_of_view] - vector which begins in player's poition
-// and end in the wall
-// [orient] - orientation
-// [angle] - angle between north vector and
-// player's vector of view
+/*
+	Player's info.
+	
+	[pos] - current position
+	[orient] - orientation
+	[angle] - angle between north vector and
+		player's vector of view
+*/
 struct s_player
 {
 	char		orient;
 	double		angle;
-	t_vector	*ray_of_view;
 	t_point		*pos;
 };
 
-// Elementary element of map.
-// [top_left_x] and [top_left_y] are coordinates of
-// this square relative to the beginning of map's array of strings
-// [type] is about walls, floor, may be smth else, idk
+/*
+	Elementary element of map.
+	
+	[top_left_x] and [top_left_y] are coordinates of
+		this square relative to the beginning of map's array of strings
+	[type] is about walls, floor, may be smth else, idk
+*/
 struct s_square
 {
 	size_t	top_left_x;
@@ -68,17 +71,21 @@ struct s_square
 	char	type;
 };
 
-// Horizontal line of map.
-// Contain array of squares and it's size
+/*
+	Horizontal line of map.
+	Contain array of squares and it's size
+*/
 struct s_map_line
 {
 	size_t		width;
 	t_square	**line;
 };
 
-// The whole map.
-// Contain array of map lines, it's size
-// and player's struct
+/*
+	The whole map.
+	Contain array of map lines, it's size
+	and player's struct
+*/
 struct s_map
 {
 	size_t		height;

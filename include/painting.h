@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 21:15:02 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:18:53 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ typedef struct s_decrease		t_decrease;
 typedef struct s_move_vars		t_move_vars;
 typedef struct s_room_vars		t_room_vars;
 
-// Just colors for mlx_pixel_put
-//
-// paint_get_color(..) function converts it to int
+/*
+	Just colors for mlx_pixel_put
+
+	paint_get_color(..) function converts it to int
+*/
 enum e_color
 {
 	COLOR_WALL,
@@ -78,10 +80,12 @@ enum e_color
 	COLOR_TRANSPARENT
 };
 
-// Variables to indicate what kind of
-// orienation vector I need
-//
-// paint_get_orient_vector(..)
+/*
+	Variables to indicate what kind of
+	orienation vector I need
+
+	paint_get_orient_vector(..)
+*/
 enum e_orient
 {
 	ORIENT_NORTH,
@@ -98,28 +102,30 @@ enum e_movement
 	MOVE_RIGHT
 };
 
-// Contain information about player's vector of view.
-//
-//                 N(0°)
-//                  |
-//             [4]  |  [1]
-//  W(270°) --------|-------- E(90°)
-//             [3]  |  [2]
-//                  |
-//                S(180°)
-//
-// (0 <= angle < 90)    ==> (quarter == 1)
-// (90 <= angle < 180)  ==> (quarter == 2)
-// (180 <= angle < 270) ==> (quarter == 3)
-// (270 <= angle < 360) ==> (quarter == 4)
-// 
-// [quarter_angle] is an angle inside current quarter
-// relative to the vertical orientation vector
-//
-// Orientation vectors are N, E, S and W
-//
-// paint_get_orient_vector(..) creates required 
-// orientation vector
+/*
+	Contain information about player's vector of view.
+
+					N(0°)
+	  				 |
+				[4]  |  [1]
+	 W(270°) --------|-------- E(90°)
+				[3]  |  [2]
+					 |
+				   S(180°)
+
+	(0 <= angle < 90)    ==> (quarter == 1)
+	(90 <= angle < 180)  ==> (quarter == 2)
+	(180 <= angle < 270) ==> (quarter == 3)
+	(270 <= angle < 360) ==> (quarter == 4)
+
+	[quarter_angle] is an angle inside current quarter
+	relative to the vertical orientation vector
+
+	Orientation vectors are N, E, S and W
+
+	paint_get_orient_vector(..) creates required 
+	orientation vector
+*/
 struct s_ray
 {
 	int			quarter;
@@ -137,6 +143,9 @@ struct s_drawable
 	char	*img_addr;
 };
 
+/*
+	It's for .xpm files
+*/
 struct s_image
 {
 	int			w;
@@ -144,8 +153,10 @@ struct s_image
 	t_drawable	drawable;
 };
 
-// Contain all necssary information about
-// map, player and mlx stuff
+/*
+	Contain all necssary information about
+	map, player and mlx stuff
+*/
 struct s_painting
 {
 	int			minimap_x;
@@ -167,7 +178,6 @@ struct s_ray_of_view
 	t_orient	orient;
 };
 
-// Just vars for paint_decrease_coord(..) function
 struct s_decrease
 {
 	double			*x;
@@ -178,12 +188,6 @@ struct s_decrease
 	t_ray_vars		*vars;
 };
 
-// These values are NOT about pixels or smth.
-// They are about position inside map's array of strings
-//
-// All of them are coordinates of player square's corners
-//
-// paint_is_move_[somewhere](..) ==> paint_get_vars(..)
 struct s_move_vars
 {	
 	double			x;
@@ -196,22 +200,24 @@ struct s_move_vars
 	t_ray_of_view	*ray_of_view;
 };
 
-// I need it to contain variables
-// for paint_get_ray_vector(..) function
-//
-// [delta] - Y-axis or X-axis shift
-// [octet] - like coordinate axis's quarter, but octet
-// [corner_angle] - angle between corner vector and
-// vertical orientation vector
-// [ray_vector] is what this function creates
+/*
+	I need it to contain variables
+	for paint_get_ray_vector(..) function
+
+	[delta] - Y-axis or X-axis shift
+	[octet] - like coordinate axis's quarter, but octet
+	[corner_angle] - angle between corner vector and
+		vertical orientation vector
+	[ray_of_view] is what this function creates
+*/
 struct s_ray_vars
 {
 	int				octet;
 	double			delta;
 	double			corner_angle;
 	t_ray			*ray_info;
-	t_ray_of_view	*ray_of_view;
 	t_painting		*painting;
+	t_ray_of_view	*ray_of_view;
 };
 
 struct s_room_vars

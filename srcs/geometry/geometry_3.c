@@ -6,14 +6,17 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:58:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:37:38 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:37:56 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/geometry.h"
 
-// Create a vector of sum of vectors [first] and [second].
-// May return NULL
+/*
+	Create a vector of sum of vectors [first] and [second].
+
+	May return NULL
+*/
 t_vector	*geom_sum_vectors(t_vector *first, t_vector *second)
 {
 	t_point		*begin_cpy;
@@ -38,7 +41,9 @@ t_vector	*geom_sum_vectors(t_vector *first, t_vector *second)
 	return (geom_init_vector(begin_cpy, end_cpy));
 }
 
-// Get module of vector
+/*
+	Get length of vector
+*/
 double	geom_vector_get_module(t_vector *vector)
 {
 	if (!vector)
@@ -49,7 +54,9 @@ double	geom_vector_get_module(t_vector *vector)
 	);
 }
 
-// Move begin point of [vector] to [point]
+/*
+	Move begin point of [vector] to [point]
+*/
 void	geom_move_vector(t_vector *vector, t_point *point)
 {
 	t_point	delta;
@@ -64,7 +71,9 @@ void	geom_move_vector(t_vector *vector, t_point *point)
 	vector->end->y += delta.y;
 }
 
-// Get angle between two vectors
+/*
+	Get angle between two vectors
+*/
 double	geom_get_angle(t_vector *vector_1, t_vector *vector_2)
 {
 	double		scalar;

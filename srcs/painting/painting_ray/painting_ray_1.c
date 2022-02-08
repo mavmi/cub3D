@@ -6,12 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 20:19:21 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:57:17 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
+/*
+	It must be obvious tho
+*/
 void	paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view)
 {
 	if (!ray_of_view)
@@ -20,9 +23,12 @@ void	paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view)
 	free(ray_of_view);
 }
 
-// Just initialization of player's vector of view.
-// It's begin and end point are equal to players position.
-// May return NULL
+/*
+	Just initialization of player's vector of view.
+	It's begin and end point are equal to players position.
+	
+	May return NULL
+*/
 static t_vector	*paint_ray_init_ray_vector(t_painting *painting)
 {
 	t_point		*begin;
@@ -49,6 +55,11 @@ static t_vector	*paint_ray_init_ray_vector(t_painting *painting)
 	return (NULL);
 }
 
+/*
+	Just initialization of t_ray_of_view struct.
+
+	May return NULL
+*/
 static t_ray_of_view	*paint_ray_init_ray_of_view(t_painting *painting)
 {
 	t_ray_of_view	*ray_of_view;
@@ -65,8 +76,12 @@ static t_ray_of_view	*paint_ray_init_ray_of_view(t_painting *painting)
 	return (NULL);
 }
 
-// Create player's vector of view
-static t_ray_of_view	*paint_ray_get_ray_vector(t_painting *painting,
+/*
+	Part of paint_ray_get_ray_of_view(..) function.
+
+	May return NULL
+*/
+static t_ray_of_view	*paint_ray_get_ray_of_view_handler(t_painting *painting,
 							t_ray *ray_info)
 {	
 	t_ray_vars	vars;
@@ -94,11 +109,11 @@ static t_ray_of_view	*paint_ray_get_ray_vector(t_painting *painting,
 	}
 }
 
-// Welcome to my doom
-//
-// It gets all information about map,
-// calculate orientation of player's vector of view
-// and draw it
+/*
+	Create player's ray_of_view struct with specified angle.
+
+	May return NULL
+*/
 t_ray_of_view	*paint_ray_get_ray_of_view(t_painting *painting, double angle)
 {
 	t_ray			*ray_info;
@@ -109,7 +124,7 @@ t_ray_of_view	*paint_ray_get_ray_of_view(t_painting *painting, double angle)
 	ray_info = paint_ray_get_ray_info(angle);
 	if (!ray_info)
 		return (NULL);
-	ray_of_view = paint_ray_get_ray_vector(painting, ray_info);
+	ray_of_view = paint_ray_get_ray_of_view_handler(painting, ray_info);
 	paint_ray_destroy_ray_info(ray_info);
 	if (ray_of_view)
 		return (ray_of_view);

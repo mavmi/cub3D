@@ -6,12 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:36:15 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 15:39:42 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:08:50 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
+/*
+	Get t_move_vars to make some calculations
+*/
 static t_move_vars	paint_movements_get_vars(t_painting *p, t_movement movement)
 {
 	t_move_vars	vars;
@@ -38,6 +41,9 @@ static t_move_vars	paint_movements_get_vars(t_painting *p, t_movement movement)
 	return (vars);
 }
 
+/*
+	Move player if it's far away from wall
+*/
 void	paint_movements_move(t_painting *painting, t_movement movement)
 {
 	t_move_vars	vars;

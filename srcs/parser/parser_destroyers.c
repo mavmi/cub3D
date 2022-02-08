@@ -6,23 +6,26 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:14:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/26 15:32:43 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:15:15 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-// Free t_player
+/*
+	Free t_player
+*/
 void	pars_destroy_player(t_player *player)
 {
 	if (!player)
 		return ;
 	free(player->pos);
-	geom_destroy_vector(player->ray_of_view);
 	free(player);
 }
 
-// Free t_square
+/*
+	Free t_square
+*/
 void	pars_destroy_square(t_square *square)
 {
 	if (!square)
@@ -30,7 +33,9 @@ void	pars_destroy_square(t_square *square)
 	free(square);
 }
 
-// Free t_map_line
+/*
+	Free t_map_line
+*/
 void	pars_destroy_map_line(t_map_line *map_line)
 {
 	size_t	i;
@@ -50,7 +55,9 @@ void	pars_destroy_map_line(t_map_line *map_line)
 	free(map_line);
 }
 
-// Free t_map
+/*
+	Free t_map
+*/
 void	pars_destroy_map(t_map *map)
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:22:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/27 11:59:04 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:35:58 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ double	utils_rad_to_degree(double rad)
 	return (rad * 180.0 / M_PI);
 }
 
-// Get size of array of strings
+/*
+	Get size of array of strings
+*/
 size_t	utils_get_str_arr_size(char **arr)
 {
 	size_t	size;
@@ -38,7 +40,9 @@ size_t	utils_get_str_arr_size(char **arr)
 	return (size);
 }
 
-// Free array of strings
+/*
+	Free array of strings
+*/
 void	utils_destroy_str_arr(char **arr)
 {
 	char	**ptr;
@@ -54,9 +58,11 @@ void	utils_destroy_str_arr(char **arr)
 	free(arr);
 }
 
-// Append strings array arr with string str.
-// Return 0 if everything is ok,
-// 1 otherwise
+/*
+	Append strings array arr with string str.
+	Return 0 if everything is ok,
+	1 otherwise
+*/
 int	utils_str_arr_push_bach(char ***arr, char *str)
 {
 	int		i;

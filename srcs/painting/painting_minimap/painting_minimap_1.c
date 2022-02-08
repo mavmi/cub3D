@@ -6,12 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 21:12:39 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:11:40 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
+/*
+	Get color of minimap's square
+*/
 static t_color	paint_minimap_type_to_color(char type)
 {
 	if (type == MAP_SQ_WALL)
@@ -22,6 +25,9 @@ static t_color	paint_minimap_type_to_color(char type)
 		return (COLOR_TRANSPARENT);
 }
 
+/*
+	Draw minimap's line
+*/
 static void	paint_minimap_draw_map_line(t_painting *painting,
 				size_t sq_y, size_t abs_y, size_t y)
 {
@@ -52,6 +58,9 @@ static void	paint_minimap_draw_map_line(t_painting *painting,
 	}
 }
 
+/*
+	Just draw minimap
+*/
 void	paint_minimap_draw_map(t_painting *painting)
 {
 	size_t	y;
@@ -70,6 +79,9 @@ void	paint_minimap_draw_map(t_painting *painting)
 	}
 }
 
+/*
+	Check if it is necessary to redraw minimap
+*/
 static int	paint_minimap_is_redraw(t_painting *painting,
 				int pl_sq_x, int pl_sq_y, int rad)
 {
@@ -99,6 +111,9 @@ static int	paint_minimap_is_redraw(t_painting *painting,
 	return (1);
 }
 
+/*
+	Redraw minimap if it is necessary and draw player
+*/
 void	paint_minimap_draw(t_painting *painting)
 {
 	int	pl_sq_x;

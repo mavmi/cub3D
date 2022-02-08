@@ -6,13 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 12:36:16 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:01:00 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
-// Get quarter from absolute angle of player's view
+/*
+	Get quarter from absolute angle
+*/
 int	paint_ray_get_quarter(double angle)
 {
 	if (utils_are_doubles_equal(angle, 360)
@@ -27,7 +29,9 @@ int	paint_ray_get_quarter(double angle)
 	return (0);
 }
 
-// Convert absolute angle of player's view to an angle inside current quarter
+/*
+	Convert absolute angle to an angle of current quarter
+*/
 double	paint_ray_get_quarter_angle(int quarter, double abs_angle)
 {
 	if (quarter == 1)
@@ -45,8 +49,11 @@ double	paint_ray_get_quarter_angle(int quarter, double abs_angle)
 	return (-1.0);
 }
 
-// Create [end] point of orientation vector depending on t_orient.
-// May return NULL
+/*
+	Create [end] point of orientation vector depending on t_orient.
+
+	May return NULL
+*/
 static t_point	*paint_ray_get_orient_vector_handler(t_orient orient)
 {
 	if (orient == ORIENT_NORTH)
@@ -60,8 +67,11 @@ static t_point	*paint_ray_get_orient_vector_handler(t_orient orient)
 	return (NULL);
 }
 
-// Create N, E, S or W orientation vector.
-// May return NULL
+/*
+	Create N, E, S or W orientation vector.
+
+	May return NULL
+*/
 t_vector	*paint_ray_get_orient_vector(t_orient orient)
 {
 	t_point		*begin;

@@ -6,12 +6,17 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:47:58 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 21:04:52 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:46:52 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
+/*
+	Conver file to mlx image.
+
+	May return NULL
+*/
 t_image	*paint_get_image(t_painting *painting, char *file_name)
 {
 	t_image	*image;

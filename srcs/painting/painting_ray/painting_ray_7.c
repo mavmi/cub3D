@@ -6,12 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:00:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/06 20:32:40 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:07:51 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
+/*
+	Set wall's orientation when vector hits it
+*/
 void	paint_ray_set_ray_orient(t_ray_vars *vars)
 {
 	if (vars->octet == 1 || vars->octet == 7)
@@ -36,12 +39,17 @@ int	paint_ray_decrease_coord_assignment(t_decrease *decr)
 	return (0);
 }
 
-// Get quarter depending on [quarter], [quarter_angle] and [corner_angle]
+/*
+	Get octet from quarter and angle
+*/
 int	paint_ray_get_octet(int quarter, int part)
 {
 	return (2 * quarter - 1 + part);
 }
 
+/*
+	Check if {x, y} point belongs to a wall
+*/
 int	paint_ray_is_wall(t_ray_vars *vars, double x, double y)
 {
 	paint_ray_decrease_coord(vars, &x, &y);
@@ -50,8 +58,10 @@ int	paint_ray_is_wall(t_ray_vars *vars, double x, double y)
 	return (0);
 }
 
-// Update t_ray_getter's [delta], [corner_angle] and [octet].
-// Return 0 if everything is fine, 1 otherwise
+/*
+	Update t_ray_getter's [delta], [corner_angle] and [octet].
+	Return 0 if everything is fine, 1 otherwise
+*/
 int	paint_ray_get_delta_angle_octet(t_ray_vars *vars)
 {
 	t_vector	*corner_v;

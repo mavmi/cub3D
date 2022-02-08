@@ -6,14 +6,16 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:32:43 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 16:57:12 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:09:45 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
-// Draw player's circle or background.
-// It all depends on {x, y} point of current pixel
+/*
+	Draw player's circle or background.
+	It all depends on {x, y} point of current pixel
+*/
 static void	paint_minimap_draw_player_handler(t_painting *painting,
 						int x, int y, t_color color)
 {
@@ -32,7 +34,9 @@ static void	paint_minimap_draw_player_handler(t_painting *painting,
 		paint_put_color(&painting->minimap, x, y, COLOR_FIELD);
 }
 
-// Draw player with specified color
+/*
+	Draw player with specified color
+*/
 static void	paint_minimap_player_printer(t_painting *painting, t_color color)
 {
 	int	iter_x;
@@ -60,7 +64,9 @@ static void	paint_minimap_player_printer(t_painting *painting, t_color color)
 	}
 }
 
-// Draw player in canvas
+/*
+	Draw player in minimap
+*/
 void	paint_minimap_draw_player(t_painting *painting)
 {
 	if (!painting)
@@ -68,7 +74,9 @@ void	paint_minimap_draw_player(t_painting *painting)
 	paint_minimap_player_printer(painting, COLOR_PLAYER);
 }
 
-// Delete player from canvas
+/*
+	Delete player from minimap
+*/
 void	paint_minimap_erase_player(t_painting *painting)
 {
 	if (!painting)

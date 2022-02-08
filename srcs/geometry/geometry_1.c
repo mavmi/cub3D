@@ -6,13 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 15:49:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:37:41 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:44:23 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/geometry.h"
 
-// Free point
+/*
+	Free point
+*/
 void	geom_destroy_point(t_point *point)
 {
 	if (!point)
@@ -20,7 +22,9 @@ void	geom_destroy_point(t_point *point)
 	free(point);
 }
 
-// Free vector
+/*
+	Free vector
+*/
 void	geom_destroy_vector(t_vector *vector)
 {
 	if (!vector)
@@ -30,8 +34,10 @@ void	geom_destroy_vector(t_vector *vector)
 	free(vector);
 }
 
-// Create point with specified values.
-// May return NULL
+/*
+	Create point with specified values.
+	May return NULL
+*/
 t_point	*geom_init_point(double x, double y)
 {
 	t_point	*point;
@@ -44,10 +50,12 @@ t_point	*geom_init_point(double x, double y)
 	return (point);
 }
 
-// Create vector with specified points.
-// It doesn't copy [begin] and [end],
-// just keep these pointers.
-// May return NULL
+/*
+	Create vector with specified points.
+	It doesn't copy [begin] and [end],
+	just keep these pointers.
+	May return NULL
+*/
 t_vector	*geom_init_vector(t_point *begin, t_point *end)
 {
 	t_vector	*vector;

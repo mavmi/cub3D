@@ -6,13 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:36:50 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 15:06:43 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:59:47 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
-// Free t_ray
+/*
+	\ (•◡•) /
+*/
 void	paint_ray_destroy_ray_info(t_ray *ray)
 {
 	if (!ray)
@@ -22,8 +24,12 @@ void	paint_ray_destroy_ray_info(t_ray *ray)
 	free(ray);
 }
 
-// Update t_ray's orientation vectors 
-// depending on quarter
+/*
+	Update t_ray's orientation vectors 
+	depending on it's quarter.
+	Return 0 if everything is fine,
+	1 otherwise
+*/
 static int	paint_ray_get_ray_info_handler(t_ray *ray)
 {
 	if (!ray)
@@ -53,8 +59,11 @@ static int	paint_ray_get_ray_info_handler(t_ray *ray)
 	return (0);
 }
 
-// Create t_ray struct of player's vector of view.
-// May return NULL
+/*
+	Create t_ray struct of player's vector of view.
+	
+	May return NULL
+*/
 t_ray	*paint_ray_get_ray_info(double angle)
 {
 	t_ray	*ray;

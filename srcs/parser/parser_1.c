@@ -6,14 +6,16 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:11 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/01/25 21:09:27 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:14:54 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-// Pushback [line] to [arr].
-// Return 0 if everything is ok, 1 otherwise
+/*
+	Pushback [line] to [arr].
+	Return 0 if everything is ok, 1 otherwise
+*/
 static int	pars_read_file_handler(char ***arr, char *line)
 {
 	int	return_status;
@@ -28,11 +30,13 @@ static int	pars_read_file_handler(char ***arr, char *line)
 	return (0);
 }
 
-// Read input file line by line,
-// save it to array of strings and
-// call pars_str_arr_to_map(..)
-// to convert it to t_map struct.
-// May return NULL
+/*
+	Read input file line by line,
+	save it to an array of strings and
+	call pars_str_arr_to_map(..)
+	to convert it to t_map struct.
+	May return NULL
+*/
 static t_map	*pars_read_file(int fd)
 {
 	t_map	*map;
@@ -54,9 +58,11 @@ static t_map	*pars_read_file(int fd)
 	return (map);
 }
 
-// Read file and convert it's content
-// to t_map struct.
-// May return NULL
+/*
+	Read file and convert it's content
+	to t_map struct.
+	May return NULL
+*/
 t_map	*pars_get_map(char *path)
 {
 	int		fd;

@@ -6,15 +6,18 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:10:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/04 17:51:18 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:15:18 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-// Create new t_player object and
-// fill it with default values.
-// May return NULL
+/*
+	Create new t_player object and
+	fill it with default values.
+	
+	May return NULL
+*/
 t_player	*pars_get_empty_player(void)
 {
 	t_player	*player;
@@ -30,15 +33,17 @@ t_player	*pars_get_empty_player(void)
 	}
 	player->pos->x = BAD_PL_POS;
 	player->pos->y = BAD_PL_POS;
-	player->ray_of_view = NULL;
 	player->orient = BAD_PL_ORIENT;
 	player->angle = BAD_PL_ANGLE;
 	return (player);
 }
 
-// Create new t_square object and
-// fill it with default values.
-// May return NULL
+/*
+	Create new t_square object and
+	fill it with default values.
+	
+	May return NULL
+*/
 t_square	*pars_get_empty_square(void)
 {
 	t_square	*square;
@@ -52,9 +57,12 @@ t_square	*pars_get_empty_square(void)
 	return (square);
 }
 
-// Create new t_map_line object and
-// fill it with default values.
-// May return NULL
+/*
+	Create new t_map_line object and
+	fill it with default values.
+
+	May return NULL
+*/
 t_map_line	*pars_get_empty_map_line(void)
 {
 	t_map_line	*map_line;
@@ -69,6 +77,7 @@ t_map_line	*pars_get_empty_map_line(void)
 
 // Create new t_map object and
 // fill it with default values.
+
 // May return NULL
 t_map	*pars_get_empty_map(void)
 {

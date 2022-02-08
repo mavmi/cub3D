@@ -6,13 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:37:02 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 21:09:22 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:47:53 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-// Free all and exit
+/*
+	Free all and exit
+*/
 void	paint_exit(t_painting *painting)
 {
 	if (painting)
@@ -44,7 +46,9 @@ int	paint_draw_all(t_painting *painting)
 	return (0);
 }
 
-// Move player and redraw it
+/*
+	Move player and redraw it
+*/
 static void	paint_handle_arrows(int key_code, t_painting *painting)
 {
 	paint_minimap_erase_player(painting);
@@ -68,7 +72,9 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 		paint_exit(painting);
 }
 
-// Keyboard keys handler. Exit on esc and move on arrows
+/*
+	Keyboard keys handler. Exit on esc and move on arrows
+*/
 int	paint_key_pressed(int key_code, t_painting *painting)
 {
 	if (key_code == ESC)
@@ -81,8 +87,10 @@ int	paint_key_pressed(int key_code, t_painting *painting)
 	return (0);
 }
 
-// Change player's angle of view relative to north and
-// redraw vector of view
+/*
+	Change player's angle of view relative to north and
+	redraw everything
+*/
 int	paint_mouse_move(int x, int y, t_painting *painting)
 {
 	double			*angle;

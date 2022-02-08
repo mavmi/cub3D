@@ -6,14 +6,17 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:09:13 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/02 16:45:06 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:02:28 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
-// Create t_vector from two t_points.
-// May return NULL
+/*
+	Create t_vector from two t_points.
+
+	May return NULL
+*/
 static t_vector	*paint_ray_get_corner_vector_handler(t_point *begin,
 					t_point *end)
 {
@@ -27,7 +30,9 @@ static t_vector	*paint_ray_get_corner_vector_handler(t_point *begin,
 	return (NULL);
 }
 
-// Get x for corner vector
+/*
+	Get x for corner vector
+*/
 static int	paint_ray_get_corner_x(double point_x, int quarter)
 {
 	if (quarter == 1)
@@ -52,7 +57,9 @@ static int	paint_ray_get_corner_x(double point_x, int quarter)
 	}
 }
 
-// Get y for corner vector
+/*
+	Get y for corner vector
+*/
 static int	paint_ray_get_corner_y(double point_y, int quarter)
 {
 	if (quarter == 1)
@@ -77,9 +84,12 @@ static int	paint_ray_get_corner_y(double point_y, int quarter)
 	}
 }
 
-// Create vector from [point] to corner of the current square
-// depending on quarter.
-// May return NULL
+/*
+	Create vector from [point] to the corner of the current square
+	depending on quarter.
+
+	May return NULL
+*/
 t_vector	*paint_ray_get_corner_vector(t_point *point, int quarter)
 {
 	t_point		*begin;

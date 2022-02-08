@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 21:03:55 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:46:16 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ static t_painting	*paint_get_struct(t_map *map)
 	return (p);
 }
 
+/*
+	Little red cross in the corner of window
+*/
 static int	paint_cross(void *data)
 {
 	t_painting	*painting;

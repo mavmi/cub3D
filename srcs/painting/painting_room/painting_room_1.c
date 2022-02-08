@@ -6,12 +6,15 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:29:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/07 21:00:59 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:49:47 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
 
+/*
+	Just initialization of t_room_vars
+*/
 static t_room_vars	paint_room_get_data(t_painting *painting)
 {
 	t_room_vars	room_data;
@@ -28,6 +31,9 @@ static t_room_vars	paint_room_get_data(t_painting *painting)
 	return (room_data);
 }
 
+/*
+	Get image of wall
+*/
 static t_image	*paint_room_get_image(t_painting *painting, t_orient orient)
 {
 	if (orient == ORIENT_NORTH)
@@ -40,6 +46,9 @@ static t_image	*paint_room_get_image(t_painting *painting, t_orient orient)
 		return (painting->t_west);
 }
 
+/*
+	Update [data] for new angle of view
+*/
 static int	paint_room_update_vars(t_room_vars *data, t_painting *painting)
 {
 	double	val;
@@ -68,6 +77,9 @@ static int	paint_room_update_vars(t_room_vars *data, t_painting *painting)
 	return (0);
 }
 
+/*
+	Get pixel from image
+*/
 static int	paint_room_get_pixel(t_image *image, int x, int y)
 {
 	int			pos;
@@ -77,6 +89,11 @@ static int	paint_room_get_pixel(t_image *image, int x, int y)
 	return (*(int *)(image->drawable.img_addr + pos));
 }
 
+/*
+	Draw room.
+	Return 0 if everything is ok,
+	1 otherwise
+*/
 int	paint_room_draw_room(t_painting *painting)
 {
 	double		delta;
