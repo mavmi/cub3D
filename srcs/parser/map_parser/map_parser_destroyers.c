@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_destroyers.c                                :+:      :+:    :+:   */
+/*   m_parser_destroyers.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:14:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 17:15:15 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/13 15:51:18 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "../../../include/map_parser.h"
 
 /*
 	Free t_player

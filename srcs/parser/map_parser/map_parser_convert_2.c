@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_convert_2.c                                 :+:      :+:    :+:   */
+/*   m_parser_convert_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 16:42:33 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 16:27:36 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/13 15:51:09 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "../../../include/map_parser.h"
 
 /*
 	Convert each symbol of file's string to t_squares,
@@ -41,7 +41,7 @@ static t_map_line	*pars_str_to_map_line_handler(t_map *map,
 
 /*
 	Convert string to t_map_line.
-	
+
 	May return NULL
 */
 t_map_line	*pars_str_to_map_line(t_map *map, char *str, int y)
@@ -67,7 +67,7 @@ t_map_line	*pars_str_to_map_line(t_map *map, char *str, int y)
 /*
 	Convert each line of file's array of strings to t_map_lines,
 	pushback them to t_map and return it.
-	
+
 	May return NULL
 */
 static t_map	*pars_str_arr_to_map_handler(t_map *map, char **arr)
@@ -91,7 +91,7 @@ static t_map	*pars_str_arr_to_map_handler(t_map *map, char **arr)
 
 /*
 	Convert file's array of strings to t_map.
-	
+
 	May return NULL
 */
 t_map	*pars_str_arr_to_map(char **arr)

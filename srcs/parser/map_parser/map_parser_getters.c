@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_getters.c                                   :+:      :+:    :+:   */
+/*   m_parser_getters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:10:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 17:15:18 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/13 15:51:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "../../../include/map_parser.h"
 
 /*
 	Create new t_player object and
 	fill it with default values.
-	
+
 	May return NULL
 */
 t_player	*pars_get_empty_player(void)
@@ -41,7 +41,7 @@ t_player	*pars_get_empty_player(void)
 /*
 	Create new t_square object and
 	fill it with default values.
-	
+
 	May return NULL
 */
 t_square	*pars_get_empty_square(void)

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils_1.c                                   :+:      :+:    :+:   */
+/*   m_parser_utils_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:12:44 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 16:34:41 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/13 15:51:29 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "../../../include/map_parser.h"
 
 /*
 	Open file with read only mode and

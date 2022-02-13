@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 17:18:53 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/13 16:06:01 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <math.h>
 
 # include "../minilibx/mlx.h"
+# include "../libft/libft.h"
 
-# include "parser.h"
+# include "map_parser.h"
 # include "painting.h"
 # include "geometry.h"
 
@@ -59,7 +60,7 @@ typedef struct s_ray			t_ray;
 typedef struct s_image			t_image;
 typedef struct s_drawable		t_drawable;
 typedef struct s_painting		t_painting;
-typedef struct s_ray_of_view	t_ray_of_view;	
+typedef struct s_ray_of_view	t_ray_of_view;
 typedef struct s_decrease		t_decrease;
 typedef struct s_move_vars		t_move_vars;
 typedef struct s_room_vars		t_room_vars;
@@ -123,7 +124,7 @@ enum e_movement
 
 	Orientation vectors are N, E, S and W
 
-	paint_get_orient_vector(..) creates required 
+	paint_get_orient_vector(..) creates required
 	orientation vector
 */
 struct s_ray
@@ -189,7 +190,7 @@ struct s_decrease
 };
 
 struct s_move_vars
-{	
+{
 	double			x;
 	double			y;
 	double			len;

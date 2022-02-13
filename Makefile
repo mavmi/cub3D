@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
+#    By: msalena <msalena@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/02/08 16:16:53 by pmaryjo          ###   ########.fr        #
+#    Updated: 2022/02/13 16:41:36 by msalena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME					=	cub3D
-	
-	
+
+
 HDRS_DIR				=	include
 SRCS_DIR				=	srcs
 GEOM_DIR				=	$(SRCS_DIR)/geometry
@@ -23,17 +23,20 @@ PAINTING_MINIMAP_DIR	=	$(PAINTING_DIR)/painting_minimap
 PAINTING_MOVE_DIR		=	$(PAINTING_DIR)/painting_movements
 PAINTING_RAY_DIR		=	$(PAINTING_DIR)/painting_ray
 PAINTING_ROOM_DIR		=	$(PAINTING_DIR)/painting_room
-	
+
 PARSER_DIR				=	$(SRCS_DIR)/parser
+PARSER_MAP_DIR			=	$(PARSER_DIR)/map_parser
+PARSER_ARGUMS_DIR		=	$(PARSER_DIR)/argums_parser
+
 UTILS_DIR				=	$(SRCS_DIR)/utils
 LIBFT_DIR				=	libft
 MLX_DIR					=	minilibx
-	
-	
+
+
 LIBFT				=	$(LIBFT_DIR)/libft.a
 MLX					=	$(MLX_DIR)/libmlx.a
-	
-	
+
+
 HDRS				=	$(addprefix $(HDRS_DIR)/, geometry.h get_next_line.h painting.h parser.h utils.h)
 SRCS				=	$(addprefix $(SRCS_DIR)/, main.c)\
 						$(addprefix $(GEOM_DIR)/, geometry_1.c geometry_2.c geometry_3.c)\
@@ -46,8 +49,11 @@ SRCS				=	$(addprefix $(SRCS_DIR)/, main.c)\
 								painting_ray_4.c painting_ray_5.c painting_ray_6.c painting_ray_7.c)\
 						$(addprefix $(PAINTING_ROOM_DIR)/, painting_room_1.c painting_room_2.c)\
 						\
-						$(addprefix $(PARSER_DIR)/, parser_1.c parser_convert_1.c parser_convert_2.c\
+						$(PARSER_DIR)/parsing_start.c\
+						$(addprefix $(PARSER_MAP_DIR)/map_, parser_convert_1.c parser_convert_2.c\
 								parser_destroyers.c parser_getters.c parser_utils_1.c)\
+						$(addprefix $(PARSER_ARGUMS_DIR)/, )\
+						\
 						$(addprefix $(UTILS_DIR)/, utils_1.c utils_2.c)
 OBJS				=	$(SRCS:.c=.o)
 DEPEN				=	$(SRCS:.c=.d)
@@ -86,7 +92,7 @@ re:			fclean all
 
 get_libft:
 			$(MAKE) -C $(LIBFT_DIR)
-			
+
 get_mlx:
 			$(MAKE) -C $(MLX_DIR)
 
@@ -99,7 +105,7 @@ norm:
 
 			@echo "$(BLUE)\n\t*** GEOMETRY ***$(NC)"
 			@norminette $(GEOM_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
-			
+
 			@echo "$(BLUE)\n\t*** GNL ***$(NC)"
 			@norminette $(GNL_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
 

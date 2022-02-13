@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_1.c                                         :+:      :+:    :+:   */
+/*   parsing_start.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:11 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 16:14:54 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/02/13 18:57:52 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "../../include/map_parser.h"
 
 /*
 	Pushback [line] to [arr].
@@ -49,10 +49,14 @@ static t_map	*pars_read_file(int fd)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (pars_read_file_handler(&arr, line))
-			return (NULL);
+			return (NULL); // castomer sms about not reading
 	}
 	if (pars_read_file_handler(&arr, line))
-		return (NULL);
+		return (NULL); // castomer sms about not reading
+		for (int i = 0; arr[i]; i++)
+			printf ("%s\n", arr[i]);
+		exit (0);
+	////////////function which parsing arguments before map////////////
 	map = pars_str_arr_to_map(arr);
 	utils_destroy_str_arr(arr);
 	return (map);
@@ -63,14 +67,14 @@ static t_map	*pars_read_file(int fd)
 	to t_map struct.
 	May return NULL
 */
-t_map	*pars_get_map(char *path)
+t_map	*pars_start(char *path)
 {
 	int		fd;
 	t_map	*map;
 
 	fd = pars_open_file(path);
 	if (!path || fd < 0)
-		return (NULL);
+		return (NULL); // should be needing printing error from open function
 	map = pars_read_file(fd);
 	close(fd);
 	return (map);
