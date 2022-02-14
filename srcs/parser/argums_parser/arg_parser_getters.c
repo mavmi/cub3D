@@ -33,8 +33,10 @@ t_textures	*pars_get_empty_textures(void)
 	new = (t_textures *)malloc(sizeof(t_textures));
 	if (!new)
 		return (NULL);
-	new->arg = NULL;
-	new->arg = 0;
+	new->arg = (t_txtr_arg **)malloc(sizeof(t_txtr_arg *) * 4);
+	if (!new->arg)
+		return (NULL);
+	new->arg_count = 0;
 	return (new);
 }
 
@@ -62,7 +64,9 @@ t_up_down	*pars_get_empty_up_down(void)
 	new = (t_up_down *)malloc(sizeof(t_up_down));
 	if (!new)
 		return (NULL);
-	new->type = NULL;
+	new->type = (t_ud_type **)malloc(sizeof(t_ud_type *) * 2);
+	if (!new->type)
+		return (NULL);
 	new->type_count = 0;
 	return (new);
 }

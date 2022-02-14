@@ -32,6 +32,7 @@ void	pars_destroy_textures(t_textures *destroyed)
 		pars_destroy_txtr_arg(destroyed->arg[i]);
 		i++;
 	}
+	free(destroyed->arg);
 	free(destroyed);
 }
 
@@ -54,5 +55,6 @@ void	pars_destroy_up_down(t_up_down *destroyed)
 		pars_destroy_ud_type(destroyed->type[i]);
 		i++;
 	}
+	free(destroyed->type);
 	free(destroyed);
 }

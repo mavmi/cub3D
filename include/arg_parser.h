@@ -16,6 +16,8 @@
 # include "painting.h"
 # include "map_parser.h"
 
+# define SKIP_SPACE ' '
+
 # define NORTH_SIDE_ARG 'N'
 # define SOUTH_SIDE_ARG 'S'
 # define WEST_SIDE_ARG 'W'
@@ -61,6 +63,9 @@ struct s_up_down
 // arg_parser_1.c
 
 
+// arg_parser_textures.c
+
+int	pars_valid_txtr(char *str, t_textures *arr);
 
 // arg_parser_getters.c
 

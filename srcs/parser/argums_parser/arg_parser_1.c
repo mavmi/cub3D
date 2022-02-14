@@ -14,28 +14,41 @@
 
 int	pars_arg_definition(char **arr)
 {
-	size_t	i;
+	size_t		i_s;
+	size_t		i_e;
+	t_up_down	*ud_arr;
+	t_textures	*txtr_arr;
 
-	i = 0;
-	while (arr[i])
+	if (!arr)
+		return (1);
+	i_s = 0;
+	i_e = 0;
+	ud_arr = pars_get_empty_up_down();
+	txtr_arr = pars_get_empty_tetures();
+	while (arr[i_s])
 	{
-		if (arr[i][0] == NORTH_SIDE_ARG || arr[i][0] == SOUTH_SIDE_ARG
-				|| arr[i][0] == WEST_SIDE_ARG || arr[i][0] == EAST_SIDE_ARG)
+		while (arr[i_s][i_e] == SKIP_SPACE)
 		{
-			//"take new texture elem" function
+			i_e++;
 		}
-		else if (arr[i][0] == FLOOR_TYPE || arr[i][0] == CEILING_TYPE)
+		if (arr[i_s][i_e] == NORTH_SIDE_ARG || arr[i_s][i_e] == SOUTH_SIDE_ARG
+			|| arr[i_s][i_e] == WEST_SIDE_ARG || arr[i_s][i_e] == EAST_SIDE_ARG)
+		{
+			//"take new texture elem" function: give me arr[i_s + i_e]
+			if (take_valid_txtr((arr[i_s + i_e]), txtr_arr))
+				return (1);
+		}
+		else if (arr[i_s][i_e] == FLOOR_TYPE || arr[i_s][i_e] == CEILING_TYPE)
 		{
 			//"take new up_back elem" function
 		}
-		else if (arr[i][0] == MAP_SQ_VOID || arr[i][0] == MAP_SQ_EMPTY
-					|| arr[i][0] == MAP_SQ_WALL || arr[i][0] == MAP_OR_NORTH
-					|| arr[i][0] == MAP_OR_SOUTH || arr[i][0] == MAP_OR_EAST
-					|| arr[i][0] == MAP_OR_WEST)
+		else if (arr[i_s][i_e] == MAP_SQ_EMPTY || arr[i_s][i_e] == MAP_SQ_WALL
+					|| arr[i_s][i_e] == MAP_OR_NORTH || arr[i_s][i_e] == MAP_OR_SOUTH
+					|| arr[i_s][i_e] == MAP_OR_EAST || arr[i_s][i_e] == MAP_OR_WEST)
 		{
 			//"for map" function
 		}
-		else if (arr[i][0] == '\n')
+		else if (arr[i_s][i_e] == '\n')
 		{
 			// continue ;
 		}
@@ -43,6 +56,7 @@ int	pars_arg_definition(char **arr)
 		{
 			// return with error
 		}
-
+		i_e = 0;
+		i_s++;
 	}
 }
