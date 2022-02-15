@@ -40,7 +40,7 @@ int	pars_arg_definition(char **arr)
 		}
 		else if (arr[i_s][i_e] == FLOOR_TYPE || arr[i_s][i_e] == CEILING_TYPE)
 		{
-			//"take new up_back elem" function
+			//"take new up_back elem" function: give me arr[i_s + i_e]
 		}
 		else if (arr[i_s][i_e] == MAP_SQ_EMPTY || arr[i_s][i_e] == MAP_SQ_WALL
 					|| arr[i_s][i_e] == MAP_OR_NORTH || arr[i_s][i_e] == MAP_OR_SOUTH

@@ -12,12 +12,6 @@
 
 #include "../../../include/arg_parser.h"
 
-static int	error_message(void)
-{
-	printf("Error: invalid texture arguments \n");
-	return (1);
-}
-
 static char	*take_path(char *str, size_t *start)
 {
 	char	*path;
@@ -29,7 +23,7 @@ static char	*take_path(char *str, size_t *start)
 	{
 		end++;
 	}
-	length = end - start;
+	length = end - *start;
 	path = (char *)malloc(sizeof(char) * (length + 1));
 	if (!path)
 		return (NULL);
@@ -51,12 +45,12 @@ static int	add_new_side_elem(t_textures *arr, char *path, char side)
 		return (2);
 	if (arr->arg_count == 4)
 	{
-		return (error_message());
+		return (error_texture_message());
 	}
 	while (i < arr->arg_count)
 	{
 		if (new->side == arr->arg[i]->side)
-			return (error_message());
+			return (error_texture_message());
 		i++;
 	}
 	arr->arg[arr->arg_count] = new;
@@ -80,9 +74,10 @@ int	pars_valid_txtr(char *str, t_textures *arr)
 	path = NULL;
 	if (!str || !arr)
 		return (2);
-	if (ft_strncmp(str, "NO", 2) != 0 && ft_strncmp(str, "SO", 2) != 0
+	if ((ft_strncmp(str, "NO", 2) != 0 && ft_strncmp(str, "SO", 2) != 0
 			&& ft_strncmp(str, "WE", 2) != 0 && ft_strncmp(str, "EA", 2) != 0)
-		return (error_message());
+			|| !str[i])
+		return (error_texture_message());
 	while (str[i])
 	{
 		if (str[i] == SKIP_SPACE)
@@ -90,12 +85,11 @@ int	pars_valid_txtr(char *str, t_textures *arr)
 		else
 		{
 			if (path)
-				return (error_message());
+				return (error_texture_message());
 			path = take_path(str, &i);
 			if (!path)
 				return (2);
 		}
 	}
-	add_new_side_elem(arr, path, str[0])
-	return (0);
+	return (add_new_side_elem(arr, path, str[0]));
 }
