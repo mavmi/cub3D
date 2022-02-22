@@ -45,14 +45,14 @@ static size_t	*creat_arr_RGB(char *str)
 	{
 		if (i_RGB > 3)
 		{
-			return (free_return(RGB_arr, 'y'))
+			return (free_return(RGB_arr, 'y'));
 		}
 		new_elem = ft_atoi(str + i_str);
-		if (new_elem < 0 || new_elem > 255 || (new_elem == '0'
+		if (new_elem < 0 || new_elem > 255 || (new_elem == 0
 				&& (str[i_str] != '0' || str[i_str] != ','
 				|| (str[i_str] == ',' && i_str == 0)
-				|| (str[i_str] == ',' && str[i_str + 1] = '\0')
-				|| (str[i_str] == ',' && str[i_str + 1] = ','))))
+				|| (str[i_str] == ',' && str[i_str + 1] == '\0')
+				|| (str[i_str] == ',' && str[i_str + 1] == ','))))
 		{
 			return (free_return(RGB_arr, 'y'));
 		}

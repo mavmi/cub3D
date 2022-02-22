@@ -69,7 +69,7 @@ int	pars_valid_txtr(char *str, t_textures *arr);
 
 // arg_parser_floor&ceiling.c
 
-
+int	pars_valid_up_down(char *str, t_up_down *arr);
 
 // arg_parser_getters.c
 
@@ -86,12 +86,7 @@ void	pars_destroy_textures(t_textures *destroyed);
 void	pars_destroy_ud_type(t_ud_type *destroyed);
 void	pars_destroy_up_down(t_up_down *destroyed);
 
-//arg_parser_utils.c
 
-int	error_texture_message(void);
-int	error_ud_message(void);
-void	*free_return(size_t *freed, char sms_fl);
-int	check_other_three_elems(char *str);
 
 
 #endif

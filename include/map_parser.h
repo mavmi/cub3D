@@ -96,6 +96,18 @@ struct s_map
 // parsing_start.c
 t_map		*pars_start(char *path);
 
+//parsing_utils.c
+
+int	error_texture_message(void);
+int	error_ud_message(void);
+void	*free_return(size_t *freed, char sms_fl);
+int	check_other_three_elems(char *str);
+size_t	arr_size_before_empty_str(char **arr);
+
+
+///////////////////////////////////////////////
+
+// map_parser_valid.c
 
 
 // map_parser_convert_1.c

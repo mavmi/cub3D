@@ -12,6 +12,11 @@ int	error_ud_message(void)
 	return (1);
 }
 
+
+/*
+	Free freed and input sms about
+	invalide argums if sms_fl == 'y'
+*/
 void	*free_return(size_t *freed, char sms_fl)
 {
 	if (sms_fl && sms_fl == 'y')
@@ -43,4 +48,19 @@ int	check_other_three_elems(char *str)
 		i_str++;
 	}
 	return (0);
+}
+
+
+size_t	arr_size_before_empty_str(char **arr)
+{
+	size_t	len;
+
+	len = 0;
+	if (!arr)
+		return (len);
+	while (arr[len][0])// if we take empty str
+	{
+		len++;
+	}
+	return (len);
 }

@@ -36,17 +36,19 @@ int	pars_arg_definition(char **arr)
 		{
 			//"take new texture elem" function: give me arr[i_s + i_e]
 			if (take_valid_txtr((arr[i_s + i_e]), txtr_arr))
-				return (1);
+				return (1); //don't forget free()
 		}
 		else if (arr[i_s][i_e] == FLOOR_TYPE || arr[i_s][i_e] == CEILING_TYPE)
 		{
 			//"take new up_back elem" function: give me arr[i_s + i_e]
+			if (pars_valid_up_down(arr[i_s + i_e], ud_arr))
+				return (1); //don't forget free()
 		}
 		else if (arr[i_s][i_e] == MAP_SQ_EMPTY || arr[i_s][i_e] == MAP_SQ_WALL
 					|| arr[i_s][i_e] == MAP_OR_NORTH || arr[i_s][i_e] == MAP_OR_SOUTH
 					|| arr[i_s][i_e] == MAP_OR_EAST || arr[i_s][i_e] == MAP_OR_WEST)
 		{
-			//"for map" function
+			//"for map" function: give me (arr + i_s)
 		}
 		else if (arr[i_s][i_e] == '\n')
 		{
