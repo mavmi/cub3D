@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:15:08 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/13 18:53:02 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/25 16:19:28 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ struct s_up_down
 
 // arg_parser_1.c
 
+int	pars_arg_definition(char **arr);
 
 // arg_parser_textures.c
 

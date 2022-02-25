@@ -1,4 +1,4 @@
-#include "../../../include/arg_parser.h"
+#include "../../include/arg_parser.h"
 
 int	error_texture_message(void)
 {
@@ -8,7 +8,7 @@ int	error_texture_message(void)
 
 int	error_ud_message(void)
 {
-	pritnf("Error: invalid floor/ceiling arguments\n");
+	printf("Error: invalid floor/ceiling arguments\n");
 	return (1);
 }
 

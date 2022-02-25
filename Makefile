@@ -6,7 +6,7 @@
 #    By: msalena <msalena@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/02/13 16:41:36 by msalena          ###   ########.fr        #
+#    Updated: 2022/02/25 16:06:36 by msalena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,11 @@ SRCS				=	$(addprefix $(SRCS_DIR)/, main.c)\
 								painting_ray_4.c painting_ray_5.c painting_ray_6.c painting_ray_7.c)\
 						$(addprefix $(PAINTING_ROOM_DIR)/, painting_room_1.c painting_room_2.c)\
 						\
-						$(PARSER_DIR)/parsing_start.c\
+						$(addprefix $(PARSER_DIR)/, parsing_start.c parsing_utils.c)\
 						$(addprefix $(PARSER_MAP_DIR)/map_, parser_convert_1.c parser_convert_2.c\
-								parser_destroyers.c parser_getters.c parser_utils_1.c)\
-						$(addprefix $(PARSER_ARGUMS_DIR)/, )\
+								parser_destroyers.c parser_getters.c parser_utils_1.c parser_valid.c)\
+						$(addprefix $(PARSER_ARGUMS_DIR)/arg_, parser_1.c parser_destroyers.c\
+								parser_floor_ceiling.c parser_getters.c parser_textures.c)\
 						\
 						$(addprefix $(UTILS_DIR)/, utils_1.c utils_2.c)
 OBJS				=	$(SRCS:.c=.o)

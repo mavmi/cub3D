@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/13 18:51:41 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/25 10:28:12 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ size_t	arr_size_before_empty_str(char **arr);
 
 // map_parser_valid.c
 
+int	map_pars_valid(char **arr);
 
 // map_parser_convert_1.c
 t_square	*pars_char_to_square(t_map *map, char c, int x, int y);

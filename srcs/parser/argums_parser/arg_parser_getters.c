@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:50:46 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/13 17:28:57 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/25 12:43:43 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ t_textures	*pars_get_empty_textures(void)
 		return (NULL);
 	new->arg = (t_txtr_arg **)malloc(sizeof(t_txtr_arg *) * 4);
 	if (!new->arg)
+	{
+		free(new);
 		return (NULL);
+	}
 	new->arg_count = 0;
 	return (new);
 }
@@ -66,7 +69,10 @@ t_up_down	*pars_get_empty_up_down(void)
 		return (NULL);
 	new->type = (t_ud_type **)malloc(sizeof(t_ud_type *) * 2);
 	if (!new->type)
+	{
+		free(new);
 		return (NULL);
+	}
 	new->type_count = 0;
 	return (new);
 }

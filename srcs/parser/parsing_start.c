@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:11 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/13 18:57:52 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/25 16:42:58 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/map_parser.h"
+#include "../../include/arg_parser.h"
 
 /*
 	Pushback [line] to [arr].
@@ -55,8 +55,9 @@ static t_map	*pars_read_file(int fd)
 		return (NULL); // castomer sms about not reading
 		for (int i = 0; arr[i]; i++)
 			printf ("%s\n", arr[i]);
-		exit (0);
 	////////////function which parsing arguments before map////////////
+	printf ("\n~~~~~~~ %d\n", pars_arg_definition(arr));
+	exit (1);
 	map = pars_str_arr_to_map(arr);
 	utils_destroy_str_arr(arr);
 	return (map);

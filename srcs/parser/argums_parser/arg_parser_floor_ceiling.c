@@ -48,18 +48,23 @@ static size_t	*creat_arr_RGB(char *str)
 			return (free_return(RGB_arr, 'y'));
 		}
 		new_elem = ft_atoi(str + i_str);
+		printf ("%c      %d\n", str[i_str], new_elem);
 		if (new_elem < 0 || new_elem > 255 || (new_elem == 0
-				&& (str[i_str] != '0' || str[i_str] != ','
+				&& (str[i_str] != '0' || str[i_str] != ','//why != ','
 				|| (str[i_str] == ',' && i_str == 0)
 				|| (str[i_str] == ',' && str[i_str + 1] == '\0')
 				|| (str[i_str] == ',' && str[i_str + 1] == ','))))
 		{
+			printf ("Dfdfdfdfd\n");
 			return (free_return(RGB_arr, 'y'));
 		}
 		if (new_elem == 0 && str[i_str] != ',')
 			RGB_arr[i_RGB++] = (size_t)new_elem;
 		i_str += ft_strlen(ft_itoa(new_elem));
+		if (str[i_str] == ',')
+			i_str++;
 	}
+
 	return (RGB_arr);
 }
 
@@ -71,7 +76,7 @@ int	pars_valid_up_down(char *str, t_up_down *arr)
 	i = 1;
 	if (!str || !arr)
 		return (2);
-	if (ft_strncmp(str, FLOOR_TYPE, 1) != 0 && ft_strncmp(str, CEILING_TYPE, 1) != 0)
+	if (ft_memchr(str, FLOOR_TYPE, 1) != 0 && ft_memchr(str, CEILING_TYPE, 1) != 0)
 		return (error_ud_message());
 	while (str[i] == SKIP_SPACE)
 		i++;
@@ -81,7 +86,10 @@ int	pars_valid_up_down(char *str, t_up_down *arr)
 		return (1);
 	RGB = creat_arr_RGB(str + i);
 	if (!RGB)
+	{
+		printf("/////////////\n");
 		return (1);
+	}
 	if (!add_new_ud_elem(RGB, str, arr))
 		return (1);
 	return (0);

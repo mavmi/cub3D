@@ -14,10 +14,60 @@ static int	map_check_valid_spaces(char **arr, size_t i_arr,
 
 	len_str_up = ft_strlen(arr[i_arr - 1]);
 	len_str_down = ft_strlen(arr[i_arr + 1]);
-	if (i_str == 0)
-	{
 
+	if (i_str <= (len_str_up - 1)   										// check for up elem
+		&& (arr[i_arr - 1][i_str] != ' ' || arr[i_arr - 1][i_str] != '1'))
+		return (error_map_message());
+	if (i_str <= (len_str_down - 1) 										// check for down elem
+		&& (arr[i_arr + 1][i_str] != ' ' || arr[i_arr + 1][i_str] != '1'))
+		return (error_map_message());
+	// check right side
+	if (arr[i_arr][i_str + 1]      											// check for right elem
+		&& (arr[i_arr][i_str + 1] != ' ' || arr[i_arr][i_str + 1] != '1'))
+		return (error_map_message());
+	if (i_str < (len_str_up - 1)    										// check for right_up elem
+		&& (arr[i_arr - 1][i_str + 1] != ' ' || arr[i_arr - 1][i_str + 1] != '1'))
+		return (error_map_message());
+	if (i_str < (len_str_down - 1)  										// check for right_down elem
+		&& (arr[i_arr + 1][i_str + 1] != ' ' || arr[i_arr + 1][i_str + 1] != '1'))
+		return (error_map_message());
+	// checks left side
+	if ((arr[i_arr][i_str - 1] != ' ' || arr[i_arr][i_str - 1] != '1')) 	// check for left elem
+		return (error_map_message());
+	if (i_str >= (len_str_up - 1)    										// check for left_up elem
+		&& (arr[i_arr - 1][i_str - 1] != ' ' || arr[i_arr - 1][i_str - 1] != '1'))
+		return (error_map_message());
+	if (i_str >= (len_str_down - 1)  										// check for left_down elem
+		&& (arr[i_arr + 1][i_str - 1] != ' ' || arr[i_arr + 1][i_str - 1] != '1'))
+		return (error_map_message());
+	return (0);
+}
+
+static int	map_check_valid_doors(char **arr, size_t i_arr,
+						size_t i_str, size_t len_str)
+{
+	size_t	len_str_up;
+	size_t	len_str_down;
+
+	len_str_up = ft_strlen(arr[i_arr - 1]);
+	len_str_down = ft_strlen(arr[i_arr + 1]);
+
+	if (i_str > (len_str_up - 1) || i_str >(len_str_down - 1)
+			|| !arr[i_arr][i_str + 1])
+		return (error_map_message());
+	if (arr[i_arr - 1][i_str] == '1')
+	{
+		if (arr[i_arr + 1][i_str] == '1' && arr[i_arr][i_str - 1] != '1'
+			&& arr[i_arr][i_str + 1] != '1')
+			return (0);
 	}
+	else if (arr[i_arr][i_str - 1] == '1')
+	{
+		if (arr[i_arr][i_str + 1] == '1' && arr[i_arr - 1][i_str] != '1'
+			&& arr[i_arr + 1][i_str] != '1')
+			return (0);
+	}
+	return (error_map_message());
 }
 
 static int	map_check_valid_str(char **arr, size_t i_arr)
@@ -26,20 +76,20 @@ static int	map_check_valid_str(char **arr, size_t i_arr)
 	size_t	len;
 
 	len = ft_strlen(arr[i_arr]);
-	if (arr[i_arr][0] != '1' || arr[i_arr][0] != ' '
-			&& (arr[i_arr][len - 1] != '1' || arr[i_arr][len - 1] != ' '))
+	if ((arr[i_arr][0] != '1' || arr[i_arr][0] != ' ')
+			|| (arr[i_arr][len - 1] != '1' || arr[i_arr][len - 1] != ' '))
 		return (error_map_message());
 	i = 1;
 	while (arr[i_arr][i])
 	{
 		if (arr[i_arr][i] == ' ')
 		{
-			if //func_check_spaces
+			if (map_check_valid_spaces(arr, i_arr, i, len))
 				return (1);
 		}
 		else if (arr[i_arr][i] == 'd' || arr[i_arr][i] == 'D')
 		{
-			if //func_check_doors
+			if (map_check_valid_doors(arr, i_arr, i, len))
 				return (1);
 		}
 		i++;
@@ -58,9 +108,9 @@ int	map_pars_valid(char **arr)
 	i_arr = 0;
 	i_str = 0;
 	arr_len = arr_size_before_empty_str(arr);
-	while (i_arr < arr_len) // if we take empty str
+	while (i_arr < arr_len)
 	{
-		if (i_arr == 0 || i_arr == (arr_len - 1)) // first or second str
+		if (i_arr == 0 || i_arr == (arr_len - 1)) // first or last str
 		{
 			while (arr[i_arr][i_str])
 			{
@@ -68,11 +118,11 @@ int	map_pars_valid(char **arr)
 					return (error_map_message());
 				i_str++;
 			}
-			t_str = 0;
+			i_str = 0;
 		}
 		else
 		{
-			if //func_check_valid_str(arr, i_arr)
+			if (map_check_valid_str(arr, i_arr))
 				return (1);
 		}
 		i_arr++;
