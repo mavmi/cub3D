@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:14:44 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/25 16:42:12 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/26 18:39:34 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 int errors()
 {
-	printf("Error: invalid file arguments\n");
+	printf("Error: invalid file's arguments\n");
 	return (1);
 }
 
 static int	all_agrums_got(t_up_down *arr1, t_textures *arr2)
 {
-	if (arr1->type_count != 2)
-		return (error_texture_message());
-	if (arr2->arg_count != 4)
-		return (error_ud_message());
+	if (arr1->type_count != 2 || arr2->arg_count != 4)
+		return (1);
 	return (0);
 }
 
 int	pars_arg_definition(char **arr)
 {
-	size_t		i_s;
+	int		i_s;
 	size_t		i_e;
 	t_up_down	*ud_arr;
 	t_textures	*txtr_arr;
@@ -42,7 +40,6 @@ int	pars_arg_definition(char **arr)
 	txtr_arr = pars_get_empty_textures();
 	while (arr[i_s])
 	{
-		printf ("%s\n", arr[i_s]);
 		while (arr[i_s][i_e] == SKIP_SPACE)
 		{
 			i_e++;
@@ -51,7 +48,7 @@ int	pars_arg_definition(char **arr)
 			|| arr[i_s][i_e] == WEST_SIDE_ARG || arr[i_s][i_e] == EAST_SIDE_ARG)
 		{
 			//"take new texture elem" function: give me arr[i_s + i_e]
-			if (pars_valid_txtr((arr[i_s + i_e]), txtr_arr))
+			if (pars_valid_txtr((arr[i_s] + i_e), txtr_arr))
 			{
 				pars_destroy_up_down(ud_arr);
 				pars_destroy_textures(txtr_arr);
@@ -62,7 +59,7 @@ int	pars_arg_definition(char **arr)
 		else if (arr[i_s][i_e] == FLOOR_TYPE || arr[i_s][i_e] == CEILING_TYPE)
 		{
 			//"take new up_back elem" function: give me arr[i_s + i_e]
-			if (pars_valid_up_down(arr[i_s + i_e], ud_arr))
+			if (pars_valid_up_down((arr[i_s] + i_e), ud_arr))
 			{
 				pars_destroy_up_down(ud_arr);
 				pars_destroy_textures(txtr_arr);
@@ -75,7 +72,16 @@ int	pars_arg_definition(char **arr)
 					|| arr[i_s][i_e] == MAP_OR_EAST || arr[i_s][i_e] == MAP_OR_WEST)
 		{
 			//"for map" function: give me (arr + i_s)
-			if (map_pars_valid(arr + i_s))
+			int	map_fl;
+
+			map_fl = map_pars_valid(arr + i_s);
+			if(map_fl < 0)
+				i_s = map_fl;
+			else
+				i_s += map_fl;
+			i_e = 0;
+			printf("///////////%d\n", i_s);
+			if (i_s < 0)
 			{
 				pars_destroy_up_down(ud_arr);
 				pars_destroy_textures(txtr_arr);

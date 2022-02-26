@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arg_parser_floor_ceiling.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/26 16:43:03 by msalena           #+#    #+#             */
+/*   Updated: 2022/02/26 18:48:05 by msalena          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/arg_parser.h"
 
 static void	*add_new_ud_elem(size_t *RGB, char *str, t_up_down *arr)
@@ -43,19 +55,19 @@ static size_t	*creat_arr_RGB(char *str)
 	////////
 	while (str[i_str])
 	{
-		if (i_RGB > 3)
+		if (i_RGB >= 3)
 		{
+			if(str[i_str++] == SKIP_SPACE)
+				continue ;
 			return (free_return(RGB_arr, 'y'));
 		}
 		new_elem = ft_atoi(str + i_str);
-		printf ("%c      %d\n", str[i_str], new_elem);
 		if (new_elem < 0 || new_elem > 255 || (new_elem == 0
-				&& (str[i_str] != '0' || str[i_str] != ','//why != ','
-				|| (str[i_str] == ',' && i_str == 0)
+				&& str[i_str] != '0' && str[i_str] != ','
+				&& ((str[i_str] == ',' && i_str == 0)
 				|| (str[i_str] == ',' && str[i_str + 1] == '\0')
 				|| (str[i_str] == ',' && str[i_str + 1] == ','))))
 		{
-			printf ("Dfdfdfdfd\n");
 			return (free_return(RGB_arr, 'y'));
 		}
 		if (new_elem == 0 && str[i_str] != ',')
@@ -87,7 +99,6 @@ int	pars_valid_up_down(char *str, t_up_down *arr)
 	RGB = creat_arr_RGB(str + i);
 	if (!RGB)
 	{
-		printf("/////////////\n");
 		return (1);
 	}
 	if (!add_new_ud_elem(RGB, str, arr))

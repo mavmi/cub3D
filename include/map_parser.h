@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:17:24 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/25 10:28:12 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/26 20:26:20 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_player		t_player;
 typedef struct s_square		t_square;
 typedef struct s_map_line	t_map_line;
 typedef struct s_map		t_map;
+typedef struct s_param_len	t_param_len;
 
 /*
 	Player's info.
@@ -92,6 +93,15 @@ struct s_map
 	t_player	*player;
 	t_map_line	**lines;
 };
+
+struct s_param_len
+{
+	size_t	arr;
+	size_t	str;
+	size_t	up;
+	size_t	down;
+};
+
 
 // parsing_start.c
 t_map		*pars_start(char *path);
