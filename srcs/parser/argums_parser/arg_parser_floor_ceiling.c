@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:43:03 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/27 16:10:09 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/27 17:43:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ static void	*add_new_ud_elem(size_t *RGB, char *str, t_up_down *arr)
 	i = 0;
 	if (arr->type_count == 2)
 	{
+		free(new);
 		return (free_return(RGB, 'y'));
 	}
 	while (i < arr->type_count)
 	{
 		if (new->type == arr->type[i]->type)
+		{
+			free(new);
 			return (free_return(RGB, 'y'));
+		}
 		i++;
 	}
 	arr->type[arr->type_count] = new;
@@ -53,6 +57,9 @@ static size_t	*creat_arr_RGB(char *str)
 		RGB_arr[i_RGB++] = '\0';
 	i_RGB = 0;
 	////////
+	char	*tmp;
+
+	tmp = NULL;
 	while (str[i_str])
 	{
 		if (i_RGB >= 3)
@@ -72,7 +79,9 @@ static size_t	*creat_arr_RGB(char *str)
 		}
 		if (str[i_str] != ',')
 			RGB_arr[i_RGB++] = (size_t)new_elem;
-		i_str += ft_strlen(ft_itoa(new_elem));
+		tmp = ft_itoa(new_elem);
+		i_str += ft_strlen(tmp);
+		free (tmp);
 	}
 
 	return (RGB_arr);

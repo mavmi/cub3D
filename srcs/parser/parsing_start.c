@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:11 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/25 16:42:58 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/27 17:34:28 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static t_map	*pars_read_file(int fd)
 			printf ("%s\n", arr[i]);
 	////////////function which parsing arguments before map////////////
 	printf ("\n~~~~~~~ %d\n", pars_arg_definition(arr));
+	sleep(10);
 	exit (1);
 	map = pars_str_arr_to_map(arr);
 	utils_destroy_str_arr(arr);
