@@ -9,30 +9,33 @@ static int	error_map_message(void)
 static int	map_check_valid_spaces(char **arr, size_t i_arr,
 						size_t i_str, t_param_len *lens)
 {
-	if (i_str > (lens->up - 1) || i_str > (lens->down - 1))
-		return (error_map_message());
-	if (i_str <= (lens->up - 1)   										// check for up elem
+	// printf ("i_arr:%zu   i_str:%zu   l_up:%zu  l_down:%zu\n", i_arr, i_str, lens->up, lens->down);
+	if (lens->up && i_str <= (lens->up - 1)   										// check for up elem
 		&& (arr[i_arr - 1][i_str] != ' ' && arr[i_arr - 1][i_str] != '1'))
 		return (error_map_message());
-	if (i_str <= (lens->down - 1) 										// check for down elem
+	if (lens->down && i_str <= (lens->down - 1) 										// check for down elem
 		&& (arr[i_arr + 1][i_str] != ' ' && arr[i_arr + 1][i_str] != '1'))
 		return (error_map_message());
+
 	// check right side
 	if (arr[i_arr][i_str + 1]      											// check for right elem
 		&& (arr[i_arr][i_str + 1] != ' ' && arr[i_arr][i_str + 1] != '1'))
 		return (error_map_message());
-	if (i_str < (lens->up - 1)    										// check for right_up elem
+	if (lens->up && i_str < (lens->up - 1)    										// check for right_up elem
 		&& (arr[i_arr - 1][i_str + 1] != ' ' && arr[i_arr - 1][i_str + 1] != '1'))
 		return (error_map_message());
-	if (i_str < (lens->down - 1)  										// check for right_down elem
+	if (lens->down && i_str < (lens->down - 1)  										// check for right_down elem
 		&& (arr[i_arr + 1][i_str + 1] != ' ' && arr[i_arr + 1][i_str + 1] != '1'))
 		return (error_map_message());
+
 	// checks left side
-	if ((arr[i_arr][i_str - 1] != ' ' && arr[i_arr][i_str - 1] != '1')) 	// check for left elem
+	if (i_str != 0 && (arr[i_arr][i_str - 1] != ' ' && arr[i_arr][i_str - 1] != '1')) 	// check for left elem
 		return (error_map_message());
-	if ((arr[i_arr - 1][i_str - 1] != ' ' && arr[i_arr - 1][i_str - 1] != '1'))// check for left_up elem
+	if (i_str != 0 && lens->up && i_str <= (lens->up - 1)
+			&& (arr[i_arr - 1][i_str - 1] != ' ' && arr[i_arr - 1][i_str - 1] != '1'))// check for left_up elem
 		return (error_map_message());
-	if ((arr[i_arr + 1][i_str - 1] != ' ' && arr[i_arr + 1][i_str - 1] != '1'))// check for left_down elem
+	if (i_str != 0 && lens->down && i_str <= (lens->down - 1)
+			&& (arr[i_arr + 1][i_str - 1] != ' ' && arr[i_arr + 1][i_str - 1] != '1'))// check for left_down elem
 		return (error_map_message());
 	return (0);
 }
@@ -131,6 +134,8 @@ int	map_pars_valid(char **arr)
 			lens.up = ft_strlen(arr[i_arr - 1]);
 		if (i_arr != (lens.arr - 1))
 			lens.down = ft_strlen(arr[i_arr + 1]);
+		else
+			lens.down = 0;
 		if (map_check_str_end(arr, i_arr, &lens) < 0)
 		{
 			return (-1);
@@ -141,6 +146,11 @@ int	map_pars_valid(char **arr)
 			{
 				if (arr[i_arr][i_str] != '1' && arr[i_arr][i_str] != ' ')
 					return (error_map_message()); //check argums to anvalid spaces
+				if (arr[i_arr][i_str] == ' ')
+				{
+					if (map_check_valid_spaces(arr, i_arr, i_str, &lens) < 0)
+						return (-1);
+				}
 				i_str++;
 			}
 			i_str = 0;

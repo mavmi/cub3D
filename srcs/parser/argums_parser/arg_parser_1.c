@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:14:44 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/26 18:39:34 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/27 15:57:58 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,24 @@ static int	all_agrums_got(t_up_down *arr1, t_textures *arr2)
 {
 	if (arr1->type_count != 2 || arr2->arg_count != 4)
 		return (1);
-	return (0);
+	if (arr2->arg[0]->side == NORTH_SIDE_ARG)
+	{
+		if (arr2->arg[1]->side == SOUTH_SIDE_ARG)
+		{
+			if (arr2->arg[2]->side == WEST_SIDE_ARG)
+			{
+				if (arr2->arg[3]->side == EAST_SIDE_ARG)
+				{
+					if (arr1->type[0]->type == FLOOR_TYPE)
+					{
+						if (arr1->type[1]->type == CEILING_TYPE)
+							return (0);
+					}
+				}
+			}
+		}
+	}
+	return (1);
 }
 
 int	pars_arg_definition(char **arr)
@@ -43,8 +60,13 @@ int	pars_arg_definition(char **arr)
 		while (arr[i_s][i_e] == SKIP_SPACE)
 		{
 			i_e++;
+			// printf ("elem:%c   i_e:%zu\n", arr[i_s][i_e], i_e);
 		}
-		if (arr[i_s][i_e] == NORTH_SIDE_ARG || arr[i_s][i_e] == SOUTH_SIDE_ARG
+		if (arr[i_s][i_e] == '\0')
+		{
+			i_e = 0;
+		}
+		else if (arr[i_s][i_e] == NORTH_SIDE_ARG || arr[i_s][i_e] == SOUTH_SIDE_ARG
 			|| arr[i_s][i_e] == WEST_SIDE_ARG || arr[i_s][i_e] == EAST_SIDE_ARG)
 		{
 			//"take new texture elem" function: give me arr[i_s + i_e]
@@ -80,7 +102,6 @@ int	pars_arg_definition(char **arr)
 			else
 				i_s += map_fl;
 			i_e = 0;
-			printf("///////////%d\n", i_s);
 			if (i_s < 0)
 			{
 				pars_destroy_up_down(ud_arr);
@@ -101,13 +122,9 @@ int	pars_arg_definition(char **arr)
 			}
 			return (0);
 		}
-		else if (arr[i_s][i_e] == '\0')
-		{
-			i_s++;
-			continue ;
-		}
 		else
 		{
+			printf ("elem:%c   i_e:%zu\n", arr[i_s][i_e], i_e);
 			pars_destroy_up_down(ud_arr);
 			pars_destroy_textures(txtr_arr);
 			printf("5\n");

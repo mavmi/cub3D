@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:43:03 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/26 18:48:05 by msalena          ###   ########.fr       */
+/*   Updated: 2022/02/27 16:10:09 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,16 @@ static size_t	*creat_arr_RGB(char *str)
 		}
 		new_elem = ft_atoi(str + i_str);
 		if (new_elem < 0 || new_elem > 255 || (new_elem == 0
-				&& str[i_str] != '0' && str[i_str] != ','
+				&& str[i_str] != '0'
 				&& ((str[i_str] == ',' && i_str == 0)
 				|| (str[i_str] == ',' && str[i_str + 1] == '\0')
 				|| (str[i_str] == ',' && str[i_str + 1] == ','))))
 		{
 			return (free_return(RGB_arr, 'y'));
 		}
-		if (new_elem == 0 && str[i_str] != ',')
+		if (str[i_str] != ',')
 			RGB_arr[i_RGB++] = (size_t)new_elem;
 		i_str += ft_strlen(ft_itoa(new_elem));
-		if (str[i_str] == ',')
-			i_str++;
 	}
 
 	return (RGB_arr);
