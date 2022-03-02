@@ -69,11 +69,11 @@ struct	s_argums
 
 // arg_parser_textures.c
 
-int	pars_valid_txtr(char *str, t_textures *arr);
+int			pars_valid_txtr(char *str, t_textures *arr);
 
 // arg_parser_floor&ceiling.c
 
-int	pars_valid_up_down(char *str, t_up_down *arr);
+int			pars_valid_up_down(char *str, t_up_down *arr);
 
 // arg_parser_getters.c
 
@@ -85,10 +85,10 @@ t_up_down	*pars_get_empty_up_down(void);
 
 //arg_parser_destroyers.c
 
-void	pars_destroy_txtr_arg(t_txtr_arg *destroyed);
-void	pars_destroy_textures(t_textures *destroyed);
-void	pars_destroy_ud_type(t_ud_type *destroyed);
-void	pars_destroy_up_down(t_up_down *destroyed);
+void		pars_destroy_txtr_arg(t_txtr_arg *destroyed);
+void		pars_destroy_textures(t_textures *destroyed);
+void		pars_destroy_ud_type(t_ud_type *destroyed);
+void		pars_destroy_up_down(t_up_down *destroyed);
 
 
 

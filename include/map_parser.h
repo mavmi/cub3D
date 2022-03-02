@@ -108,27 +108,27 @@ t_map		*pars_start(char *path);
 
 // parsing_valid_check.c
 
-int	pars_arg_definition(char **arr);
+int			pars_arg_definition(char **arr);
 
 //parsing_utils.c
 
-int	check_other_three_elems(char *str);
-size_t	arr_size_before_empty_str(char **arr);
+int			check_other_three_elems(char *str);
+size_t		arr_size_before_empty_str(char **arr);
 
 
 //parsing_errors.c
 
-int	errors(void);
-int	error_texture_message(void);
-int	error_ud_message(void);
-void	*free_return(size_t *freed, char sms_fl);
-int	error_destroy(t_ud_type *ud_arr, t_textures *txtr_arr, char error_message);
+int			errors(void);
+int			error_texture_message(void);
+int			error_ud_message(void);
+void		*free_return(size_t *freed, char sms_fl);
+int			error_destroy(t_ud_type *ud_arr, t_textures *txtr_arr, char error_message);
 
 ///////////////////////////////////////////////
 
 // map_parser_valid.c
 
-int	map_pars_valid(char **arr);
+int			map_pars_valid(char **arr);
 
 // map_parser_convert_1.c
 t_square	*pars_char_to_square(t_map *map, char c, int x, int y);

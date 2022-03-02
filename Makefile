@@ -49,11 +49,12 @@ SRCS				=	$(addprefix $(SRCS_DIR)/, main.c)\
 								painting_ray_4.c painting_ray_5.c painting_ray_6.c painting_ray_7.c)\
 						$(addprefix $(PAINTING_ROOM_DIR)/, painting_room_1.c painting_room_2.c)\
 						\
-						$(addprefix $(PARSER_DIR)/, parsing_start.c parsing_utils.c)\
+						$(addprefix $(PARSER_DIR)/, parsing_start.c parsing_utils.c parsing_errors.c\
+								parsing_valid_check.c)\
 						$(addprefix $(PARSER_MAP_DIR)/map_, parser_convert_1.c parser_convert_2.c\
 								parser_destroyers.c parser_getters.c parser_utils_1.c parser_valid.c)\
-						$(addprefix $(PARSER_ARGUMS_DIR)/arg_, parser_1.c parser_destroyers.c\
-								parser_floor_ceiling.c parser_getters.c parser_textures.c)\
+						$(addprefix $(PARSER_ARGUMS_DIR)/arg_, parser_destroyers.c parser_floor_ceiling.c\
+								 parser_getters.c parser_textures.c)\
 						\
 						$(addprefix $(UTILS_DIR)/, utils_1.c utils_2.c)
 OBJS				=	$(SRCS:.c=.o)
