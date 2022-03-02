@@ -33,19 +33,9 @@ size_t	arr_size_before_empty_str(char **arr)
 	len = 0;
 	if (!arr)
 		return (len);
-	while (arr[len][0])// if we take empty str
+	while (arr[len][0])
 	{
 		len++;
 	}
 	return (len);
-}
-
-int	error_destroy(t_argums *args, char error_message)
-{
-	pars_destroy_up_down(args->ud_arr);
-	pars_destroy_textures(args->txtr_arr);
-	if (error_message == 'y')
-		return (errors());
-	else
-		return (1);
 }

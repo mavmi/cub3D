@@ -114,15 +114,15 @@ int	pars_arg_definition(char **arr);
 
 int	check_other_three_elems(char *str);
 size_t	arr_size_before_empty_str(char **arr);
-int	error_destroy(t_ud_type *ud_arr, t_textures *txtr_arr, char error_message)
 
 
 //parsing_errors.c
 
-int	errors();
+int	errors(void);
 int	error_texture_message(void);
 int	error_ud_message(void);
 void	*free_return(size_t *freed, char sms_fl);
+int	error_destroy(t_ud_type *ud_arr, t_textures *txtr_arr, char error_message);
 
 ///////////////////////////////////////////////
 

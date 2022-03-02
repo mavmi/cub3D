@@ -40,49 +40,79 @@ static void	*add_new_ud_elem(size_t *RGB, char *str, t_up_down *arr)
 	return (new);
 }
 
+static int	check_valid_RGB_str(size_t *RGB_arr, char *tmp, char *s)
+{
+	size_t	i;
+	size_t	i_RGB;
+	int		new_el;
+
+	i = 0;
+	i_RGB = 0;
+	while (s[i])
+	{
+		if (i_RGB >= 3)
+		{
+			if(s[i++] == SKIP_SPACE)
+				continue ;
+			return (free_return(RGB_arr, 'y'));
+		}
+		new_el = ft_atoi(s + i);
+		if (new_el < 0 || new_el > 255 || (new_el == 0 && s[i] != '0'
+				&& ((s[i] == ',' && i == 0) || (s[i] == ',' && s[i + 1] == '\0')
+				|| (s[i] == ',' && s[i + 1] == ','))))
+			return (free_return(RGB_arr, 'y'));
+		if (s[i] != ',')
+			RGB_arr[i_RGB++] = (size_t)new_el;
+		tmp = ft_itoa(new_el);
+		i += ft_strlen(tmp);
+		free (tmp);
+	}
+	return (0);
+}
+
 static size_t	*creat_arr_RGB(char *str)
 {
-	size_t	i_str;
 	size_t	i_RGB;
-	int		new_elem;
 	size_t	*RGB_arr;
+	char	*tmp;
 
-	i_str = 0;
 	i_RGB = 0;
+	tmp = NULL;
 	///////
 	RGB_arr = (size_t *)malloc(sizeof(size_t) * 4);
 	if (!RGB_arr)
 		return (free_return(NULL, 'n'));
 	while (i_RGB < 4)
 		RGB_arr[i_RGB++] = '\0';
-	i_RGB = 0;
 	////////
-	char	*tmp;
+	if (check_valid_RGB_str(RGB_arr, tmp, s))
+		return (1);
+	// char	*tmp;
 
-	tmp = NULL;
-	while (str[i_str])
-	{
-		if (i_RGB >= 3)
-		{
-			if(str[i_str++] == SKIP_SPACE)
-				continue ;
-			return (free_return(RGB_arr, 'y'));
-		}
-		new_elem = ft_atoi(str + i_str);
-		if (new_elem < 0 || new_elem > 255 || (new_elem == 0
-				&& str[i_str] != '0'
-				&& ((str[i_str] == ',' && i_str == 0)
-				|| (str[i_str] == ',' && str[i_str + 1] == '\0')
-				|| (str[i_str] == ',' && str[i_str + 1] == ','))))
-		{
-			return (free_return(RGB_arr, 'y'));
-		}
-		if (str[i_str] != ',')
-			RGB_arr[i_RGB++] = (size_t)new_elem;
-		tmp = ft_itoa(new_elem);
-		i_str += ft_strlen(tmp);
-		free (tmp);
-	}
+	// tmp = NULL;
+	// while (str[i_str])
+	// {
+	// 	if (i_RGB >= 3)
+	// 	{
+	// 		if(str[i_str++] == SKIP_SPACE)
+	// 			continue ;
+	// 		return (free_return(RGB_arr, 'y'));
+	// 	}
+	// 	new_elem = ft_atoi(str + i_str);
+	// 	if (new_elem < 0 || new_elem > 255 || (new_elem == 0
+	// 			&& str[i_str] != '0'
+	// 			&& ((str[i_str] == ',' && i_str == 0)
+	// 			|| (str[i_str] == ',' && str[i_str + 1] == '\0')
+	// 			|| (str[i_str] == ',' && str[i_str + 1] == ','))))
+	// 	{
+	// 		return (free_return(RGB_arr, 'y'));
+	// 	}
+	// 	if (str[i_str] != ',')
+	// 		RGB_arr[i_RGB++] = (size_t)new_elem;
+	// 	tmp = ft_itoa(new_elem);
+	// 	i_str += ft_strlen(tmp);
+	// 	free (tmp);
+	// }
 
 	return (RGB_arr);
 }
@@ -95,13 +125,13 @@ int	pars_valid_up_down(char *str, t_up_down *arr)
 	i = 1;
 	if (!str || !arr)
 		return (2);
-	if (ft_memchr(str, FLOOR_TYPE, 1) != 0 && ft_memchr(str, CEILING_TYPE, 1) != 0)
+	if (ft_memchr(str, FLOOR, 1) != 0 && ft_memchr(str, CEILING, 1) != 0)
 		return (error_ud_message());
 	while (str[i] == SKIP_SPACE)
 		i++;
 	if (!str[i])
 		return (error_ud_message());
-	if (check_other_three_elems(str + i)) //other three digit protection
+	if (check_other_three_elems(str + i))
 		return (1);
 	RGB = creat_arr_RGB(str + i);
 	if (!RGB)
