@@ -1,30 +1,5 @@
 #include "../../include/arg_parser.h"
 
-int	error_texture_message(void)
-{
-	printf("Error: invalid texture arguments \n");
-	return (1);
-}
-
-int	error_ud_message(void)
-{
-	printf("Error: invalid floor/ceiling arguments\n");
-	return (1);
-}
-
-
-/*
-	Free freed and input sms about
-	invalide argums if sms_fl == 'y'
-*/
-void	*free_return(size_t *freed, char sms_fl)
-{
-	if (sms_fl && sms_fl == 'y')
-		error_ud_message();
-	free(freed);
-	return (NULL);
-}
-
 /*
 	Checks the floor and ceiling digit colors
 	aren't bigger then three ints (hundredth place)
@@ -63,4 +38,14 @@ size_t	arr_size_before_empty_str(char **arr)
 		len++;
 	}
 	return (len);
+}
+
+int	error_destroy(char error_message)
+{
+	pars_destroy_up_down(ud_arr);
+	pars_destroy_textures(txtr_arr);
+	if (error_message == 'y')
+		return (errors());
+	else
+		return (1);
 }

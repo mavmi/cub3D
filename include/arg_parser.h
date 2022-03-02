@@ -60,10 +60,6 @@ struct s_up_down
 	size_t		type_count;
 };
 
-// arg_parser_1.c
-
-int	pars_arg_definition(char **arr);
-
 // arg_parser_textures.c
 
 int	pars_valid_txtr(char *str, t_textures *arr);

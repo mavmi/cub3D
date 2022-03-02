@@ -106,14 +106,23 @@ struct s_param_len
 // parsing_start.c
 t_map		*pars_start(char *path);
 
+// parsing_valid_check.c
+
+int	pars_arg_definition(char **arr);
+
 //parsing_utils.c
 
+int	check_other_three_elems(char *str);
+size_t	arr_size_before_empty_str(char **arr);
+int	error_destroy(char error_message);
+
+
+//parsing_errors.c
+
+int	errors();
 int	error_texture_message(void);
 int	error_ud_message(void);
 void	*free_return(size_t *freed, char sms_fl);
-int	check_other_three_elems(char *str);
-size_t	arr_size_before_empty_str(char **arr);
-
 
 ///////////////////////////////////////////////
 
