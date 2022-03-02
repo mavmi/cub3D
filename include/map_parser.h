@@ -114,7 +114,7 @@ int	pars_arg_definition(char **arr);
 
 int	check_other_three_elems(char *str);
 size_t	arr_size_before_empty_str(char **arr);
-int	error_destroy(char error_message);
+int	error_destroy(t_ud_type *ud_arr, t_textures *txtr_arr, char error_message)
 
 
 //parsing_errors.c

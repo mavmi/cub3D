@@ -18,18 +18,19 @@
 
 # define SKIP_SPACE ' '
 
-# define NORTH_SIDE_ARG 'N'
-# define SOUTH_SIDE_ARG 'S'
-# define WEST_SIDE_ARG 'W'
-# define EAST_SIDE_ARG 'E'
+# define NO_SIDE 'N'
+# define SO_SIDE 'S'
+# define WE_SIDE 'W'
+# define EA_SIDE 'E'
 
-# define FLOOR_TYPE 'F'
-# define CEILING_TYPE 'C'
+# define FLOOR 'F'
+# define CEILING 'C'
 
 typedef struct s_txtr_arg	t_txtr_arg;
 typedef struct s_textures	t_textures;
 typedef struct s_ud_type	t_ud_type;
 typedef struct s_up_down	t_up_down;
+typedef struct s_argums		t_argums;
 
 
 struct s_txtr_arg
@@ -58,6 +59,12 @@ struct s_up_down
 {
 	t_ud_type	**type;
 	size_t		type_count;
+};
+
+struct	s_argums
+{
+	t_up_down	*ud_arr;
+	t_textures	*txtr_arr;
 };
 
 // arg_parser_textures.c

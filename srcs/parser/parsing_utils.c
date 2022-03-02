@@ -40,10 +40,10 @@ size_t	arr_size_before_empty_str(char **arr)
 	return (len);
 }
 
-int	error_destroy(char error_message)
+int	error_destroy(t_argums *args, char error_message)
 {
-	pars_destroy_up_down(ud_arr);
-	pars_destroy_textures(txtr_arr);
+	pars_destroy_up_down(args->ud_arr);
+	pars_destroy_textures(args->txtr_arr);
 	if (error_message == 'y')
 		return (errors());
 	else
