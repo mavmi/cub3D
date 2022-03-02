@@ -49,7 +49,6 @@ static int	check_map(char **arr, int *i_s, size_t *i_e, t_argums *args)
 	*i_e = 0;
 	if (*i_s < 0)
 	{
-		printf("3\n");
 		return (error_destroy(args, 'n'));
 	}
 	while (arr[*i_s] && arr[*i_s][*i_e] == '\0')
@@ -58,7 +57,6 @@ static int	check_map(char **arr, int *i_s, size_t *i_e, t_argums *args)
 	}
 	if (arr[*i_s] || all_agrums_got(args)
 	{
-		printf("4\n");
 		return (error_destroy(args, 'y'));
 	}
 	return (0);
@@ -67,47 +65,31 @@ static int	check_map(char **arr, int *i_s, size_t *i_e, t_argums *args)
 static int	check_every_str(char **arr, int *i_s, size_t *i_e, t_argums *args)
 {
 	if (arr[*i_s][*i_e] == '\0')
-	{
 		*i_e = 0;
-	}
 	else if (arr[*i_s][*i_e] == NO_SIDE || arr[*i_s][*i_e] == SO_SIDE
 			|| arr[*i_s][*i_e] == WE_SIDE || arr[*i_s][*i_e] == EA_SIDE)
 	{
-		//"take new texture elem" function: give me arr[i_s + i_e]
 		if (pars_valid_txtr((arr[*i_s] + i_e), args->txtr_arr))
-		{
-			printf("1\n");
 			return (error_destroy(args, 'n'));
-		}
 	}
 	else if (arr[*i_s][*i_e] == FLOOR || arr[*i_s][*i_e] == CEILING)
 	{
-		//"take new up_back elem" function: give me arr[i_s + i_e]
 		if (pars_valid_up_down((arr[*i_s] + i_e), args->ud_arr))
-		{
-			printf("2\n");
 			return (error_destroy(args, 'n'));
-		}
 	}
 	else if (arr[*i_s][*i_e] == MAP_SQ_EMPTY || arr[*i_s][*i_e] == MAP_SQ_WALL
 				|| arr[*i_s][*i_e] == MAP_OR_NORTH || arr[*i_s][*i_e] == MAP_OR_SOUTH
 				|| arr[*i_s][*i_e] == MAP_OR_EAST || arr[*i_s][*i_e] == MAP_OR_WEST)
 	{
-		//"for map" function: give me (arr + i_s)
 		if (check_map(arr, i_s, i_e, args))
-		{
 			return (1);
-		}
 		///tmp///
 		pars_destroy_up_down(args->ud_arr);
 		pars_destroy_textures(args->txtr_arr);
 		return (0);
 	}
 	else
-	{
-		printf("5\n");
 		return (error_destroy(argums, 'y'));
-	}
 	return (0);
 }
 
@@ -138,6 +120,5 @@ int	pars_arg_definition(char **arr)
 		i_e = 0;
 		i_s++;
 	}
-	printf("6\n");
 	return (error_destroy (argums, 'y'));
 }
