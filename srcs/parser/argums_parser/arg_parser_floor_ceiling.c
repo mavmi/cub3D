@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:43:03 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/27 17:43:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/04 20:10:03 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/arg_parser.h"
+#include "../../../include/main_parser.h"
 
 static void	*add_new_ud_elem(size_t *RGB, char *str, t_up_down *arr)
 {
@@ -40,7 +40,7 @@ static void	*add_new_ud_elem(size_t *RGB, char *str, t_up_down *arr)
 	return (new);
 }
 
-static int	check_valid_RGB_str(size_t *RGB_arr, char *tmp, char *s)
+static void	*check_valid_RGB_str(size_t *RGB_arr, char *tmp, char *s)
 {
 	size_t	i;
 	size_t	i_RGB;
@@ -67,7 +67,7 @@ static int	check_valid_RGB_str(size_t *RGB_arr, char *tmp, char *s)
 		i += ft_strlen(tmp);
 		free (tmp);
 	}
-	return (0);
+	return (RGB_arr);
 }
 
 static size_t	*creat_arr_RGB(char *str)
@@ -83,8 +83,8 @@ static size_t	*creat_arr_RGB(char *str)
 		return (free_return(NULL, 'n'));
 	while (i_RGB < 4)
 		RGB_arr[i_RGB++] = '\0';
-	if (check_valid_RGB_str(RGB_arr, tmp, s))
-		return (1);
+	if (!check_valid_RGB_str(RGB_arr, tmp, str))
+		return (NULL);
 	return (RGB_arr);
 }
 

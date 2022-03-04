@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_parser_getters.c                                 :+:      :+:    :+:   */
+/*   map_parser_getters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:10:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/13 15:51:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/04 19:52:34 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/map_parser.h"
+#include "../../../include/main_parser.h"
 
 /*
 	Create new t_player object and

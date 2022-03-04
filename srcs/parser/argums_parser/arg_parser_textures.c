@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 13:46:29 by marvin            #+#    #+#             */
-/*   Updated: 2022/02/27 15:42:10 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/04 19:52:51 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/arg_parser.h"
+#include "../../../include/main_parser.h"
 
 static char	*take_path(char *str, size_t *start)
 {

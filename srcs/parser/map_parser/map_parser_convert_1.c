@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_parser_convert_1.c                               :+:      :+:    :+:   */
+/*   map_parser_convert_1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:43:34 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/13 15:51:01 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/04 19:52:47 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/map_parser.h"
+#include "../../../include/main_parser.h"
 
 /*
 	Check if current char is player's char.

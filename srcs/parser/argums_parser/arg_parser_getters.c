@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:50:46 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/27 15:36:41 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/04 19:52:55 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/arg_parser.h"
+#include "../../../include/main_parser.h"
 
 t_txtr_arg	*pars_get_new_txtr_arg(char side, char *path)
 {

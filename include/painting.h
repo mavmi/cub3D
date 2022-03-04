@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/13 16:06:01 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/04 20:03:49 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 
-# include "map_parser.h"
-# include "painting.h"
 # include "geometry.h"
+# include "main_parser.h"
 
 # define MOUSE_HIDE 1
 # define PL_STEP 0.37

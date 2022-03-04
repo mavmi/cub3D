@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_parser_1.c                                     :+:      :+:    :+:   */
+/*   parsing_valid_check.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:14:44 by msalena           #+#    #+#             */
-/*   Updated: 2022/02/27 17:35:30 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/04 19:32:05 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/arg_parser.h"
+#include "../../include/main_parser.h"
 
 
 static int	all_agrums_got(t_argums *args)
 {
 	if (args->ud_arr->type_count != 2 || args->txtr_arr->arg_count != 4)
 		return (1);
-	if (args->txtr_arr->arg[0]->side == NORTH_SIDE_ARG)
+	if (args->txtr_arr->arg[0]->side == NO_SIDE)
 	{
-		if (args->txtr_arr->arg[1]->side == SOUTH_SIDE_ARG)
+		if (args->txtr_arr->arg[1]->side == SO_SIDE)
 		{
-			if (args->txtr_arr->arg[2]->side == WEST_SIDE_ARG)
+			if (args->txtr_arr->arg[2]->side == WE_SIDE)
 			{
-				if (args->txtr_arr->arg[3]->side == EAST_SIDE_ARG)
+				if (args->txtr_arr->arg[3]->side == EA_SIDE)
 				{
-					if (args->ud_arr->type[0]->type == FLOOR_TYPE)
+					if (args->ud_arr->type[0]->type == FLOOR)
 					{
-						if (args->ud_arr->type[1]->type == CEILING_TYPE)
+						if (args->ud_arr->type[1]->type == CEILING)
 							return (0);
 					}
 				}
@@ -55,7 +55,7 @@ static int	check_map(char **arr, int *i_s, size_t *i_e, t_argums *args)
 	{
 		i_s++;
 	}
-	if (arr[*i_s] || all_agrums_got(args)
+	if (arr[*i_s] || all_agrums_got(args))
 	{
 		return (error_destroy(args, 'y'));
 	}
@@ -69,12 +69,12 @@ static int	check_every_str(char **arr, int *i_s, size_t *i_e, t_argums *args)
 	else if (arr[*i_s][*i_e] == NO_SIDE || arr[*i_s][*i_e] == SO_SIDE
 			|| arr[*i_s][*i_e] == WE_SIDE || arr[*i_s][*i_e] == EA_SIDE)
 	{
-		if (pars_valid_txtr((arr[*i_s] + i_e), args->txtr_arr))
+		if (pars_valid_txtr((arr[*i_s] + *i_e), args->txtr_arr))
 			return (error_destroy(args, 'n'));
 	}
 	else if (arr[*i_s][*i_e] == FLOOR || arr[*i_s][*i_e] == CEILING)
 	{
-		if (pars_valid_up_down((arr[*i_s] + i_e), args->ud_arr))
+		if (pars_valid_up_down((arr[*i_s] + *i_e), args->ud_arr))
 			return (error_destroy(args, 'n'));
 	}
 	else if (arr[*i_s][*i_e] == MAP_SQ_EMPTY || arr[*i_s][*i_e] == MAP_SQ_WALL
@@ -89,7 +89,7 @@ static int	check_every_str(char **arr, int *i_s, size_t *i_e, t_argums *args)
 		return (0);
 	}
 	else
-		return (error_destroy(argums, 'y'));
+		return (error_destroy(args, 'y'));
 	return (0);
 }
 
@@ -106,7 +106,7 @@ int	pars_arg_definition(char **arr)
 	ud_arr = pars_get_empty_up_down();
 	txtr_arr = pars_get_empty_textures();
 	if (!ud_arr || !txtr_arr)
-		return (error_destroy(argums, 'n'));
+		return (error_destroy(&argums, 'n'));
 	argums.ud_arr = ud_arr;
 	argums.txtr_arr = txtr_arr;
 	i_s = 0;
@@ -115,10 +115,10 @@ int	pars_arg_definition(char **arr)
 	{
 		while (arr[i_s][i_e] == SKIP_SPACE)
 			i_e++;
-		if (check_every_str(arr, &i_s, &i_e, argums))
+		if (check_every_str(arr, &i_s, &i_e, &argums))
 			return (1);
 		i_e = 0;
 		i_s++;
 	}
-	return (error_destroy (argums, 'y'));
+	return (error_destroy (&argums, 'y'));
 }
