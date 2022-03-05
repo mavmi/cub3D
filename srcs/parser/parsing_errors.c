@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:26:52 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/04 19:26:53 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/05 19:22:28 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,12 @@ int	error_ud_message(void)
 	return (1);
 }
 
-/*
-	Free freed and input sms about
-	invalide argums if sms_fl == 'y'
-*/
-void	*free_return(size_t *freed, char sms_fl)
-{
-	if (sms_fl && sms_fl == 'y')
-		error_ud_message();
-	free(freed);
-	return (NULL);
-}
 
+int	error_map_message(void)
+{
+	printf("Error: invalid map \n");
+	return (-1);
+}
 
 int	error_destroy(t_argums *args, char error_message)
 {

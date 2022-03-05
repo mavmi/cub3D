@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:48:43 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/04 19:48:44 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/05 19:22:14 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ int	check_other_three_elems(char *str)
 	return (0);
 }
 
+/*
+	Free freed and input sms about
+	invalide argums if sms_fl == 'y'
+*/
+void	*free_return(size_t *freed, char sms_fl)
+{
+	if (sms_fl && sms_fl == 'y')
+		error_ud_message();
+	free(freed);
+	return (NULL);
+}
 
 size_t	arr_size_before_empty_str(char **arr)
 {

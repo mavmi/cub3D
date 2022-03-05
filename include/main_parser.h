@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:20:56 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/04 20:04:21 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/05 19:22:55 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "utils.h"
 # include "geometry.h"
 # include "get_next_line.h"
-// # include "painting.h"
 # include "../libft/libft.h"
 
 # define BAD_SQ_TYPE '-'
@@ -171,6 +170,7 @@ int			pars_arg_definition(char **arr);
 
 int			check_other_three_elems(char *str);
 size_t		arr_size_before_empty_str(char **arr);
+void		*free_return(size_t *freed, char sms_fl);
 
 
 //parsing_errors.c
@@ -178,7 +178,7 @@ size_t		arr_size_before_empty_str(char **arr);
 int			errors(void);
 int			error_texture_message(void);
 int			error_ud_message(void);
-void		*free_return(size_t *freed, char sms_fl);
+int			error_map_message(void);
 int			error_destroy(t_argums *args, char error_message);
 
 

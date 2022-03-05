@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:14:44 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/04 19:32:05 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/05 19:42:15 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	all_agrums_got(t_argums *args)
 	return (1);
 }
 
-static int	check_map(char **arr, int *i_s, size_t *i_e, t_argums *args)
+static int	check_map(char **arr, int *i_s, int *i_e, t_argums *args)
 {
 	int	map_fl;
 
@@ -53,7 +53,7 @@ static int	check_map(char **arr, int *i_s, size_t *i_e, t_argums *args)
 	}
 	while (arr[*i_s] && arr[*i_s][*i_e] == '\0')
 	{
-		i_s++;
+		(*i_s)++;
 	}
 	if (arr[*i_s] || all_agrums_got(args))
 	{
@@ -62,7 +62,7 @@ static int	check_map(char **arr, int *i_s, size_t *i_e, t_argums *args)
 	return (0);
 }
 
-static int	check_every_str(char **arr, int *i_s, size_t *i_e, t_argums *args)
+static int	check_every_str(char **arr, int *i_s, int *i_e, t_argums *args)
 {
 	if (arr[*i_s][*i_e] == '\0')
 		*i_e = 0;
@@ -86,39 +86,44 @@ static int	check_every_str(char **arr, int *i_s, size_t *i_e, t_argums *args)
 		///tmp///
 		pars_destroy_up_down(args->ud_arr);
 		pars_destroy_textures(args->txtr_arr);
-		return (0);
+		return (-1);
 	}
 	else
 		return (error_destroy(args, 'y'));
 	return (0);
 }
 
+static int	take_memory_argums(t_argums *argums)
+{
+	argums->ud_arr = pars_get_empty_up_down();
+	argums->txtr_arr = pars_get_empty_textures();
+	if (!argums->ud_arr || !argums->txtr_arr)
+		return (error_destroy(argums, 'n'));
+	return (0);
+}
+
 int	pars_arg_definition(char **arr)
 {
 	int			i_s;
-	size_t		i_e;
-	t_up_down	*ud_arr;
-	t_textures	*txtr_arr;
+	int			i_e;
 	t_argums	argums;
 
 	if (!arr)
+		return (2);
+	if (take_memory_argums(&argums))
 		return (1);
-	ud_arr = pars_get_empty_up_down();
-	txtr_arr = pars_get_empty_textures();
-	if (!ud_arr || !txtr_arr)
-		return (error_destroy(&argums, 'n'));
-	argums.ud_arr = ud_arr;
-	argums.txtr_arr = txtr_arr;
 	i_s = 0;
 	i_e = 0;
 	while (arr[i_s])
 	{
 		while (arr[i_s][i_e] == SKIP_SPACE)
 			i_e++;
-		if (check_every_str(arr, &i_s, &i_e, &argums))
-			return (1);
+		i_e = check_every_str(arr, &i_s, &i_e, &argums);
+		if (i_e != 0)
+			return ((1 + i_e) / 2);
 		i_e = 0;
-		i_s++;
+		if (arr[i_s])
+			i_s++;
 	}
 	return (error_destroy (&argums, 'y'));
 }

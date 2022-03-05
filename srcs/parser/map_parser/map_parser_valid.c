@@ -6,17 +6,12 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:52:10 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/04 19:52:17 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/05 20:02:27 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/main_parser.h"
 
-static int	error_map_message(void)
-{
-	printf("Error: invalid map \n");
-	return (-1);
-}
 
 static int	map_check_valid_spaces(char **arr, size_t i_arr,
 						size_t i_str, t_param_len *lens)
@@ -99,6 +94,10 @@ static int	map_check_valid_str(char **arr, size_t i_arr, t_param_len *lens)
 	return (0);
 }
 
+/*
+	Checks all end elems in one str.
+	Their should be just " " or "1"
+*/
 static int	map_check_str_end(char **arr, size_t i_arr, t_param_len *lens)
 {
 	size_t	i;
@@ -126,53 +125,63 @@ static int	map_check_str_end(char **arr, size_t i_arr, t_param_len *lens)
 	return (0);
 }
 
+static void	take_str_lens(size_t i_arr, char **arr, t_param_len	*lens)
+{
+	lens->str = ft_strlen(arr[i_arr]);
+	if (i_arr != 0)
+		lens->up = ft_strlen(arr[i_arr - 1]);
+	if (i_arr != (lens->arr - 1))
+		lens->down = ft_strlen(arr[i_arr + 1]);
+	else
+		lens->down = 0;
+}
+
+static int	check_str_valid(size_t *i_arr, char **arr, t_param_len *lens)
+{
+	size_t		i_str;
+
+	i_str = 0;
+	take_str_lens(*i_arr, arr, lens);
+	if (map_check_str_end(arr, *i_arr, lens) < 0)
+		return (-1);
+	if (*i_arr == 0 || *i_arr == (lens->arr - 1)) // first or last str
+	{
+		while (arr[*i_arr][i_str])
+		{
+			if (arr[*i_arr][i_str] != '1' && arr[*i_arr][i_str] != ' ')
+				return (error_map_message()); //check argums to anvalid spaces
+			i_str++;
+		}
+		i_str = 0;
+	}
+	else
+	{
+		if (map_check_valid_str(arr, *i_arr, lens) < 0)
+			return (-1);
+	}
+	(*i_arr)++;
+	return (0);
+}
+
 int	map_pars_valid(char **arr)
 {
 	size_t		i_arr;
-	size_t		i_str;
 	t_param_len	lens;
+	int			valid;
 
 	if (!arr)
 		return (2);
 	i_arr = 0;
-	i_str = 0;
 	lens.arr = arr_size_before_empty_str(arr);
 	lens.up = 0;
 	lens.down = 0;
 	while (i_arr < lens.arr)
 	{
-		lens.str = ft_strlen(arr[i_arr]);
-		if (i_arr != 0)
-			lens.up = ft_strlen(arr[i_arr - 1]);
-		if (i_arr != (lens.arr - 1))
-			lens.down = ft_strlen(arr[i_arr + 1]);
-		else
-			lens.down = 0;
-		if (map_check_str_end(arr, i_arr, &lens) < 0)
-		{
+		valid = check_str_valid(&i_arr, arr, &lens);
+		if (valid > 0)
+			return (1);
+		else if (valid < 0)
 			return (-1);
-		}
-		if (i_arr == 0 || i_arr == (lens.arr - 1)) // first or last str
-		{
-			while (arr[i_arr][i_str])
-			{
-				if (arr[i_arr][i_str] != '1' && arr[i_arr][i_str] != ' ')
-					return (error_map_message()); //check argums to anvalid spaces
-				if (arr[i_arr][i_str] == ' ')
-				{
-					if (map_check_valid_spaces(arr, i_arr, i_str, &lens) < 0)
-						return (-1);
-				}
-				i_str++;
-			}
-			i_str = 0;
-		}
-		else
-		{
-			if (map_check_valid_str(arr, i_arr, &lens) < 0)
-				return (-1);
-		}
-		i_arr++;
 	}
 	return (lens.arr);
 }
