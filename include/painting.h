@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/04 20:03:49 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:30:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include "../libft/libft.h"
 
 # include "geometry.h"
-# include "main_parser.h"
+# include "parser.h"
 
-# define MOUSE_HIDE 1
+# define MOUSE_HIDE 0
 # define PL_STEP 0.37
 # define ANGLE_DELTA_KEY 5
 # define ANGLE_DELTA_MOUSE 7

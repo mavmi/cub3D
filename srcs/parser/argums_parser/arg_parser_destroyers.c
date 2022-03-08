@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 17:17:52 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/04 19:53:08 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/main_parser.h"
+#include "../../../include/parser.h"
 
 void	pars_destroy_txtr_arg(t_txtr_arg *destroyed)
 {

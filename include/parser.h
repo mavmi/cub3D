@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_parser.h                                      :+:      :+:    :+:   */
+/*   parser.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:20:56 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/05 19:22:55 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:11:14 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_PARSER_H
-# define MAIN_PARSER_H
+#ifndef PARSER_H
+# define PARSER_H
 
 # include <fcntl.h>
 # include <errno.h>
@@ -33,6 +33,8 @@
 # define MAP_SQ_VOID ' '
 # define MAP_SQ_EMPTY '0'
 # define MAP_SQ_WALL '1'
+# define MAP_SQ_OP_DOOR 'D'
+# define MAP_SQ_CL_DOOR 'd'
 # define MAP_OR_NORTH 'N'
 # define MAP_OR_SOUTH 'S'
 # define MAP_OR_EAST 'E'
@@ -47,6 +49,7 @@
 # define FLOOR 'F'
 # define CEILING 'C'
 
+typedef enum e_ALL			t_ALL;
 
 typedef struct s_player		t_player;
 typedef struct s_square		t_square;
@@ -59,6 +62,14 @@ typedef struct s_textures	t_textures;
 typedef struct s_ud_type	t_ud_type;
 typedef struct s_up_down	t_up_down;
 typedef struct s_argums		t_argums;
+
+enum e_ALL
+{
+	ALL,
+	TXTR,
+	FC,
+	MAP
+};
 
 /*
 	Player's info.
@@ -151,6 +162,7 @@ struct s_up_down
 
 struct	s_argums
 {
+	size_t		map_start;
 	t_up_down	*ud_arr;
 	t_textures	*txtr_arr;
 };
@@ -164,21 +176,18 @@ t_map		*pars_start(char *path);
 
 // parsing_valid_check.c
 
-int			pars_arg_definition(char **arr);
+t_argums	*pars_arg_definition(char **arr);
 
 //parsing_utils.c
 
 int			check_other_three_elems(char *str);
 size_t		arr_size_before_empty_str(char **arr);
-void		*free_return(size_t *freed, char sms_fl);
+void		*free_return(void *freed, char sms_fl, t_ALL code);
 
 
 //parsing_errors.c
 
-int			errors(void);
-int			error_texture_message(void);
-int			error_ud_message(void);
-int			error_map_message(void);
+int			errors(t_ALL code);
 int			error_destroy(t_argums *args, char error_message);
 
 

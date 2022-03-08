@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 13:46:29 by marvin            #+#    #+#             */
-/*   Updated: 2022/03/05 18:33:30 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/main_parser.h"
+#include "../../../include/parser.h"
 
 static char	*take_path(char *str, size_t *start)
 {
@@ -45,12 +45,12 @@ static int	add_new_side_elem(t_textures *arr, char *path, char side)
 		return (2);
 	if (arr->arg_count == 4)
 	{
-		return (error_texture_message());
+		return (errors(TXTR));
 	}
 	while (i < arr->arg_count)
 	{
 		if (new->side == arr->arg[i]->side)
-			return (error_texture_message());
+			return (errors(TXTR));
 		i++;
 	}
 	arr->arg[arr->arg_count] = new;
@@ -77,7 +77,7 @@ int	pars_valid_txtr(char *str, t_textures *arr)
 	if ((ft_strncmp(str, "NO", 2) != 0 && ft_strncmp(str, "SO", 2) != 0
 			&& ft_strncmp(str, "WE", 2) != 0 && ft_strncmp(str, "EA", 2) != 0)
 			|| !str[i])
-		return (error_texture_message());
+		return (errors(TXTR));
 	while (str[i])
 	{
 		if (str[i] == SKIP_SPACE)
@@ -85,7 +85,7 @@ int	pars_valid_txtr(char *str, t_textures *arr)
 		else
 		{
 			if (path)
-				return (error_texture_message());
+				return (errors(TXTR));
 			path = take_path(str, &i);
 			if (!path)
 				return (2);

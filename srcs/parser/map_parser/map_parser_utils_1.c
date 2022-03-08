@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:12:44 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/04 19:52:24 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:37:25 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/main_parser.h"
+#include "../../../include/parser.h"
 
 /*
 	Open file with read only mode and
@@ -27,7 +27,8 @@ int	pars_open_file(char *path)
 */
 int	pars_is_char_valid_square(char c)
 {
-	if (c != MAP_SQ_VOID && c != MAP_SQ_EMPTY && c != MAP_SQ_WALL)
+	if (c != MAP_SQ_VOID && c != MAP_SQ_EMPTY && c != MAP_SQ_WALL
+			&& c != MAP_SQ_CL_DOOR && c != MAP_SQ_OP_DOOR)
 		return (0);
 	return (1);
 }

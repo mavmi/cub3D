@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:43:34 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/04 19:52:47 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/main_parser.h"
+#include "../../../include/parser.h"
 
 /*
 	Check if current char is player's char.

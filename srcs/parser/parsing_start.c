@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:11 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/05 18:55:12 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/main_parser.h"
+#include "../../include/parser.h"
 
 /*
 	Pushback [line] to [arr].
@@ -39,9 +39,10 @@ static int	pars_read_file_handler(char ***arr, char *line)
 */
 static t_map	*pars_read_file(int fd)
 {
-	t_map	*map;
-	char	**arr;
-	char	*line;
+	t_map		*map;
+	char		**arr;
+	char		*line;
+	t_argums	*argums;
 
 	if (fd < 0)
 		return (NULL);
@@ -53,13 +54,13 @@ static t_map	*pars_read_file(int fd)
 	}
 	if (pars_read_file_handler(&arr, line))
 		return (NULL); // castomer sms about not reading
-		for (int i = 0; arr[i]; i++)
-			printf ("%s\n", arr[i]);
-	////////////function which parsing arguments before map////////////
-	printf ("\n~~~~~~~ %d\n", pars_arg_definition(arr));
-	// sleep (10);
-	exit (1);
-	map = pars_str_arr_to_map(arr);
+	argums = pars_arg_definition(arr);
+	if (!argums)
+	{
+		utils_destroy_str_arr(arr);
+		return (NULL);
+	}
+	map = pars_str_arr_to_map(arr + argums->map_start);
 	utils_destroy_str_arr(arr);
 	return (map);
 }

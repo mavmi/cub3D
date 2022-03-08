@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:02:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/04 20:04:51 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:44:39 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,13 @@ void	run(int argc, char **argv)
 	map = pars_start(argv[1]);
 	if (!map)
 	{
-		printf("Parser error\n");
 		exit(1);
+	}
+	if (!map->player)
+	{
+		pars_destroy_map(map);
+		errors(MAP);
+		exit (1);
 	}
 	paint(map);
 }

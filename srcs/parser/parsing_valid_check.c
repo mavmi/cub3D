@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:14:44 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/05 19:42:15 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/main_parser.h"
+#include "../../include/parser.h"
 
 
 static int	all_agrums_got(t_argums *args)
@@ -81,11 +81,13 @@ static int	check_every_str(char **arr, int *i_s, int *i_e, t_argums *args)
 				|| arr[*i_s][*i_e] == MAP_OR_NORTH || arr[*i_s][*i_e] == MAP_OR_SOUTH
 				|| arr[*i_s][*i_e] == MAP_OR_EAST || arr[*i_s][*i_e] == MAP_OR_WEST)
 	{
+		args->map_start = *i_s;
 		if (check_map(arr, i_s, i_e, args))
 			return (1);
 		///tmp///
 		pars_destroy_up_down(args->ud_arr);
 		pars_destroy_textures(args->txtr_arr);
+		free(args);
 		return (-1);
 	}
 	else
@@ -95,35 +97,41 @@ static int	check_every_str(char **arr, int *i_s, int *i_e, t_argums *args)
 
 static int	take_memory_argums(t_argums *argums)
 {
+	if (!argums)
+		return (1);
 	argums->ud_arr = pars_get_empty_up_down();
 	argums->txtr_arr = pars_get_empty_textures();
+	argums->map_start = 0;
 	if (!argums->ud_arr || !argums->txtr_arr)
 		return (error_destroy(argums, 'n'));
 	return (0);
 }
 
-int	pars_arg_definition(char **arr)
+t_argums	*pars_arg_definition(char **arr)
 {
 	int			i_s;
 	int			i_e;
-	t_argums	argums;
+	t_argums	*argums;
 
 	if (!arr)
-		return (2);
-	if (take_memory_argums(&argums))
-		return (1);
+		return (NULL);
+	argums = (t_argums *)malloc(sizeof(t_argums) * 2);
+	if (take_memory_argums(argums))
+		return (NULL);
 	i_s = 0;
 	i_e = 0;
 	while (arr[i_s])
 	{
 		while (arr[i_s][i_e] == SKIP_SPACE)
 			i_e++;
-		i_e = check_every_str(arr, &i_s, &i_e, &argums);
-		if (i_e != 0)
-			return ((1 + i_e) / 2);
+		i_e = check_every_str(arr, &i_s, &i_e, argums);
+		if (i_e == 1)
+			return (NULL);
+		else if (i_e == -1)
+			return (argums);
 		i_e = 0;
 		if (arr[i_s])
 			i_s++;
 	}
-	return (error_destroy (&argums, 'y'));
+	return (free_return (argums, 'y', ALL));
 }

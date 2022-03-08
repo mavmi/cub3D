@@ -6,11 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:48:43 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/05 19:22:14 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/main_parser.h"
+#include "../../include/parser.h"
 
 /*
 	Checks the floor and ceiling digit colors
@@ -30,7 +30,7 @@ int	check_other_three_elems(char *str)
 		while (str[i_str] >= '0' && str[i_str++] <= '9')
 			i_int++;
 		if (i_int > 3)
-			return (error_ud_message());
+			return (errors(FC));
 		i_int = 0;
 		i_str++;
 	}
@@ -41,10 +41,10 @@ int	check_other_three_elems(char *str)
 	Free freed and input sms about
 	invalide argums if sms_fl == 'y'
 */
-void	*free_return(size_t *freed, char sms_fl)
+void	*free_return(void *freed, char sms_fl, t_ALL code)
 {
 	if (sms_fl && sms_fl == 'y')
-		error_ud_message();
+		errors(code);
 	free(freed);
 	return (NULL);
 }
