@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:10:04 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:29:19 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ t_map	*pars_get_empty_map(void)
 	map->height = 0;
 	map->player = NULL;
 	map->lines = NULL;
+	map->argms = NULL;
 	return (map);
 }

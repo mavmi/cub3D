@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:26:52 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 17:23:16 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int errors(t_ALL code)
 
 int	error_destroy(t_argums *args, char error_message)
 {
-	pars_destroy_up_down(args->ud_arr);
-	pars_destroy_textures(args->txtr_arr);
-	free (args);
+	pars_destroy_argums(args);
 	if (error_message == 'y')
 		return (errors(ALL));
 	else

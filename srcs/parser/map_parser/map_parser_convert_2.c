@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 16:42:33 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:29:17 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static t_map	*pars_str_arr_to_map_handler(t_map *map, char **arr)
 
 	May return NULL
 */
-t_map	*pars_str_arr_to_map(char **arr)
+t_map	*pars_str_arr_to_map(char **arr, t_argums *argms)
 {
 	t_map	*map;
 
@@ -106,6 +106,7 @@ t_map	*pars_str_arr_to_map(char **arr)
 	map->height = utils_get_str_arr_size(arr);
 	map->lines = (t_map_line **)malloc(sizeof(t_map_line *)
 			* (map->height + 1));
+	map->argms = argms;
 	if (!map->lines)
 	{
 		pars_destroy_map(map);

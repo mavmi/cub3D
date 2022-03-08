@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:14:44 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 17:14:49 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ static int	check_every_str(char **arr, int *i_s, int *i_e, t_argums *args)
 		if (check_map(arr, i_s, i_e, args))
 			return (1);
 		///tmp///
-		pars_destroy_up_down(args->ud_arr);
-		pars_destroy_textures(args->txtr_arr);
-		free(args);
+		// pars_destroy_up_down(args->ud_arr);
+		// pars_destroy_textures(args->txtr_arr);
+		// free(args);
 		return (-1);
 	}
 	else

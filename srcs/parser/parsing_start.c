@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:11 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:28:18 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_map	*pars_read_file(int fd)
 	t_map		*map;
 	char		**arr;
 	char		*line;
-	t_argums	*argums;
+	t_argums	*argms;
 
 	if (fd < 0)
 		return (NULL);
@@ -54,13 +54,13 @@ static t_map	*pars_read_file(int fd)
 	}
 	if (pars_read_file_handler(&arr, line))
 		return (NULL); // castomer sms about not reading
-	argums = pars_arg_definition(arr);
-	if (!argums)
+	argms = pars_arg_definition(arr);
+	if (!argms)
 	{
 		utils_destroy_str_arr(arr);
 		return (NULL);
 	}
-	map = pars_str_arr_to_map(arr + argums->map_start);
+	map = pars_str_arr_to_map(arr + argms->map_start, argms);
 	utils_destroy_str_arr(arr);
 	return (map);
 }

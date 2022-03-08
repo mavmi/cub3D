@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 17:17:52 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 17:24:16 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ void	pars_destroy_up_down(t_up_down *destroyed)
 	}
 	free(destroyed->type);
 	free(destroyed);
+}
+
+void	pars_destroy_argums(t_argums *args)
+{
+	if (!args)
+		return ;
+	pars_destroy_up_down(args->ud_arr);
+	pars_destroy_textures(args->txtr_arr);
+	free (args);
 }

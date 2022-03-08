@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 14:30:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/08 18:29:37 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ enum e_color
 	COLOR_GRID,
 	COLOR_PLAYER,
 	COLOR_FIELD,
-	COLOR_CEIL,
-	COLOR_FLOOR,
 	COLOR_TRANSPARENT
 };
 
@@ -161,6 +159,8 @@ struct s_painting
 {
 	int			minimap_x;
 	int			minimap_y;
+	int			floor;
+	int			ceil;
 	void		*mlx;
 	void		*win;
 	t_map		*map;

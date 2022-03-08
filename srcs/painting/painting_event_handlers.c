@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_event_handlers.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:37:02 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 16:47:53 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:49:46 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	paint_exit(t_painting *painting)
 	if (painting)
 	{
 		pars_destroy_map(painting->map);
+		painting->map = NULL;
 		mlx_destroy_image(painting->mlx, painting->minimap.img);
 		mlx_destroy_image(painting->mlx, painting->room.img);
 		mlx_destroy_image(painting->mlx, painting->t_north->drawable.img);

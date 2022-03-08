@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_room_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:29:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 16:49:47 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/08 17:49:20 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,30 +94,30 @@ static int	paint_room_get_pixel(t_image *image, int x, int y)
 	Return 0 if everything is ok,
 	1 otherwise
 */
-int	paint_room_draw_room(t_painting *painting)
+int	paint_room_draw_room(t_painting *p)
 {
 	double		delta;
 	t_room_vars	data;
 
-	data = paint_room_get_data(painting);
+	data = paint_room_get_data(p);
 	while (data.x < WIN_WIDTH)
 	{
-		if (paint_room_update_vars(&data, painting))
+		if (paint_room_update_vars(&data, p))
 			return (1);
 		while (data.y < data.wall_start)
-			paint_put_color(&painting->room, data.x, data.y++, COLOR_CEIL);
+			paint_put_pixel(&p->room, data.x, data.y++, p->ceil);
 		delta = data.image->h / (double)data.wall_height;
 		while (data.y < data.wall_end)
 		{
-			paint_put_pixel(&painting->room, data.x, data.y++,
+			paint_put_pixel(&p->room, data.x, data.y++,
 				paint_room_get_pixel(data.image, data.text_x, data.text_y));
 			data.text_y += delta;
 		}
 		while (data.y < WIN_HEIGHT)
-			paint_put_color(&painting->room, data.x, data.y++, COLOR_FLOOR);
+			paint_put_pixel(&p->room, data.x, data.y++, p->floor);
 		data.x++;
 	}
-	mlx_put_image_to_window(painting->mlx, painting->win,
-		painting->room.img, 0, 0);
+	mlx_put_image_to_window(p->mlx, p->win,
+		p->room.img, 0, 0);
 	return (0);
 }

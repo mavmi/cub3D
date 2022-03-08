@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:37:48 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 16:45:43 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/08 17:51:52 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ int	paint_get_color(t_color color)
 		return (0x808080);
 	if (color == COLOR_TRANSPARENT)
 		return (0xFF000000);
-	if (color == COLOR_CEIL)
-		return (0xdeb3b9);
-	if (color == COLOR_FLOOR)
-		return (0x304545);
 	return (0x000000);
 }
 

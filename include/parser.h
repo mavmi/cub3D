@@ -120,6 +120,7 @@ struct s_map
 	size_t		height;
 	t_player	*player;
 	t_map_line	**lines;
+	t_argums	*argms;
 };
 
 struct s_param_len
@@ -217,6 +218,7 @@ void		pars_destroy_txtr_arg(t_txtr_arg *destroyed);
 void		pars_destroy_textures(t_textures *destroyed);
 void		pars_destroy_ud_type(t_ud_type *destroyed);
 void		pars_destroy_up_down(t_up_down *destroyed);
+void		pars_destroy_argums(t_argums *args);
 
 /******************************
 	./map_parser
@@ -233,7 +235,7 @@ t_square	*pars_char_to_square(t_map *map, char c, int x, int y);
 // map_parser_convert_2.c
 
 t_map_line	*pars_str_to_map_line(t_map *map, char *str, int y);
-t_map		*pars_str_arr_to_map(char **arr);
+t_map		*pars_str_arr_to_map(char **arr, t_argums *argms);
 
 // map_parser_destroyers.c
 
