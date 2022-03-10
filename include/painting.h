@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 18:29:37 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/10 14:36:05 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,13 @@ enum e_color
 */
 enum e_orient
 {
+	DEFAULT,
 	ORIENT_NORTH,
 	ORIENT_EAST,
 	ORIENT_SOUTH,
-	ORIENT_WEST
+	ORIENT_WEST,
+	ORIENT_CL_DOOR,
+	ORIENT_OP_DOOR
 };
 
 enum e_movement
@@ -170,6 +173,7 @@ struct s_painting
 	t_image		*t_east;
 	t_image		*t_south;
 	t_image		*t_west;
+	t_image		*t_door;
 };
 
 struct s_ray_of_view
@@ -316,7 +320,7 @@ void			paint_ray_decrease_coord(t_ray_vars *vars,
 void			paint_ray_set_ray_orient(t_ray_vars *vars);
 int				paint_ray_decrease_coord_assignment(t_decrease *decr);
 int				paint_ray_get_octet(int quarter, int part);
-int				paint_ray_is_wall(t_ray_vars *vars, double x, double y);
+int				paint_ray_is_wall_or_door(t_ray_vars *vars, double x, double y);
 int				paint_ray_get_delta_angle_octet(t_ray_vars *vars);
 
 /******************************

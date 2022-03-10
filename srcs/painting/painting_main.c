@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 17:55:24 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/10 18:22:24 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	paint_load_images(t_painting *p)
 	p->t_south = paint_get_image(p, p->map->argms->txtr_arr->arg[1]->path);
 	p->t_west = paint_get_image(p, p->map->argms->txtr_arr->arg[2]->path);
 	p->t_east = paint_get_image(p, p->map->argms->txtr_arr->arg[3]->path);
-	if (!p->t_north || !p->t_south || !p->t_west || !p->t_east)
+	p->t_door = paint_get_image(p, p->map->argms->txtr_arr->arg[4]->path);
+	if (!p->t_north || !p->t_south || !p->t_west || !p->t_east || !p->t_door)
 	{
 		return (1);
 	}

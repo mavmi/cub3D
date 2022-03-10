@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 13:46:29 by marvin            #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/10 15:00:53 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*take_path(char *str, size_t *start)
 	return (path);
 }
 
-static int	add_new_side_elem(t_textures *arr, char *path, char side)
+int	add_new_side_elem(t_textures *arr, char *path, char side)
 {
 	size_t		i;
 	t_txtr_arg	*new;
@@ -43,7 +43,7 @@ static int	add_new_side_elem(t_textures *arr, char *path, char side)
 	new = pars_get_new_txtr_arg(side, path);
 	if (!new)
 		return (2);
-	if (arr->arg_count == 4)
+	if (arr->arg_count == 5)
 	{
 		return (errors(TXTR));
 	}

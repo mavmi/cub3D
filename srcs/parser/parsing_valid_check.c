@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:14:44 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/08 17:14:49 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/10 18:21:17 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 static int	all_agrums_got(t_argums *args)
 {
+	char	*door_path;
+
 	if (args->ud_arr->type_count != 2 || args->txtr_arr->arg_count != 4)
 		return (1);
 	if (args->txtr_arr->arg[0]->side == NO_SIDE)
@@ -28,7 +30,14 @@ static int	all_agrums_got(t_argums *args)
 					if (args->ud_arr->type[0]->type == FLOOR)
 					{
 						if (args->ud_arr->type[1]->type == CEILING)
-							return (0);
+						{
+							door_path = (char *)malloc(sizeof(char) * (ft_strlen("./cl_door.xpm" + 1)));
+							if (!door_path)
+								return (1);
+							ft_strlcpy(door_path, "./cl_door.xpm\0", (ft_strlen("./cl_door.xpm") + 1));
+							if (!(add_new_side_elem(args->txtr_arr, door_path, MAP_SQ_CL_DOOR)))
+								return (0);
+						}
 					}
 				}
 			}

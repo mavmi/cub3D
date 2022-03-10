@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:50:46 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/10 14:56:32 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_textures	*pars_get_empty_textures(void)
 	new = (t_textures *)malloc(sizeof(t_textures));
 	if (!new)
 		return (NULL);
-	new->arg = (t_txtr_arg **)malloc(sizeof(t_txtr_arg *) * 4);
+	new->arg = (t_txtr_arg **)malloc(sizeof(t_txtr_arg *) * 5);
 	if (!new->arg)
 	{
 		free(new);

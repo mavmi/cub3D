@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:29:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 17:49:20 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/10 18:31:34 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ static t_image	*paint_room_get_image(t_painting *painting, t_orient orient)
 		return (painting->t_east);
 	if (orient == ORIENT_SOUTH)
 		return (painting->t_south);
-	else
+	if (orient == ORIENT_WEST)
 		return (painting->t_west);
+	if (orient == ORIENT_CL_DOOR)
+		return (painting->t_door);
+	else
+		return (NULL);
 }
 
 /*

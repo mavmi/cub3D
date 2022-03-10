@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:01:38 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 17:01:00 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/10 18:24:20 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ t_vector	*paint_ray_get_orient_vector(t_orient orient)
 	t_vector	*orient_vector;
 
 	if (orient != ORIENT_NORTH && orient != ORIENT_EAST
-		&& orient != ORIENT_SOUTH && orient != ORIENT_WEST)
+		&& orient != ORIENT_SOUTH && orient != ORIENT_WEST
+		&& orient != ORIENT_CL_DOOR)
 		return (NULL);
 	begin = geom_init_point(0, 0);
 	end = paint_ray_get_orient_vector_handler(orient);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_ray_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 16:57:17 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/10 18:40:01 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view)
 /*
 	Just initialization of player's vector of view.
 	It's begin and end point are equal to players position.
-	
+
 	May return NULL
 */
 static t_vector	*paint_ray_init_ray_vector(t_painting *painting)
@@ -83,8 +83,9 @@ static t_ray_of_view	*paint_ray_init_ray_of_view(t_painting *painting)
 */
 static t_ray_of_view	*paint_ray_get_ray_of_view_handler(t_painting *painting,
 							t_ray *ray_info)
-{	
+{
 	t_ray_vars	vars;
+	int			return_elem;
 
 	if (!painting || !ray_info)
 		return (NULL);
@@ -101,9 +102,14 @@ static t_ray_of_view	*paint_ray_get_ray_of_view_handler(t_painting *painting,
 			paint_ray_destroy_ray_of_view(vars.ray_of_view);
 			return (NULL);
 		}
-		if (paint_ray_is_wall(&vars, vars.ray_of_view->ray->end->x,
-				vars.ray_of_view->ray->end->y))
+		return_elem = paint_ray_is_wall_or_door(&vars, vars.ray_of_view->ray->end->x,
+				vars.ray_of_view->ray->end->y);
+		if (return_elem)
+		{
+			if (return_elem == 2)
+				vars.ray_of_view->orient = ORIENT_CL_DOOR;
 			return (vars.ray_of_view);
+		}
 		paint_ray_decrease_coord(&vars, &vars.ray_of_view->ray->end->x,
 			&vars.ray_of_view->ray->end->y);
 	}

@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:00:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 18:37:46 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/10 18:39:56 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 */
 void	paint_ray_set_ray_orient(t_ray_vars *vars)
 {
-	if (vars->octet == 1 || vars->octet == 7)
+	if (vars->ray_of_view->orient == ORIENT_CL_DOOR)
+		return ;
+	else if (vars->octet == 1 || vars->octet == 7)
 		vars->ray_of_view->orient = ORIENT_NORTH;
 	else if (vars->octet == 6 || vars->octet == 8)
 		vars->ray_of_view->orient = ORIENT_WEST;
@@ -40,7 +42,7 @@ int	paint_ray_decrease_coord_assignment(t_decrease *decr)
 }
 
 /*
-	Get octet from quarter and angle
+	Get octet from quarter and angleX
 */
 int	paint_ray_get_octet(int quarter, int part)
 {
@@ -50,11 +52,13 @@ int	paint_ray_get_octet(int quarter, int part)
 /*
 	Check if {x, y} point belongs to a wall
 */
-int	paint_ray_is_wall(t_ray_vars *vars, double x, double y)
+int	paint_ray_is_wall_or_door(t_ray_vars *vars, double x, double y)
 {
 	paint_ray_decrease_coord(vars, &x, &y);
 	if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_WALL)
 		return (1);
+	else if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_CL_DOOR)
+		return (2);
 	return (0);
 }
 

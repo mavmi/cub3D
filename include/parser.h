@@ -199,6 +199,7 @@ int			error_destroy(t_argums *args, char error_message);
 // arg_parser_textures.c
 
 int			pars_valid_txtr(char *str, t_textures *arr);
+int			add_new_side_elem(t_textures *arr, char *path, char side);
 
 // arg_parser_floor&ceiling.c
 
