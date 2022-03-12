@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/10 18:22:24 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/12 16:12:56 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	paint(t_map *map)
 		pars_destroy_map(map);
 		exit(1);
 	}
+	painting->cl_door_fl = 0;
 	paint_set_up_handlers(painting);
 	paint_minimap_draw_map(painting);
 	paint_minimap_draw(painting);

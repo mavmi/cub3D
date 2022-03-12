@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/10 14:36:05 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/12 17:47:12 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "parser.h"
 
 # define MOUSE_HIDE 0
-# define PL_STEP 0.37
+# define PL_STEP 0.62
 # define ANGLE_DELTA_KEY 5
 # define ANGLE_DELTA_MOUSE 7
 # define PIXELS_PER_DEGREE 4
@@ -37,6 +37,7 @@
 # define A 0
 # define S 1
 # define D 2
+# define SPACE 49
 
 // 3D
 # define WIN_WIDTH 1000
@@ -86,7 +87,6 @@ enum e_color
 */
 enum e_orient
 {
-	DEFAULT,
 	ORIENT_NORTH,
 	ORIENT_EAST,
 	ORIENT_SOUTH,
@@ -100,7 +100,8 @@ enum e_movement
 	MOVE_FORWARD,
 	MOVE_BACK,
 	MOVE_LEFT,
-	MOVE_RIGHT
+	MOVE_RIGHT,
+	MOVE_DOOR
 };
 
 /*
@@ -164,6 +165,7 @@ struct s_painting
 	int			minimap_y;
 	int			floor;
 	int			ceil;
+	int			cl_door_fl;
 	void		*mlx;
 	void		*win;
 	t_map		*map;

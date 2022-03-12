@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:37:02 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 16:49:46 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/12 17:46:55 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 		painting->map->player->angle
 			= paint_room_increase_angle(painting->map->player->angle,
 				ANGLE_DELTA_KEY);
+	else if (key_code == SPACE)
+	{
+	painting->cl_door_fl = 1;
+		paint_movements_move(painting, MOVE_DOOR);
+	}
 	else if (key_code == UP || key_code == W)
 		paint_movements_move(painting, MOVE_FORWARD);
 	else if (key_code == DOWN || key_code == S)
@@ -83,7 +88,7 @@ int	paint_key_pressed(int key_code, t_painting *painting)
 	if (key_code == UP || key_code == LEFT
 		|| key_code == DOWN || key_code == RIGHT
 		|| key_code == W || key_code == A
-		|| key_code == S || key_code == D)
+		|| key_code == S || key_code == D || key_code == SPACE)
 		paint_handle_arrows(key_code, painting);
 	return (0);
 }

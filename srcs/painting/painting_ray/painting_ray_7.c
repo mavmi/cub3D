@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:00:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/10 18:39:56 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/12 17:21:34 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,34 @@ int	paint_ray_get_octet(int quarter, int part)
 int	paint_ray_is_wall_or_door(t_ray_vars *vars, double x, double y)
 {
 	paint_ray_decrease_coord(vars, &x, &y);
+	// if ((vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_CL_DOOR
+	// 	|| vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_OP_DOOR)
+	// 	&& vars->painting->cl_door_fl)
+	// printf ("////////////////%c          %d\n", vars->painting->map->lines[(int)y]->line[(int)x]->type,
+	// 				vars->painting->cl_door_fl );
 	if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_WALL)
 		return (1);
 	else if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_CL_DOOR)
+	{
+		if (vars->painting->cl_door_fl == 2)
+		{
+			vars->painting->map->lines[(int)y]->line[(int)x]->type = MAP_SQ_OP_DOOR;
+			vars->painting->cl_door_fl = 0;
+			return (0);
+		}
 		return (2);
+	}
+	else if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_OP_DOOR
+				&& vars->painting->cl_door_fl > 0)
+	{
+		if (vars->painting->cl_door_fl == 2)
+		{
+			vars->painting->map->lines[(int)y]->line[(int)x]->type = MAP_SQ_CL_DOOR;
+			vars->painting->cl_door_fl = 0;
+			return (2);
+		}
+		return (3);
+	}
 	return (0);
 }
 
