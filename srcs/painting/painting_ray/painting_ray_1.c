@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/12 17:42:25 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 18:05:00 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,10 @@ static t_ray_of_view	*paint_ray_get_ray_of_view_handler(t_painting *painting,
 		{
 			if (return_elem == 2)
 				vars.ray_of_view->orient = ORIENT_CL_DOOR;
-
 			else if (return_elem == 3)
 				vars.ray_of_view->orient = ORIENT_OP_DOOR;
+			else if (return_elem == 4)
+				vars.ray_of_view->orient = ORIENT_GIF;
 			return (vars.ray_of_view);
 		}
 		paint_ray_decrease_coord(&vars, &vars.ray_of_view->ray->end->x,

@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:37:02 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/12 17:46:55 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 19:26:15 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 */
 void	paint_exit(t_painting *painting)
 {
+	int	i;
+
+	i = 0;
 	if (painting)
 	{
 		pars_destroy_map(painting->map);
@@ -31,6 +34,14 @@ void	paint_exit(t_painting *painting)
 		free(painting->t_south);
 		mlx_destroy_image(painting->mlx, painting->t_west->drawable.img);
 		free(painting->t_west);
+		mlx_destroy_image(painting->mlx, painting->t_door->drawable.img);
+		free(painting->t_door);
+		while (i < 10)
+		{
+			mlx_destroy_image(painting->mlx, painting->t_gif[i]->drawable.img);
+			free(painting->t_gif[i++]);
+		}
+		free(painting->t_gif);
 		mlx_destroy_window(painting->mlx, painting->win);
 		free(painting);
 	}

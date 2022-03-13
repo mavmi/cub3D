@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/12 16:12:56 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 19:25:44 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,28 @@
 
 static int	paint_load_images(t_painting *p)
 {
-	p->t_north = paint_get_image(p, p->map->argms->txtr_arr->arg[0]->path);
-	p->t_south = paint_get_image(p, p->map->argms->txtr_arr->arg[1]->path);
-	p->t_west = paint_get_image(p, p->map->argms->txtr_arr->arg[2]->path);
-	p->t_east = paint_get_image(p, p->map->argms->txtr_arr->arg[3]->path);
-	p->t_door = paint_get_image(p, p->map->argms->txtr_arr->arg[4]->path);
-	if (!p->t_north || !p->t_south || !p->t_west || !p->t_east || !p->t_door)
+	size_t	i_gif;
+	size_t	i_txtrs;
+
+	i_gif = 0;
+	i_txtrs = 0;
+	p->t_north = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
+	p->t_south = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
+	p->t_west = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
+	p->t_east = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
+	p->t_door = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
+	p->t_gif = (t_image **)malloc(sizeof(t_image *) * 10);
+	if (!p->t_gif)
+		return (1);
+	while (i_gif < 10)
+	{
+		p->t_gif[i_gif++] = paint_get_image(p, p->map->argms->txtr_arr
+								->arg[i_txtrs++]->path);
+	}
+	if (!p->t_north || !p->t_south || !p->t_west || !p->t_east || !p->t_door
+		|| !p->t_gif[0] || !p->t_gif[1] || !p->t_gif[2] || !p->t_gif[3]
+		|| !p->t_gif[4] || !p->t_gif[5] || !p->t_gif[6] || !p->t_gif[7]
+		|| !p->t_gif[8] || !p->t_gif[9])
 	{
 		return (1);
 	}
@@ -76,6 +92,7 @@ static void	paint_set_up_handlers(t_painting *painting)
 	mlx_hook(painting->win, 2, 1L << 0, paint_key_pressed, painting);
 	mlx_hook(painting->win, 6, 1L << 6, paint_mouse_move, painting);
 	mlx_hook(painting->win, 17, 0L, paint_cross, painting);
+	mlx_loop_hook(painting->mlx, paint_draw_all, painting);
 	if (MOUSE_HIDE)
 		mlx_mouse_hide();
 }

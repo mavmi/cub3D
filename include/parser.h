@@ -39,6 +39,7 @@
 # define MAP_OR_SOUTH 'S'
 # define MAP_OR_EAST 'E'
 # define MAP_OR_WEST 'W'
+# define MAP_SQ_GIF 'G'
 
 # define SKIP_SPACE ' '
 # define NO_SIDE 'N'

@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:29:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/10 18:31:34 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 19:26:55 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static t_room_vars	paint_room_get_data(t_painting *painting)
 */
 static t_image	*paint_room_get_image(t_painting *painting, t_orient orient)
 {
+	static size_t	gif_count = 0;
+
 	if (orient == ORIENT_NORTH)
 		return (painting->t_north);
 	if (orient == ORIENT_EAST)
@@ -46,6 +48,12 @@ static t_image	*paint_room_get_image(t_painting *painting, t_orient orient)
 		return (painting->t_west);
 	if (orient == ORIENT_CL_DOOR)
 		return (painting->t_door);
+	if (orient == ORIENT_GIF)
+	{
+		if (gif_count == 9000)
+			gif_count = 0;
+		return (painting->t_gif[gif_count++ / 1000]);
+	}
 	else
 		return (NULL);
 }
@@ -118,10 +126,13 @@ int	paint_room_draw_room(t_painting *p)
 			data.text_y += delta;
 		}
 		while (data.y < WIN_HEIGHT)
+		{
 			paint_put_pixel(&p->room, data.x, data.y++, p->floor);
+		}
 		data.x++;
 	}
 	mlx_put_image_to_window(p->mlx, p->win,
 		p->room.img, 0, 0);
+
 	return (0);
 }

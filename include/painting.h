@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/12 17:47:12 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 16:35:01 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ enum e_orient
 	ORIENT_SOUTH,
 	ORIENT_WEST,
 	ORIENT_CL_DOOR,
-	ORIENT_OP_DOOR
+	ORIENT_OP_DOOR,
+	ORIENT_GIF
 };
 
 enum e_movement
@@ -176,6 +177,7 @@ struct s_painting
 	t_image		*t_south;
 	t_image		*t_west;
 	t_image		*t_door;
+	t_image		**t_gif;
 };
 
 struct s_ray_of_view

@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:12:44 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 14:37:25 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 16:42:48 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	pars_open_file(char *path)
 int	pars_is_char_valid_square(char c)
 {
 	if (c != MAP_SQ_VOID && c != MAP_SQ_EMPTY && c != MAP_SQ_WALL
-			&& c != MAP_SQ_CL_DOOR && c != MAP_SQ_OP_DOOR)
+			&& c != MAP_SQ_CL_DOOR && c != MAP_SQ_OP_DOOR
+			&& c != MAP_SQ_GIF)
 		return (0);
 	return (1);
 }
