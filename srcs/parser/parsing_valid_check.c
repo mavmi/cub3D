@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 16:14:44 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/13 19:25:15 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 20:38:16 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ static int	take_memory_for_txtrs(t_textures *txtrs_arr_in)
 	int		iter;
 
 	iter = 1;
-	door_path = (char *)malloc(sizeof(char) * (ft_strlen("./cl_door.xpm") + 1));
+	door_path = (char *)malloc(sizeof(char) * (ft_strlen("./textures/cl_door.xpm") + 1));
 	if (!door_path)
 			return (1);
-	ft_strlcpy(door_path, "./cl_door.xpm\0", (ft_strlen("./cl_door.xpm") + 1));
+	ft_strlcpy(door_path, "./textures/cl_door.xpm\0", (ft_strlen("./textures/cl_door.xpm") + 1));
 	if (add_new_side_elem(txtrs_arr_in, door_path, MAP_SQ_CL_DOOR))
 		return (1);
 	while (iter < 11)
 	{
-		gif_path = (char *)malloc(sizeof(char) * (ft_strlen("./0_gif_pos.xpm") + 2));
+		gif_path = (char *)malloc(sizeof(char) * (ft_strlen("./textures/0_gif_pos.xpm") + 2));
 		if (!gif_path)
 			return (1);
-		ft_strlcpy(gif_path, "./\0", (ft_strlen("./") + 1));
+		ft_strlcpy(gif_path, "./textures/\0", (ft_strlen("./textures/") + 1));
 		tmp = ft_itoa(iter);
-		ft_strlcat(gif_path, tmp, (ft_strlen("./0_gif_pos.xpm") + 2));
+		ft_strlcat(gif_path, tmp, (ft_strlen("./textures/0_gif_pos.xpm") + 2));
 		free(tmp);
-		ft_strlcat(gif_path, "_gif_pos.xpm\0", (ft_strlen("./0_gif_pos.xpm") + 2));
+		ft_strlcat(gif_path, "_gif_pos.xpm\0", (ft_strlen("./textures/0_gif_pos.xpm") + 2));
 		if (add_new_side_elem(txtrs_arr_in, gif_path, MAP_SQ_GIF))
 			return (1);
 		gif_path = NULL;
