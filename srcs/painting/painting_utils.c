@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:37:48 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 17:51:52 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 20:30:47 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ int	paint_get_color(t_color color)
 {
 	if (color == COLOR_WALL)
 		return (0xFFFFFF);
+	if (color == COLOR_DOOR)
+		return (0xDEB887);
+	if (color == COLOR_GIF)
+		return (0xADD8E6);
 	if (color == COLOR_GRID)
 		return (0xFF0000);
 	if (color == COLOR_PLAYER)

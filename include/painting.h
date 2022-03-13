@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/13 16:35:01 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/13 20:08:03 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct s_room_vars		t_room_vars;
 enum e_color
 {
 	COLOR_WALL,
+	COLOR_DOOR,
+	COLOR_GIF,
 	COLOR_GRID,
 	COLOR_PLAYER,
 	COLOR_FIELD,
