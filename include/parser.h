@@ -50,7 +50,7 @@
 # define FLOOR 'F'
 # define CEILING 'C'
 
-typedef enum e_ALL			t_ALL;
+typedef enum e_all			t_all;
 
 typedef struct s_player		t_player;
 typedef struct s_square		t_square;
@@ -64,7 +64,7 @@ typedef struct s_ud_type	t_ud_type;
 typedef struct s_up_down	t_up_down;
 typedef struct s_argums		t_argums;
 
-enum e_ALL
+enum e_all
 {
 	ALL,
 	TXTR,
@@ -181,11 +181,11 @@ t_argums	*pars_arg_definition(char **arr);
 //parsing_utils.c
 int			check_other_three_elems(char *str);
 size_t		arr_size_before_empty_str(char **arr);
-void		*free_return(void *freed, char sms_fl, t_ALL code);
+void		*free_return(void *freed, char sms_fl, t_all code);
 int			take_memory_for_txtrs(t_textures *txtrs_arr_in);
 
 //parsing_errors.c
-int			errors(t_ALL code);
+int			errors(t_all code);
 int			error_destroy(t_argums *args, char error_message);
 
 /******************************

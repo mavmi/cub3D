@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   arg_parser_floor_ceiling.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:43:03 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/19 15:16:35 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 16:11:49 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/parser.h"
 
-static void	*add_new_ud_elem(size_t *RGB, char *str, t_up_down *arr)
+static void	*add_new_ud_elem(size_t *rgb, char *str, t_up_down *arr)
 {
 	size_t		i;
 	t_ud_type	*new;
 
-	new = pars_get_new_ud_type(str[0], RGB[0], RGB[1], RGB[2]);
+	new = pars_get_new_ud_type(str[0], rgb[0], rgb[1], rgb[2]);
 	if (!new)
-		return (free_return(RGB, 'n', FC));
+		return (free_return(rgb, 'n', FC));
 	i = 0;
 	if (arr->type_count == 2)
 	{
 		free(new);
-		return (free_return(RGB, 'y', FC));
+		return (free_return(rgb, 'y', FC));
 	}
 	while (i < arr->type_count)
 	{
 		if (new->type == arr->type[i]->type)
 		{
 			free(new);
-			return (free_return(RGB, 'y', FC));
+			return (free_return(rgb, 'y', FC));
 		}
 		i++;
 	}
@@ -40,56 +40,56 @@ static void	*add_new_ud_elem(size_t *RGB, char *str, t_up_down *arr)
 	return (new);
 }
 
-static void	*check_valid_RGB_str(size_t *RGB_arr, char *tmp, char *s, size_t i)
+static void	*check_valid_rgb_str(size_t *rgb_arr, char *tmp, char *s, size_t i)
 {
-	size_t	i_RGB;
+	size_t	i_rgb;
 	int		new_el;
 
-	i_RGB = 0;
+	i_rgb = 0;
 	while (s[i])
 	{
-		if (i_RGB >= 3)
+		if (i_rgb >= 3)
 		{
 			if (s[i++] == SKIP_SPACE)
 				continue ;
-			return (free_return(RGB_arr, 'y', FC));
+			return (free_return(rgb_arr, 'y', FC));
 		}
 		new_el = ft_atoi(s + i);
 		if (new_el < 0 || new_el > 255 || (new_el == 0 && s[i] != '0'
 				&& ((s[i] == ',' && i == 0) || (s[i] == ',' && s[i + 1] == '\0')
 					|| (s[i] == ',' && s[i + 1] == ','))))
-			return (free_return(RGB_arr, 'y', FC));
+			return (free_return(rgb_arr, 'y', FC));
 		if (s[i] != ',')
-			RGB_arr[i_RGB++] = (size_t)new_el;
+			rgb_arr[i_rgb++] = (size_t)new_el;
 		tmp = ft_itoa(new_el);
 		i += ft_strlen(tmp);
 		free (tmp);
 	}
-	return (RGB_arr);
+	return (rgb_arr);
 }
 
-static size_t	*creat_arr_RGB(char *str)
+static size_t	*creat_arr_rgb(char *str)
 {
-	size_t	i_RGB;
-	size_t	*RGB_arr;
+	size_t	i_rgb;
+	size_t	*rgb_arr;
 	char	*tmp;
 
-	i_RGB = 0;
+	i_rgb = 0;
 	tmp = NULL;
-	RGB_arr = (size_t *)malloc(sizeof(size_t) * 4);
-	if (!RGB_arr)
+	rgb_arr = (size_t *)malloc(sizeof(size_t) * 4);
+	if (!rgb_arr)
 		return (free_return(NULL, 'n', FC));
-	while (i_RGB < 4)
-		RGB_arr[i_RGB++] = '\0';
-	if (!check_valid_RGB_str(RGB_arr, tmp, str, 0))
+	while (i_rgb < 4)
+		rgb_arr[i_rgb++] = '\0';
+	if (!check_valid_rgb_str(rgb_arr, tmp, str, 0))
 		return (NULL);
-	return (RGB_arr);
+	return (rgb_arr);
 }
 
 int	pars_valid_up_down(char *str, t_up_down *arr)
 {
 	size_t	i;
-	size_t	*RGB;
+	size_t	*rgb;
 
 	i = 1;
 	if (!str || !arr)
@@ -102,14 +102,14 @@ int	pars_valid_up_down(char *str, t_up_down *arr)
 		return (errors(FC));
 	if (check_other_three_elems(str + i))
 		return (1);
-	RGB = creat_arr_RGB(str + i);
-	if (!RGB)
+	rgb = creat_arr_rgb(str + i);
+	if (!rgb)
 		return (1);
-	if (!add_new_ud_elem(RGB, str, arr))
+	if (!add_new_ud_elem(rgb, str, arr))
 	{
-		free(RGB);
+		free(rgb);
 		return (1);
 	}
-	free(RGB);
+	free(rgb);
 	return (0);
 }

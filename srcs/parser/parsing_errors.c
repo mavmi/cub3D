@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:26:52 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/19 15:21:32 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 16:08:53 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-int	errors(t_ALL code)
+int	errors(t_all code)
 {
 	if (code == ALL)
 		printf("Error: invalid file's arguments\n");

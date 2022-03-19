@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msalena <msalena@student.42.fr>            +#+  +:+       +#+         #
+#    By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 11:40:06 by pmaryjo           #+#    #+#              #
-#    Updated: 2022/03/19 15:34:13 by msalena          ###   ########.fr        #
+#    Updated: 2022/03/19 16:04:23 by pmaryjo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,7 +128,13 @@ norm:
 			@norminette $(PAINTING_ROOM_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
 
 			@echo "$(BLUE)\n\t*** PARSER ***$(NC)"
-			@norminette $(PARSER_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+			@norminette $(PARSER_DIR)/*.c | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+
+			@echo "$(BLUE)\n\t*** PARSER_ARGUMS ***$(NC)"
+			@norminette $(PARSER_ARGUMS_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
+
+			@echo "$(BLUE)\n\t*** PARSER_MAP ***$(NC)"
+			@norminette $(PARSER_MAP_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'
 
 			@echo "$(BLUE)\n\t*** UTILS ***$(NC)"
 			@norminette $(UTILS_DIR) | awk '{printf "$(CYAN)%s\n$(NC)", $$0 }'

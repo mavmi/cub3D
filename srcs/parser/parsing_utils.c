@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:48:43 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/19 15:59:09 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 16:08:53 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	check_other_three_elems(char *str)
 	Free freed and input sms about
 	invalide argums if sms_fl == 'y'
 */
-void	*free_return(void *freed, char sms_fl, t_ALL code)
+void	*free_return(void *freed, char sms_fl, t_all code)
 {
 	if (sms_fl && sms_fl == 'y')
 		errors(code);
