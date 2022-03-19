@@ -6,7 +6,7 @@
 /*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:48:43 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/19 16:08:53 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/19 16:33:11 by pmaryjo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ size_t	arr_size_before_empty_str(char **arr)
 	len = 0;
 	if (!arr)
 		return (len);
-	while (arr[len][0])
+	while (arr[len] && arr[len][0] != '0' && arr[len][0] != '\0')
 	{
 		len++;
 	}
