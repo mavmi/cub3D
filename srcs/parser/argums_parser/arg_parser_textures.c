@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 13:46:29 by marvin            #+#    #+#             */
-/*   Updated: 2022/03/13 18:38:24 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 15:16:53 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	pars_valid_txtr(char *str, t_textures *arr)
 		return (2);
 	if ((ft_strncmp(str, "NO", 2) != 0 && ft_strncmp(str, "SO", 2) != 0
 			&& ft_strncmp(str, "WE", 2) != 0 && ft_strncmp(str, "EA", 2) != 0)
-			|| !str[i])
+		|| !str[i])
 		return (errors(TXTR));
 	while (str[i])
 	{

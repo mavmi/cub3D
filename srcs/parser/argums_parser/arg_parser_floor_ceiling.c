@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:43:03 by msalena           #+#    #+#             */
-/*   Updated: 2022/03/08 14:29:23 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 15:16:35 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,24 @@ static void	*add_new_ud_elem(size_t *RGB, char *str, t_up_down *arr)
 	return (new);
 }
 
-static void	*check_valid_RGB_str(size_t *RGB_arr, char *tmp, char *s)
+static void	*check_valid_RGB_str(size_t *RGB_arr, char *tmp, char *s, size_t i)
 {
-	size_t	i;
 	size_t	i_RGB;
 	int		new_el;
 
-	i = 0;
 	i_RGB = 0;
 	while (s[i])
 	{
 		if (i_RGB >= 3)
 		{
-			if(s[i++] == SKIP_SPACE)
+			if (s[i++] == SKIP_SPACE)
 				continue ;
 			return (free_return(RGB_arr, 'y', FC));
 		}
 		new_el = ft_atoi(s + i);
 		if (new_el < 0 || new_el > 255 || (new_el == 0 && s[i] != '0'
 				&& ((s[i] == ',' && i == 0) || (s[i] == ',' && s[i + 1] == '\0')
-				|| (s[i] == ',' && s[i + 1] == ','))))
+					|| (s[i] == ',' && s[i + 1] == ','))))
 			return (free_return(RGB_arr, 'y', FC));
 		if (s[i] != ',')
 			RGB_arr[i_RGB++] = (size_t)new_el;
@@ -83,7 +81,7 @@ static size_t	*creat_arr_RGB(char *str)
 		return (free_return(NULL, 'n', FC));
 	while (i_RGB < 4)
 		RGB_arr[i_RGB++] = '\0';
-	if (!check_valid_RGB_str(RGB_arr, tmp, str))
+	if (!check_valid_RGB_str(RGB_arr, tmp, str, 0))
 		return (NULL);
 	return (RGB_arr);
 }
@@ -106,10 +104,12 @@ int	pars_valid_up_down(char *str, t_up_down *arr)
 		return (1);
 	RGB = creat_arr_RGB(str + i);
 	if (!RGB)
+		return (1);
+	if (!add_new_ud_elem(RGB, str, arr))
 	{
+		free(RGB);
 		return (1);
 	}
-	if (!add_new_ud_elem(RGB, str, arr))
-		return (1);
+	free(RGB);
 	return (0);
 }

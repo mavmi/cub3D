@@ -6,71 +6,16 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:37:02 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/13 20:55:18 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 14:31:50 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/painting.h"
 
-/*
-	Free all and exit
-*/
-void	paint_exit(t_painting *painting)
-{
-	int	i;
-
-	i = 0;
-	if (painting)
-	{
-		pars_destroy_map(painting->map);
-		painting->map = NULL;
-		mlx_destroy_image(painting->mlx, painting->minimap.img);
-		mlx_destroy_image(painting->mlx, painting->room.img);
-		if (painting->t_north)
-		{
-			mlx_destroy_image(painting->mlx, painting->t_north->drawable.img);
-			free(painting->t_north);
-		}
-		if (painting->t_east)
-		{
-			mlx_destroy_image(painting->mlx, painting->t_east->drawable.img);
-			free(painting->t_east);
-		}
-		if (painting->t_south)
-		{
-			mlx_destroy_image(painting->mlx, painting->t_south->drawable.img);
-			free(painting->t_south);
-		}
-		if (painting->t_west)
-		{
-			mlx_destroy_image(painting->mlx, painting->t_west->drawable.img);
-			free(painting->t_west);
-		}
-		if (painting->t_door)
-		{
-			mlx_destroy_image(painting->mlx, painting->t_door->drawable.img);
-			free(painting->t_door);
-		}
-		while (i < 10)
-		{
-			if (painting->t_gif[i])
-			{
-				mlx_destroy_image(painting->mlx, painting->t_gif[i]->drawable.img);
-				free(painting->t_gif[i]);
-			}
-			i++;
-		}
-		free(painting->t_gif);
-		mlx_destroy_window(painting->mlx, painting->win);
-		free(painting);
-	}
-	exit(0);
-}
-
 int	paint_draw_all(t_painting *painting)
 {
 	if (!painting)
-		return (1);
+		return (2);
 	if (paint_room_draw_room(painting))
 		return (1);
 	paint_minimap_draw(painting);
@@ -93,7 +38,7 @@ static void	paint_handle_arrows(int key_code, t_painting *painting)
 				ANGLE_DELTA_KEY);
 	else if (key_code == SPACE)
 	{
-	painting->cl_door_fl = 1;
+		painting->cl_door_fl = 1;
 		paint_movements_move(painting, MOVE_DOOR);
 	}
 	else if (key_code == UP || key_code == W)

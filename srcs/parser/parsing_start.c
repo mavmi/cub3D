@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:11 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/08 16:28:18 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 15:21:45 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static t_map	*pars_read_file(int fd)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (pars_read_file_handler(&arr, line))
-			return (NULL); // castomer sms about not reading
+			return (NULL);
 	}
 	if (pars_read_file_handler(&arr, line))
-		return (NULL); // castomer sms about not reading
+		return (NULL);
 	argms = pars_arg_definition(arr);
 	if (!argms)
 	{
@@ -77,7 +77,7 @@ t_map	*pars_start(char *path)
 
 	fd = pars_open_file(path);
 	if (!path || fd < 0)
-		return (NULL); // should be needing printing error from open function
+		return (NULL);
 	map = pars_read_file(fd);
 	close(fd);
 	return (map);

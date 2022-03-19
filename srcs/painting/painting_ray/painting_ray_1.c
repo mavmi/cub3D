@@ -6,22 +6,11 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:21:30 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/13 18:05:00 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 14:54:14 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/painting.h"
-
-/*
-	It must be obvious tho
-*/
-void	paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view)
-{
-	if (!ray_of_view)
-		return ;
-	geom_destroy_vector(ray_of_view->ray);
-	free(ray_of_view);
-}
 
 /*
 	Just initialization of player's vector of view.
@@ -76,6 +65,26 @@ static t_ray_of_view	*paint_ray_init_ray_of_view(t_painting *painting)
 	return (NULL);
 }
 
+static int	check_if_exit(t_ray_vars *vars)
+{
+	int	return_elem;
+
+	return_elem = paint_ray_is_wall_or_door(vars,
+			vars->ray_of_view->ray->end->x,
+			vars->ray_of_view->ray->end->y);
+	if (return_elem)
+	{
+		if (return_elem == 2)
+			vars->ray_of_view->orient = ORIENT_CL_DOOR;
+		else if (return_elem == 3)
+			vars->ray_of_view->orient = ORIENT_OP_DOOR;
+		else if (return_elem == 4)
+			vars->ray_of_view->orient = ORIENT_GIF;
+		return (1);
+	}
+	return (0);
+}
+
 /*
 	Part of paint_ray_get_ray_of_view(..) function.
 
@@ -85,7 +94,6 @@ static t_ray_of_view	*paint_ray_get_ray_of_view_handler(t_painting *painting,
 							t_ray *ray_info)
 {
 	t_ray_vars	vars;
-	int			return_elem;
 
 	if (!painting || !ray_info)
 		return (NULL);
@@ -102,18 +110,8 @@ static t_ray_of_view	*paint_ray_get_ray_of_view_handler(t_painting *painting,
 			paint_ray_destroy_ray_of_view(vars.ray_of_view);
 			return (NULL);
 		}
-		return_elem = paint_ray_is_wall_or_door(&vars, vars.ray_of_view->ray->end->x,
-				vars.ray_of_view->ray->end->y);
-		if (return_elem)
-		{
-			if (return_elem == 2)
-				vars.ray_of_view->orient = ORIENT_CL_DOOR;
-			else if (return_elem == 3)
-				vars.ray_of_view->orient = ORIENT_OP_DOOR;
-			else if (return_elem == 4)
-				vars.ray_of_view->orient = ORIENT_GIF;
+		if (check_if_exit(&vars))
 			return (vars.ray_of_view);
-		}
 		paint_ray_decrease_coord(&vars, &vars.ray_of_view->ray->end->x,
 			&vars.ray_of_view->ray->end->y);
 	}

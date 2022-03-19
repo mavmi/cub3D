@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:00:21 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/13 19:26:46 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 15:01:11 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,40 +47,6 @@ int	paint_ray_decrease_coord_assignment(t_decrease *decr)
 int	paint_ray_get_octet(int quarter, int part)
 {
 	return (2 * quarter - 1 + part);
-}
-
-/*
-	Check if {x, y} point belongs to a wall
-*/
-int	paint_ray_is_wall_or_door(t_ray_vars *vars, double x, double y)
-{
-	paint_ray_decrease_coord(vars, &x, &y);
-	if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_WALL)
-		return (1);
-	else if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_CL_DOOR)
-	{
-		if (vars->painting->cl_door_fl == 2)
-		{
-			vars->painting->map->lines[(int)y]->line[(int)x]->type = MAP_SQ_OP_DOOR;
-			vars->painting->cl_door_fl = 0;
-			return (0);
-		}
-		return (2);
-	}
-	else if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_OP_DOOR
-				&& vars->painting->cl_door_fl > 0)
-	{
-		if (vars->painting->cl_door_fl == 2)
-		{
-			vars->painting->map->lines[(int)y]->line[(int)x]->type = MAP_SQ_CL_DOOR;
-			vars->painting->cl_door_fl = 0;
-			return (2);
-		}
-		return (3);
-	}
-	else if (vars->painting->map->lines[(int)y]->line[(int)x]->type == MAP_SQ_GIF)
-		return (4);
-	return (0);
 }
 
 /*

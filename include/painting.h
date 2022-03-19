@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/13 20:08:03 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 15:02:18 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,8 +250,11 @@ struct s_room_vars
 	./
 ******************************/
 
-// painting_event_handlers.c
+// painting_freeNexit.c
+void			paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view);
 void			paint_exit(t_painting *painting);
+
+// painting_event_handlers.c
 int				paint_draw_all(t_painting *painting);
 int				paint_key_pressed(int key_code, t_painting *painting);
 int				paint_mouse_move(int x, int y, t_painting *painting);
@@ -296,7 +299,6 @@ void			paint_minimap_erase_player(t_painting *painting);
 ******************************/
 
 // painting_ray_1.c
-void			paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view);
 t_ray_of_view	*paint_ray_get_ray_of_view(t_painting *painting, double angle);
 
 // painting_ray_2.c
@@ -326,8 +328,10 @@ void			paint_ray_decrease_coord(t_ray_vars *vars,
 void			paint_ray_set_ray_orient(t_ray_vars *vars);
 int				paint_ray_decrease_coord_assignment(t_decrease *decr);
 int				paint_ray_get_octet(int quarter, int part);
-int				paint_ray_is_wall_or_door(t_ray_vars *vars, double x, double y);
 int				paint_ray_get_delta_angle_octet(t_ray_vars *vars);
+
+// painting_ray_8.c
+int				paint_ray_is_wall_or_door(t_ray_vars *vars, double x, double y);
 
 /******************************
 	./painting_room/

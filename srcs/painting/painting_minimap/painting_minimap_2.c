@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:32:43 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/13 20:29:02 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 14:36:57 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	paint_minimap_draw_player_handler(t_painting *painting,
 		paint_put_color(&painting->minimap, x, y, COLOR_GRID);
 	else if (painting->map->lines[((y + painting->minimap_y)
 				- (y + painting->minimap_y) % MAP_SQ_SIZE) / MAP_SQ_SIZE]
-				-> line[((x + painting->minimap_x) - (x + painting->minimap_x)
+		-> line[((x + painting->minimap_x) - (x + painting->minimap_x)
 				% MAP_SQ_SIZE) / MAP_SQ_SIZE]->type == MAP_SQ_OP_DOOR)
 		paint_put_color(&painting->minimap, x, y, COLOR_DOOR);
 	else

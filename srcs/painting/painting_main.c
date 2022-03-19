@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:25:05 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/13 20:40:58 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 14:36:04 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,29 @@
 
 static int	paint_load_images(t_painting *p)
 {
-	size_t	i_gif;
-	size_t	i_txtrs;
+	size_t		i_gif;
+	size_t		i_txtrs;
+	t_txtr_arg	**arg;
 
 	i_gif = 0;
 	i_txtrs = 0;
-	p->t_north = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
-	p->t_south = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
-	p->t_west = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
-	p->t_east = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
-	p->t_door = paint_get_image(p, p->map->argms->txtr_arr->arg[i_txtrs++]->path);
+	arg = p->map->argms->txtr_arr->arg;
+	p->t_north = paint_get_image(p, arg[i_txtrs++]->path);
+	p->t_south = paint_get_image(p, arg[i_txtrs++]->path);
+	p->t_west = paint_get_image(p, arg[i_txtrs++]->path);
+	p->t_east = paint_get_image(p, arg[i_txtrs++]->path);
+	p->t_door = paint_get_image(p, arg[i_txtrs++]->path);
 	p->t_gif = (t_image **)malloc(sizeof(t_image *) * 10);
 	if (!p->t_gif)
 		return (1);
 	while (i_gif < 10)
-	{
 		p->t_gif[i_gif++] = paint_get_image(p, p->map->argms->txtr_arr
-								->arg[i_txtrs++]->path);
-	}
+				->arg[i_txtrs++]->path);
 	if (!p->t_north || !p->t_south || !p->t_west || !p->t_east || !p->t_door
 		|| !p->t_gif[0] || !p->t_gif[1] || !p->t_gif[2] || !p->t_gif[3]
 		|| !p->t_gif[4] || !p->t_gif[5] || !p->t_gif[6] || !p->t_gif[7]
 		|| !p->t_gif[8] || !p->t_gif[9])
-	{
 		return (1);
-	}
 	return (0);
 }
 

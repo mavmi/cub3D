@@ -6,7 +6,7 @@
 /*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:29:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/03/13 19:26:55 by msalena          ###   ########.fr       */
+/*   Updated: 2022/03/19 15:12:25 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,9 @@ int	paint_room_draw_room(t_painting *p)
 			data.text_y += delta;
 		}
 		while (data.y < WIN_HEIGHT)
-		{
 			paint_put_pixel(&p->room, data.x, data.y++, p->floor);
-		}
 		data.x++;
 	}
-	mlx_put_image_to_window(p->mlx, p->win,
-		p->room.img, 0, 0);
-
+	mlx_put_image_to_window(p->mlx, p->win, p->room.img, 0, 0);
 	return (0);
 }
