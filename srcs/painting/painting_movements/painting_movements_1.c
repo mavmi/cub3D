@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_movements_1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:36:15 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 17:08:50 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/19 14:42:24 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_move_vars	paint_movements_get_vars(t_painting *p, t_movement movement)
 	vars.vector->end->y *= PL_STEP;
 	if (!vars.vector)
 		return (vars);
-	if (movement == MOVE_FORWARD)
+	if (movement == MOVE_FORWARD || movement == MOVE_DOOR)
 		vars.angle = p->map->player->angle;
 	else if (movement == MOVE_BACK)
 		vars.angle = paint_room_increase_angle(p->map->player->angle, 180);
@@ -41,6 +41,21 @@ static t_move_vars	paint_movements_get_vars(t_painting *p, t_movement movement)
 	return (vars);
 }
 
+static void	step(t_painting *painting, t_move_vars *vars)
+{
+	vars->cos_ = cos(utils_degree_to_rad(vars->angle));
+	vars->sin_ = sin(utils_degree_to_rad(vars->angle));
+	vars->x = (vars->vector->end->x * vars->cos_
+			- vars->vector->end->y * vars->sin_) * PL_STEP;
+	vars->y = (vars->vector->end->y * vars->cos_
+			+ vars->vector->end->x * vars->sin_) * PL_STEP;
+	vars->vector->end->x = vars->x;
+	vars->vector->end->y = vars->y;
+	geom_move_vector(vars->vector, painting->map->player->pos);
+	painting->map->player->pos->x = vars->vector->end->x;
+	painting->map->player->pos->y = vars->vector->end->y;
+}
+
 /*
 	Move player if it's far away from wall
 */
@@ -51,20 +66,16 @@ void	paint_movements_move(t_painting *painting, t_movement movement)
 	if (!vars.vector || !vars.ray_of_view)
 		return ;
 	vars = paint_movements_get_vars(painting, movement);
-	if (vars.len > PL_STEP + 0.2)
+	if (movement == MOVE_DOOR && (vars.ray_of_view->orient == ORIENT_CL_DOOR
+			|| vars.ray_of_view->orient == ORIENT_OP_DOOR)
+		&& vars.len > PL_STEP + 0.2 && vars.len < PL_STEP + 1)
+		painting->cl_door_fl = 2;
+	else if (movement != MOVE_DOOR && vars.len > PL_STEP + 0.2)
 	{
-		vars.cos_ = cos(utils_degree_to_rad(vars.angle));
-		vars.sin_ = sin(utils_degree_to_rad(vars.angle));
-		vars.x = (vars.vector->end->x * vars.cos_
-				- vars.vector->end->y * vars.sin_) * PL_STEP;
-		vars.y = (vars.vector->end->y * vars.cos_
-				+ vars.vector->end->x * vars.sin_) * PL_STEP;
-		vars.vector->end->x = vars.x;
-		vars.vector->end->y = vars.y;
-		geom_move_vector(vars.vector, painting->map->player->pos);
-		painting->map->player->pos->x = vars.vector->end->x;
-		painting->map->player->pos->y = vars.vector->end->y;
+		step(painting, &vars);
 	}
+	else
+		painting->cl_door_fl = 0;
 	geom_destroy_vector(vars.vector);
 	paint_ray_destroy_ray_of_view(vars.ray_of_view);
 }

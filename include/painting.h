@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:13:18 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 17:18:53 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/19 15:02:18 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include <math.h>
 
 # include "../minilibx/mlx.h"
+# include "../libft/libft.h"
 
-# include "parser.h"
-# include "painting.h"
 # include "geometry.h"
+# include "parser.h"
 
-# define MOUSE_HIDE 1
-# define PL_STEP 0.37
+# define MOUSE_HIDE 0
+# define PL_STEP 0.62
 # define ANGLE_DELTA_KEY 5
 # define ANGLE_DELTA_MOUSE 7
 # define PIXELS_PER_DEGREE 4
@@ -37,6 +37,7 @@
 # define A 0
 # define S 1
 # define D 2
+# define SPACE 49
 
 // 3D
 # define WIN_WIDTH 1000
@@ -59,7 +60,7 @@ typedef struct s_ray			t_ray;
 typedef struct s_image			t_image;
 typedef struct s_drawable		t_drawable;
 typedef struct s_painting		t_painting;
-typedef struct s_ray_of_view	t_ray_of_view;	
+typedef struct s_ray_of_view	t_ray_of_view;
 typedef struct s_decrease		t_decrease;
 typedef struct s_move_vars		t_move_vars;
 typedef struct s_room_vars		t_room_vars;
@@ -72,11 +73,11 @@ typedef struct s_room_vars		t_room_vars;
 enum e_color
 {
 	COLOR_WALL,
+	COLOR_DOOR,
+	COLOR_GIF,
 	COLOR_GRID,
 	COLOR_PLAYER,
 	COLOR_FIELD,
-	COLOR_CEIL,
-	COLOR_FLOOR,
 	COLOR_TRANSPARENT
 };
 
@@ -91,7 +92,10 @@ enum e_orient
 	ORIENT_NORTH,
 	ORIENT_EAST,
 	ORIENT_SOUTH,
-	ORIENT_WEST
+	ORIENT_WEST,
+	ORIENT_CL_DOOR,
+	ORIENT_OP_DOOR,
+	ORIENT_GIF
 };
 
 enum e_movement
@@ -99,7 +103,8 @@ enum e_movement
 	MOVE_FORWARD,
 	MOVE_BACK,
 	MOVE_LEFT,
-	MOVE_RIGHT
+	MOVE_RIGHT,
+	MOVE_DOOR
 };
 
 /*
@@ -123,7 +128,7 @@ enum e_movement
 
 	Orientation vectors are N, E, S and W
 
-	paint_get_orient_vector(..) creates required 
+	paint_get_orient_vector(..) creates required
 	orientation vector
 */
 struct s_ray
@@ -161,6 +166,9 @@ struct s_painting
 {
 	int			minimap_x;
 	int			minimap_y;
+	int			floor;
+	int			ceil;
+	int			cl_door_fl;
 	void		*mlx;
 	void		*win;
 	t_map		*map;
@@ -170,6 +178,8 @@ struct s_painting
 	t_image		*t_east;
 	t_image		*t_south;
 	t_image		*t_west;
+	t_image		*t_door;
+	t_image		**t_gif;
 };
 
 struct s_ray_of_view
@@ -189,7 +199,7 @@ struct s_decrease
 };
 
 struct s_move_vars
-{	
+{
 	double			x;
 	double			y;
 	double			len;
@@ -240,8 +250,11 @@ struct s_room_vars
 	./
 ******************************/
 
-// painting_event_handlers.c
+// painting_freeNexit.c
+void			paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view);
 void			paint_exit(t_painting *painting);
+
+// painting_event_handlers.c
 int				paint_draw_all(t_painting *painting);
 int				paint_key_pressed(int key_code, t_painting *painting);
 int				paint_mouse_move(int x, int y, t_painting *painting);
@@ -286,7 +299,6 @@ void			paint_minimap_erase_player(t_painting *painting);
 ******************************/
 
 // painting_ray_1.c
-void			paint_ray_destroy_ray_of_view(t_ray_of_view *ray_of_view);
 t_ray_of_view	*paint_ray_get_ray_of_view(t_painting *painting, double angle);
 
 // painting_ray_2.c
@@ -316,8 +328,10 @@ void			paint_ray_decrease_coord(t_ray_vars *vars,
 void			paint_ray_set_ray_orient(t_ray_vars *vars);
 int				paint_ray_decrease_coord_assignment(t_decrease *decr);
 int				paint_ray_get_octet(int quarter, int part);
-int				paint_ray_is_wall(t_ray_vars *vars, double x, double y);
 int				paint_ray_get_delta_angle_octet(t_ray_vars *vars);
+
+// painting_ray_8.c
+int				paint_ray_is_wall_or_door(t_ray_vars *vars, double x, double y);
 
 /******************************
 	./painting_room/

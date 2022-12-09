@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_minimap_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:33:39 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 17:11:40 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/13 20:11:57 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ static t_color	paint_minimap_type_to_color(char type)
 		return (COLOR_WALL);
 	else if (type == MAP_SQ_EMPTY)
 		return (COLOR_FIELD);
+	else if (type == MAP_SQ_CL_DOOR || type == MAP_SQ_OP_DOOR)
+		return (COLOR_DOOR);
+	else if (type == MAP_SQ_GIF)
+		return (COLOR_GIF);
 	else
 		return (COLOR_TRANSPARENT);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting_room_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaryjo <pmaryjo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msalena <msalena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:29:10 by pmaryjo           #+#    #+#             */
-/*   Updated: 2022/02/08 16:49:47 by pmaryjo          ###   ########.fr       */
+/*   Updated: 2022/03/19 15:12:25 by msalena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,26 @@ static t_room_vars	paint_room_get_data(t_painting *painting)
 */
 static t_image	*paint_room_get_image(t_painting *painting, t_orient orient)
 {
+	static size_t	gif_count = 0;
+
 	if (orient == ORIENT_NORTH)
 		return (painting->t_north);
 	if (orient == ORIENT_EAST)
 		return (painting->t_east);
 	if (orient == ORIENT_SOUTH)
 		return (painting->t_south);
-	else
+	if (orient == ORIENT_WEST)
 		return (painting->t_west);
+	if (orient == ORIENT_CL_DOOR)
+		return (painting->t_door);
+	if (orient == ORIENT_GIF)
+	{
+		if (gif_count == 9000)
+			gif_count = 0;
+		return (painting->t_gif[gif_count++ / 1000]);
+	}
+	else
+		return (NULL);
 }
 
 /*
@@ -94,30 +106,29 @@ static int	paint_room_get_pixel(t_image *image, int x, int y)
 	Return 0 if everything is ok,
 	1 otherwise
 */
-int	paint_room_draw_room(t_painting *painting)
+int	paint_room_draw_room(t_painting *p)
 {
 	double		delta;
 	t_room_vars	data;
 
-	data = paint_room_get_data(painting);
+	data = paint_room_get_data(p);
 	while (data.x < WIN_WIDTH)
 	{
-		if (paint_room_update_vars(&data, painting))
+		if (paint_room_update_vars(&data, p))
 			return (1);
 		while (data.y < data.wall_start)
-			paint_put_color(&painting->room, data.x, data.y++, COLOR_CEIL);
+			paint_put_pixel(&p->room, data.x, data.y++, p->ceil);
 		delta = data.image->h / (double)data.wall_height;
 		while (data.y < data.wall_end)
 		{
-			paint_put_pixel(&painting->room, data.x, data.y++,
+			paint_put_pixel(&p->room, data.x, data.y++,
 				paint_room_get_pixel(data.image, data.text_x, data.text_y));
 			data.text_y += delta;
 		}
 		while (data.y < WIN_HEIGHT)
-			paint_put_color(&painting->room, data.x, data.y++, COLOR_FLOOR);
+			paint_put_pixel(&p->room, data.x, data.y++, p->floor);
 		data.x++;
 	}
-	mlx_put_image_to_window(painting->mlx, painting->win,
-		painting->room.img, 0, 0);
+	mlx_put_image_to_window(p->mlx, p->win, p->room.img, 0, 0);
 	return (0);
 }
